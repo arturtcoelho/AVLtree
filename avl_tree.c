@@ -54,7 +54,7 @@ int search_key_avl(avl_t *t, key_t key){
     return 1;
 }
 
-// imprime a árvore na saída padrão, retorna 0 em caso de erro e !0 caso contrário
+// imprime a árvore in-order na saída padrão, retorna 0 em caso de erro e !0 caso contrário
 int print_tree_avl(avl_t *t){
     if (tree_is_empty(t)){
         return 1;
