@@ -1,6 +1,6 @@
 <h1>AVLtree</h1>
 
-<p>Este projeto foi iniciado em Novembro de 2020 para a matéria de Algoritmos e Estuturas de Dados III no periodo especial 2 da UFPR.</p>
+<p>Este projeto foi iniciado em Novembro de 2020 para a matéria de Algoritmos e Estuturas de Dados III no período especial 2 da UFPR.</p>
 
 <p>O intuito desse projeto é implementar uma Árvore binária do tipo AVL na linguagem C, e portar a mesma para sua utilização em Python. </p>
 
