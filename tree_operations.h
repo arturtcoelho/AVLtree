@@ -15,5 +15,8 @@ int insert_key(node_t **nd, node_t *top, key_t key);
 // procura a chave 'key' a partir de um nodo apontado, 1 se a chave esta presente e 0 caso contrario
 int search_key_by_node(node_t *nd, key_t key);
 
+void print_tree_by_node(node_t *nd);
+
+
 
 #endif

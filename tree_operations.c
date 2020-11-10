@@ -66,3 +66,10 @@ int search_key_by_node(node_t *nd, key_t key){
         return search_key_by_node(nd->right, key);
     }
 }
+
+void print_tree_by_node(node_t *nd){
+    if (nd == NULL) return;
+    print_tree_by_node(nd->left);
+    printf("%d ", nd->key);
+    print_tree_by_node(nd->right);
+}

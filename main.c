@@ -7,20 +7,14 @@
 int main(){
 
     avl_t tree;
+    initialize_avl(&tree);
 
-    printf("inicializa: %d\n", initialize_avl(&tree));
-    printf("insert key: %d\n", insert_key_avl(&tree, 10));
-    printf("insert key: %d\n", insert_key_avl(&tree, 5));
-    printf("insert key: %d\n", insert_key_avl(&tree, 20));
-    printf("key1 %d\n", tree.root->key);
-    printf("key2 %d\n", tree.root->right->key);
-    printf("key3 %d\n", tree.root->left->key);
-    printf("key1 %d\n", search_key_avl(&tree, 10));
-    printf("key3 %d\n", search_key_avl(&tree, 20));
-    printf("key2 %d\n", search_key_avl(&tree, 5));
-    printf("key4 %d\n", search_key_avl(&tree, 30));
-    printf("insert key: %d\n", insert_key_avl(&tree, 30));
-    printf("key4 %d\n", search_key_avl(&tree, 30));
+    for (int i = 10; i >= 0; i--) {
+        insert_key_avl(&tree, i);
+        // insert_key_avl(&tree, i * 2 * (-1 * i % 3) + i*i / 10);
+    }
+
+    print_tree_avl(&tree);
 
     return 0;
 }
