@@ -7,7 +7,7 @@
 // inicializa a árvore, necessário para iniciar operações, retorna 0 em caso de erro e !0 ao contrário
 int initialize_avl(avl_t *t){
     t->root = NULL;
-    t->height = -1;
+    t->height = 0;
     if (DEV) {
         fprintf(stderr, "Árvore inicializada\n");
         fprintf(stderr, "root: %p\n", t->root);
@@ -18,24 +18,26 @@ int initialize_avl(avl_t *t){
 
 // insere uma chave key_t na árvore, retorna 0 em caso de erro e !0 ao contrário
 int insert_key_avl(avl_t *t, key_t key){
-    node_t *rt = t->root;
 
-    if (!tree_exists(t)){
-        initialize_avl(t);
-        insert_key(rt, NULL, key);
+    if (tree_is_empty(t)){
+        if (DEV) {
+            fprintf(stderr, "Árvore vazia\n");
+            fprintf(stderr, "Inserindo em %p\n", &(t->root));
+        }
+        insert_key(&(t->root), NULL, key);
         return 1;
     }
     
-    if (rt->key > key){
-        return insert_key_by_node(rt->left, rt, key);
+    if (t->root->key > key){
+        return insert_key_by_node(t->root->left, t->root, key);
     } else {
-        return insert_key_by_node(rt->right, rt, key);
+        return insert_key_by_node(t->root->right, t->root, key);
     }
 }
 
-// procura uma chave na árvore e insere seu valor em key, retorna 0 em caso de erro e !0 ao contrário
+// procura uma chave na árvore, retorna 0 em caso de não encontrar e !0 ao contrário
 int search_key_avl(avl_t *t, key_t *key){
-    if (!tree_exists(t)){
+    if (!tree_is_empty(t)){
         return 0;
     }
     return 1;
@@ -43,7 +45,7 @@ int search_key_avl(avl_t *t, key_t *key){
 
 // imprime a árvore na saída padrão, retorna 0 em caso de erro e !0 ao contrário
 int print_tree_avl(avl_t *t){
-    if (!tree_exists(t)){
+    if (!tree_is_empty(t)){
         return 0;
     }
     return 1;
@@ -51,7 +53,7 @@ int print_tree_avl(avl_t *t){
 
 // remove uma chave da árvore, retorna 0 em caso de erro e !0 ao contrário
 int remove_key_avl(avl_t *t, key_t key){
-    if (!tree_exists(t)){
+    if (!tree_is_empty(t)){
         return 0;
     }
 
@@ -60,7 +62,7 @@ int remove_key_avl(avl_t *t, key_t key){
 
 // destroi a árvore, retorna 0 em caso de erro e !0 ao contrário
 int destroy_tree_avl(avl_t *t){
-    if (!tree_exists(t)){
+    if (!tree_is_empty(t)){
         free(t);
         return 1;
     }
