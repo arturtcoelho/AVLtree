@@ -3,7 +3,7 @@
 #include <unistd.h>
 
 #include "avl_tree.h"
-#include "tree_operators.h"
+#include "tree_operations.h"
 
 // função de auxílio para casos de alocação dinâmica
 void bad_malloc(){

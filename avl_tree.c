@@ -2,7 +2,7 @@
 #include <stdlib.h>
 
 #include "avl_tree.h"
-#include "tree_operators.h"
+#include "tree_operations.h"
 
 // inicializa a árvore, necessário para iniciar operações, retorna 0 em caso de erro e !0 caso contrário
 int initialize_avl(avl_t *t){
@@ -40,6 +40,7 @@ int search_key_avl(avl_t *t, key_t key){
     if (tree_is_empty(t)){
         return 0;
     }
+
     if (t->root->key == key) {
         return 1;
     }
@@ -56,8 +57,9 @@ int search_key_avl(avl_t *t, key_t key){
 // imprime a árvore na saída padrão, retorna 0 em caso de erro e !0 caso contrário
 int print_tree_avl(avl_t *t){
     if (!tree_is_empty(t)){
-        return 0;
+        return 1;
     }
+    
     return 1;
 }
 

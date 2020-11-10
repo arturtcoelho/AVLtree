@@ -12,13 +12,13 @@ debug: CFLAGS += -DDEBUG
 debug: main
 
 # targets de bibliotecas
-tree_operators.o: tree_operators.h tree_operators.c
-	$(CC) $(CFLAGS) -c tree_operators.c
-avl_tree.o: avl_tree.h avl_tree.c tree_operators.o
+tree_operations.o: tree_operations.h tree_operations.c
+	$(CC) $(CFLAGS) -c tree_operations.c
+avl_tree.o: avl_tree.h avl_tree.c tree_operations.o
 	$(CC) $(CFLAGS) -c avl_tree.c 
-main.o: tree_operators.h tree_operators.o avl_tree.h avl_tree.o main.c
+main.o: tree_operations.h tree_operations.o avl_tree.h avl_tree.o main.c
 	$(CC) $(CFLAGS) -c main.c
-main: tree_operators.o avl_tree.o main.o
+main: tree_operations.o avl_tree.o main.o
 
 # targets de limpeza
 clean: all

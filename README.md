@@ -8,5 +8,5 @@
 <h4>avl_tree.*</h4>
 <p>Contém as funções de interface pra utilização de uma árvore avl, contém as funçoes padrão de qualquer árvore</p>
 
-<h4>tree_operators.*</h4>
+<h4>tree_operations.*</h4>
 <p>Contém as funções de apoio para a biblioteca principal, essas funções não devem ser utilizadas diretamente no código</p>
