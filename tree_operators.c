@@ -11,6 +11,7 @@ void bad_malloc(){
     exit(1);
 }
 
+// rotaciona a árvore para realizar seu balanço
 int rotate(){
     return 1;
 }
