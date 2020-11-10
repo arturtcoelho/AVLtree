@@ -17,11 +17,7 @@ int add_key_avl(avl_t *t, key_t key){
 
     if (!tree_initialized(t)){
         initialize_avl(t);
-        rt = (node_t*)malloc(sizeof(node_t));
-        rt->key = key;
-        rt->top = NULL;
-        rt->left = NULL;
-        rt->right = NULL;
+        add_key(rt, NULL, key);
         return 1;
     }
 

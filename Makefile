@@ -2,7 +2,9 @@ CC = gcc
 CFLAGS = -Wall
 LIBS = avl_tree.o tree_operators.o
 
-all: main $(LIBS)
+all: main
+debug: main
+	$(eval CFLAGS := -D_DEBUG_)
 
 # compilação dos arquivos de funções auxiliares
 avl_tree.o: avl_tree.h avl_tree.c
