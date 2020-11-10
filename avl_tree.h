@@ -1,6 +1,13 @@
 #ifndef __AVL_TREE__
 #define __AVL_TREE__
 
+// definição da macro DEV, para uso de debug
+#if defined DEBUG
+	#define DEV 1
+#else
+	#define DEV 0
+#endif
+
 typedef int key_t;
 
 struct node {

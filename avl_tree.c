@@ -8,6 +8,11 @@
 int initialize_avl(avl_t *t){
     t->root = NULL;
     t->height = -1;
+    if (DEV) {
+        fprintf(stderr, "Árvore inicializada\n");
+        fprintf(stderr, "root: %p\n", t->root);
+        fprintf(stderr, "height: %d\n", t->height);
+    }
     return 1;
 }
 
@@ -20,7 +25,7 @@ int insert_key_avl(avl_t *t, key_t key){
         insert_key(rt, NULL, key);
         return 1;
     }
-
+    
     if (rt->key > key){
         return insert_key_by_node(rt->left, rt, key);
     } else {
