@@ -1,12 +1,12 @@
-# AVLtree
+<h1>AVLtree</h1>
 
-Este projeto foi iniciado em Novembro de 2020 para a matéria de Algoritmos e Estuturas de Dados III no periodo especial 2 da UFPR.
+<p>Este projeto foi iniciado em Novembro de 2020 para a matéria de Algoritmos e Estuturas de Dados III no periodo especial 2 da UFPR.</p>
 
-O intuito desse projeto é implementar uma Árvore binária do tipo AVL na linguagem C, e portar a mesma para sua utilização em Python. 
+<p>O intuito desse projeto é implementar uma Árvore binária do tipo AVL na linguagem C, e portar a mesma para sua utilização em Python. </p>
 
-Arquivos:
-    avl_tree.
-        Contém as funções de interface pra utilização de uma árvore avl, contém as funçoes padrão de qualquer árvore
+<h3>Arquivos:</h3>
+<h4>avl_tree.*</h4>
+<p>Contém as funções de interface pra utilização de uma árvore avl, contém as funçoes padrão de qualquer árvore</p>
 
-    tree_operators.
-        Contém as funções de apoio para a biblioteca principal, essas funções não devem ser utilizadas diretamente no código
+<h4>tree_operators.*</h4>
+<p>Contém as funções de apoio para a biblioteca principal, essas funções não devem ser utilizadas diretamente no código</p>
