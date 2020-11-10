@@ -31,7 +31,7 @@ int initialize_avl(avl_t *t);
 int insert_key_avl(avl_t *t, key_t key);
 
 // procura uma chave na árvore e retorna seu valor em key, retorna 0 em caso de erro e !0 caso contrário
-int search_key_avl(avl_t *t, key_t *key);
+int search_key_avl(avl_t *t, key_t key);
 
 // imprime a árvore na saída padrão, retorna 0 em caso de erro e !0 caso contrário
 int print_tree_avl(avl_t *t);

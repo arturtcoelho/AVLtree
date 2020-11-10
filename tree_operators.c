@@ -18,20 +18,20 @@ int rotate(){
 
 // retorna !0 caso a árvore ja tenha sido inicializada, 0 caso contrário 
 int tree_is_empty(avl_t *t){
-    return (t->height == 0);
+    return (t->root == NULL);
 }
 
 // insere uma chave em um nodo apontado, retorna 1 em caso de sucesso, 0 ao contrário
-int insert_key_by_node(node_t *nd, node_t *top, key_t key){
-    if (!nd){
-        return insert_key(&nd, top, key);
+int insert_key_by_node(node_t **nd, node_t *top, key_t key){
+    if (!*nd){
+        return insert_key(nd, top, key);
     }
 
     int res = 1;
-    if (nd->key > key){
-        res = insert_key_by_node(nd->left, nd, key);
+    if ((*nd)->key > key){
+        res = insert_key_by_node(&((*nd)->left), *nd, key);
     } else {
-        res = insert_key_by_node(nd->right, nd, key);
+        res = insert_key_by_node(&((*nd)->right), *nd, key);
     }
 
     if (!res) return 0;
@@ -55,4 +55,14 @@ int insert_key(node_t **nd, node_t *top, key_t key){
     (*nd)->key = key;
 
     return 1;
+}
+
+int search_key_by_node(node_t *nd, key_t key){
+    if (nd == NULL) return 0;
+    if (nd->key == key) return 1;
+    if (nd->key > key) {
+        return search_key_by_node(nd->left, key);
+    } else {
+        return search_key_by_node(nd->right, key);
+    }
 }
