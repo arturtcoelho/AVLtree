@@ -11,26 +11,26 @@ int initialize_avl(avl_t *t){
     return 1;
 }
 
-// adiciona uma chave key_t na árvore, retorna 0 em caso de erro e !0 ao contrário
-int add_key_avl(avl_t *t, key_t key){
+// insere uma chave key_t na árvore, retorna 0 em caso de erro e !0 ao contrário
+int insert_key_avl(avl_t *t, key_t key){
     node_t *rt = t->root;
 
-    if (!tree_initialized(t)){
+    if (!tree_exists(t)){
         initialize_avl(t);
-        add_key(rt, NULL, key);
+        insert_key(rt, NULL, key);
         return 1;
     }
 
     if (rt->key > key){
-        return add_key_by_node(rt->left, rt, key);
+        return insert_key_by_node(rt->left, rt, key);
     } else {
-        return add_key_by_node(rt->right, rt, key);
+        return insert_key_by_node(rt->right, rt, key);
     }
 }
 
 // procura uma chave na árvore e insere seu valor em key, retorna 0 em caso de erro e !0 ao contrário
-int find_key_avl(avl_t *t, key_t *key){
-    if (!tree_initialized(t)){
+int search_key_avl(avl_t *t, key_t *key){
+    if (!tree_exists(t)){
         return 0;
     }
     return 1;
@@ -38,15 +38,15 @@ int find_key_avl(avl_t *t, key_t *key){
 
 // imprime a árvore na saída padrão, retorna 0 em caso de erro e !0 ao contrário
 int print_tree_avl(avl_t *t){
-    if (!tree_initialized(t)){
+    if (!tree_exists(t)){
         return 0;
     }
     return 1;
 }
 
 // remove uma chave da árvore, retorna 0 em caso de erro e !0 ao contrário
-int delete_key_avl(avl_t *t, key_t key){
-    if (!tree_initialized(t)){
+int remove_key_avl(avl_t *t, key_t key){
+    if (!tree_exists(t)){
         return 0;
     }
 
@@ -54,8 +54,8 @@ int delete_key_avl(avl_t *t, key_t key){
 }
 
 // destroi a árvore, retorna 0 em caso de erro e !0 ao contrário
-int remove_tree_avl(avl_t *t){
-    if (!tree_initialized(t)){
+int destroy_tree_avl(avl_t *t){
+    if (!tree_exists(t)){
         free(t);
         return 1;
     }
