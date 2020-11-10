@@ -4,13 +4,13 @@
 #include "avl_tree.h"
 
 // retorna 1 caso a árvore ja tenha sido inicializada, 0 caso contrário 
-int tree_initialized(avl_t *t);
+int tree_exists(avl_t *t);
 
 // adiciona uma chave em um nodo apontado, retorna 1 em caso de sucesso, 0 ao contrário
-int add_key_by_node(node_t *top, node_t *nd, key_t key);
+int insert_key_by_node(node_t *top, node_t *nd, key_t key);
 
 // adiciona uma chave no nodo especificado, com o pai
-int add_key(node_t *nd, node_t *top, key_t key);
+int insert_key(node_t *nd, node_t *top, key_t key);
 
 
 #endif
