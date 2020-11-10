@@ -10,7 +10,7 @@ int tree_is_empty(avl_t *t);
 int insert_key_by_node(node_t *top, node_t *nd, key_t key);
 
 // insere uma chave no nodo especificado, com o pai
-int insert_key(node_t *nd, node_t *top, key_t key);
+int insert_key(node_t **nd, node_t *top, key_t key);
 
 
 #endif

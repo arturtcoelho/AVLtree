@@ -10,6 +10,7 @@ int main(){
 
     printf("inicializa: %d\n", initialize_avl(&tree));
     printf("insert key: %d\n", insert_key_avl(&tree, 10));
-
+    printf("key %d\n", tree.root->key);
+    
     return 0;
 }

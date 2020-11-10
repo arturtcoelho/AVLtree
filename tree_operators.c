@@ -24,7 +24,7 @@ int tree_is_empty(avl_t *t){
 // insere uma chave em um nodo apontado, retorna 1 em caso de sucesso, 0 ao contrário
 int insert_key_by_node(node_t *nd, node_t *top, key_t key){
     if (!nd){
-        return insert_key(nd, top, key);
+        return insert_key(&nd, top, key);
     }
 
     int res = 1;
@@ -42,17 +42,17 @@ int insert_key_by_node(node_t *nd, node_t *top, key_t key){
 }
 
 // adiciona uma chave no nodo especificado, com o pai
-int insert_key(node_t *nd, node_t *top, key_t key){
+int insert_key(node_t **nd, node_t *top, key_t key){
     if (DEV) {
         fprintf(stderr, "Inserindo em %p\n", nd);
     }
-    nd = (node_t*)malloc(sizeof(node_t));
+    *nd = (node_t*)malloc(sizeof(node_t));
     if (!nd) bad_malloc();
 
-    nd->top = top;
-    nd->left = NULL;
-    nd->right = NULL;
-    nd->key = key;
+    (*nd)->top = top;
+    (*nd)->left = NULL;
+    (*nd)->right = NULL;
+    (*nd)->key = key;
 
     return 1;
 }
