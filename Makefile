@@ -2,20 +2,23 @@
 
 CC = gcc
 CFLAGS = -Wall
-LIBS = avl_tree.o tree_operators.o
 
 # targets de compilação
 all: main
+
+# flag de debug
+# debug: purge
+debug: CFLAGS += -DDEBUG
 debug: main
-	$(eval CFLAGS := -D_DEBUG_)
 
 # targets de bibliotecas
-avl_tree.o: avl_tree.h avl_tree.c
 tree_operators.o: tree_operators.h tree_operators.c
-
-# targets de arquivo executavel
-main.o: main.c avl_tree.o avl_tree.h tree_operators.o tree_operators.h 
-main: avl_tree.o avl_tree.o tree_operators.o
+	$(CC) $(CFLAGS) -c tree_operators.c
+avl_tree.o: avl_tree.h avl_tree.c tree_operators.o
+	$(CC) $(CFLAGS) -c avl_tree.c 
+main.o: tree_operators.h tree_operators.o avl_tree.h avl_tree.o main.c
+	$(CC) $(CFLAGS) -c main.c
+main: tree_operators.o avl_tree.o main.o
 
 # targets de limpeza
 clean: all

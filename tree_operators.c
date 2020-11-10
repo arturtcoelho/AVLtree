@@ -18,7 +18,7 @@ int rotate(){
 
 // retorna !0 caso a árvore ja tenha sido inicializada, 0 caso contrário 
 int tree_initialized(avl_t *t){
-    return (t->root != NULL || t->height != -1);
+    return !(t->root != NULL || t->height != -1);
 }
 
 // adiciona uma chave em um nodo apontado, retorna 1 em caso de sucesso, 0 ao contrário
