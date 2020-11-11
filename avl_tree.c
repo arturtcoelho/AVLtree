@@ -53,10 +53,10 @@ int search_key_avl(avl_t *t, key_t key){
 
     // busca recursivamente
     if (t->root->key > key) { // esquerda
-        if (DEV) {fprintf(stderr, "Buscando key %d á esquerda\n", key);}
+        if (DEV) {fprintf(stderr, "Buscando key %d a esquerda\n", key);}
         return search_key_by_node(t->root->left, key);
     } else { // direita
-        if (DEV) {fprintf(stderr, "Buscando key %d á direita\n", key);}
+        if (DEV) {fprintf(stderr, "Buscando key %d a direita\n", key);}
         return search_key_by_node(t->root->right, key);
     }
 
@@ -79,12 +79,26 @@ int print_tree_avl(avl_t *t){
 // remove uma chave da árvore, retorna 0 em caso de erro e !0 caso contrário
 int remove_key_avl(avl_t *t, key_t key){
     if (tree_is_empty(t)){
+        if (DEV) {fprintf(stderr, "Removendo key %d na árvore vazia\n", key);}
         return 0;
     }
 
+    // remove a chave em root
+    if (t->root->key == key) {
+        if (DEV) {fprintf(stderr, "Removendo key %d em root\n", key);}
+        return remove_node(&(t->root), NULL);
+    }
 
+    // remove a chave na sub-árvore correspondente
+    if (t->root->key > key) { // esquerda
+        if (DEV) {fprintf(stderr, "Removendo key %d a esquerda\n", key);}
+        return remove_key_by_node(&(t->root->left), t->root, key);
+    } else { // direita 
+        if (DEV) {fprintf(stderr, "Removendo key %d a direita\n", key);}
+        return remove_key_by_node(&(t->root->right), t->root, key);
+    }
 
-    return 1;
+    return 0;
 }
 
 // destroi a árvore, retorna 0 em caso de erro e !0 caso contrário

@@ -62,6 +62,7 @@ int insert_key(node_t **nd, node_t *top, key_t key){
     return 1;
 }
 
+// procura a chave 'key' a partir de um nodo apontado, 1 se a chave esta presente e 0 caso contrario
 int search_key_by_node(node_t *nd, key_t key){
     if (nd == NULL) return 0; // caso seja nulo, não achou
     if (nd->key == key) return 1; // achou
@@ -72,10 +73,35 @@ int search_key_by_node(node_t *nd, key_t key){
     }
 }
 
+// imprime recursivamente in-order as chaves da árvore
 void print_tree_by_node(node_t *nd){
     if (nd == NULL) return; // terminou essa sub-árvore
     print_tree_by_node(nd->left); // imprime a sub-árvore a esquerda
     printf("%d ", nd->key);
     print_tree_by_node(nd->right); // imprime a sub-árvore a direita
     return;
+}
+
+int remove_node(node_t **nd, node_t *top){
+    // se nodo não existir
+    if (!*nd) return 0;
+
+    // MELHORAR ISSO (?)
+    if ((*nd)->left && (*nd)->right) { // ambas existem
+
+    } else {
+        if (!((*nd)->left || (*nd)->right)) { // nenhuma existte
+
+        } else { // uma das duas existe
+            if ((*nd)->left) { // apenas esquerda existe
+
+            } else { // apenas direita existe
+
+            }
+        }
+    }
+}
+
+int remove_key_by_node(node_t **nd, node_t *top, key_t key){
+
 }
