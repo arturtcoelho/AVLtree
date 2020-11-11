@@ -82,6 +82,7 @@ void print_tree_by_node(node_t *nd){
     return;
 }
 
+// remove o nodo apontado
 int remove_node(node_t **nd, node_t *top){
     // se nodo não existir
     if (!*nd) return 0;
@@ -100,8 +101,25 @@ int remove_node(node_t **nd, node_t *top){
             }
         }
     }
+    return 0;
 }
 
+// busca recursivamente e remove a chave
 int remove_key_by_node(node_t **nd, node_t *top, key_t key){
 
+    return 0;
+}
+
+// destroi a árvore recursivamente
+int destroy_tree(node_t **nd){
+    if (!*nd) return 1; // se ja não existe, retorna
+
+    destroy_tree(&((*nd)->left)); // destroi a sub-arvore da esquerda
+    (*nd)->left = NULL; // define a folha como vazia já
+
+    destroy_tree(&((*nd)->right)); // destroi a sub-árvore da direita
+    (*nd)->right = NULL; // define a folha como vazia
+
+    free(*nd); // libera o nodo em si
+    return 1;
 }

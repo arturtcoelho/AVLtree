@@ -45,7 +45,7 @@ int search_key_avl(avl_t *t, key_t key){
         return 0;
     }
 
-    
+    // caso ja ache a chave na root
     if (t->root->key == key) {
         if (DEV) {fprintf(stderr, "Achou key %d na root\n", key);}
         return 1;
@@ -66,6 +66,7 @@ int search_key_avl(avl_t *t, key_t key){
 // imprime a árvore in-order na saída padrão, retorna 0 em caso de erro e !0 caso contrário
 int print_tree_avl(avl_t *t){
     if (tree_is_empty(t)){
+        if (DEV) {fprintf(stderr, "Imprimindo árvore vazia\n");}
         return 1;
     }
 
@@ -106,5 +107,10 @@ int destroy_tree_avl(avl_t *t){
     if (tree_is_empty(t)){
         return 1;
     }
+
+    // empilha todos os nodos e os destroi recursivamente
+    destroy_tree(&(t->root));
+    t->root = NULL;
+
     return 1;
 }

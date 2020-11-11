@@ -9,11 +9,15 @@ int main(){
     avl_t tree;
     initialize_avl(&tree);
 
-    print_tree_avl(&tree);
-    insert_key_avl(&tree, 10);
-    print_tree_avl(&tree);
-    remove_key_avl(&tree, 10);
-    print_tree_avl(&tree);
+    for (int i = 0; i < 20; i++){
+        insert_key_avl(&tree, i * (i % 2 ? -1 : 1));
+    }
 
+    printf("Print 1st tree\n");
+    print_tree_avl(&tree);
+    destroy_tree_avl(&tree);
+    printf("Print 2nd tree\n");
+    print_tree_avl(&tree);
+    
     return 0;
 }
