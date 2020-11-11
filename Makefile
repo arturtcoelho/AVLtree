@@ -3,24 +3,28 @@
 CC = gcc
 CFLAGS = -Wall
 
-# targets de compilação
+# regra principal
 all: main
 
-# flag de debug
+# regra para compilar com a opção de debug
 # debug: purge
 debug: CFLAGS += -DDEBUG
 debug: main
 
-# targets de bibliotecas
+# regras para as bibliotecas
 tree_operations.o: tree_operations.h tree_operations.c
 	$(CC) $(CFLAGS) -c tree_operations.c
 avl_tree.o: avl_tree.h avl_tree.c tree_operations.o
 	$(CC) $(CFLAGS) -c avl_tree.c 
+
+# regra de compilação do arquivo principal
 main.o: tree_operations.h tree_operations.o avl_tree.h avl_tree.o main.c
 	$(CC) $(CFLAGS) -c main.c
+
+# regra de montagem do arquivo principal
 main: tree_operations.o avl_tree.o main.o
 
-# targets de limpeza
+# regras de limpeza
 clean: all
 	-rm -f ~. *.o
 
