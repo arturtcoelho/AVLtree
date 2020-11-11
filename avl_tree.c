@@ -6,12 +6,11 @@
 
 // inicializa a árvore, necessário para iniciar operações, retorna 0 em caso de erro e !0 caso contrário
 int initialize_avl(avl_t *t){
+    // inicializa os valores de root e height
     t->root = NULL;
     t->height = 0;
     if (DEV) {
-        fprintf(stderr, "Árvore inicializada\n");
-        fprintf(stderr, "root: %p\n", t->root);
-        fprintf(stderr, "height: %d\n", t->height);
+        fprintf(stderr, "Árvore em %p inicializada\n", t);
     }
     return 1;
 }
@@ -19,6 +18,7 @@ int initialize_avl(avl_t *t){
 // insere uma chave key_t na árvore, retorna 0 em caso de erro e !0 caso contrário
 int insert_key_avl(avl_t *t, key_t key){
 
+    // caso ainda não existam nodos presentes
     if (tree_is_empty(t)){
         if (DEV) {
             fprintf(stderr, "Árvore vazia\n");
@@ -28,9 +28,12 @@ int insert_key_avl(avl_t *t, key_t key){
         return 1;
     }
     
-    if (t->root->key > key){
+    // insere na sub-árvore a esquerda ou direita
+    if (t->root->key > key){ // esquerda
+        if (DEV) {fprintf(stderr, "Inserindo key: %d em %p\n", key, &(t->root->left));}
         return insert_key_by_node(&(t->root->left), t->root, key);
-    } else {
+    } else { // direita
+        if (DEV) {fprintf(stderr, "Inserindo key: %d em %p\n", key, &(t->root->right));}
         return insert_key_by_node(&(t->root->right), t->root, key);
     }
 }
@@ -38,16 +41,22 @@ int insert_key_avl(avl_t *t, key_t key){
 // procura uma chave na árvore, retorna 0 em caso de erro e !0 caso contrário
 int search_key_avl(avl_t *t, key_t key){
     if (tree_is_empty(t)){
+        if (DEV) {fprintf(stderr, "Buscando key %d numa árvore vazia\n", key);}
         return 0;
     }
 
+    
     if (t->root->key == key) {
+        if (DEV) {fprintf(stderr, "Achou key %d na root\n", key);}
         return 1;
     }
 
-    if (t->root->key > key) {
+    // busca recursivamente
+    if (t->root->key > key) { // esquerda
+        if (DEV) {fprintf(stderr, "Buscando key %d á esquerda\n", key);}
         return search_key_by_node(t->root->left, key);
-    } else {
+    } else { // direita
+        if (DEV) {fprintf(stderr, "Buscando key %d á direita\n", key);}
         return search_key_by_node(t->root->right, key);
     }
 
@@ -60,26 +69,27 @@ int print_tree_avl(avl_t *t){
         return 1;
     }
 
-    if (t->root) {
-        print_tree_by_node(t->root);
-        printf("\n");
-    }
+    // imprime a árvore recursivamente
+    print_tree_by_node(t->root);
+    printf("\n");
     
     return 1;
 }
 
 // remove uma chave da árvore, retorna 0 em caso de erro e !0 caso contrário
 int remove_key_avl(avl_t *t, key_t key){
-    if (!tree_is_empty(t)){
+    if (tree_is_empty(t)){
         return 0;
     }
+
+
+
     return 1;
 }
 
 // destroi a árvore, retorna 0 em caso de erro e !0 caso contrário
 int destroy_tree_avl(avl_t *t){
-    if (!tree_is_empty(t)){
-        free(t);
+    if (tree_is_empty(t)){
         return 1;
     }
     return 1;
