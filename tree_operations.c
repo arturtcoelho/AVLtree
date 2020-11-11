@@ -106,6 +106,18 @@ int remove_node(node_t **nd, node_t *top){
 
 // busca recursivamente e remove a chave
 int remove_key_by_node(node_t **nd, node_t *top, key_t key){
+    if (!*nd) return 0;
+
+    if ((*nd)->key == key) {
+        if (DEV) {fprintf(stderr, "Removendo nodo %p com chave %d\n", *nd, key);}
+        return remove_node(nd, top);
+    }
+
+    if ((*nd)->key > key) { //esquerda
+
+    } else { // direita
+
+    }
 
     return 0;
 }
