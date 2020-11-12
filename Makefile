@@ -12,26 +12,27 @@ all: main
 debug: CFLAGS += -DDEBUG
 debug: main
 
-# regras para as bibliotecas
+# regras para as bibliotecas de árvore
 tree_operations.o: tree_operations.h tree_operations.c
 	$(CC) $(CFLAGS) -c tree_operations.c
 avl_tree.o: avl_tree.h avl_tree.c tree_operations.o
 	$(CC) $(CFLAGS) -c avl_tree.c 
 
-# regra de compilação do arquivo principal
+# regra de compilação do arquivo principal em C
 main.o: tree_operations.h tree_operations.o avl_tree.h avl_tree.o main.c
 	$(CC) $(CFLAGS) -c main.c
 
-# regra de montagem do arquivo principal
+# regra de montagem do arquivo principal em C
 main: tree_operations.o avl_tree.o main.o
 
 #######################################################
 
+# compilação da lib utilizada pelo ctype
 avl_module.so: avl_module.c # OUTRAS LIBS DEPOIS
 	$(CC) $(LIBFLAGS) -o $@ avl_module.c
-# $(CC) $(LIBFLAGS) -Wl,-soname,avl_module -o avl_module.so avl_module.c 
+# $(CC) $(LIBFLAGS) -Wl,-soname,avl_module -o avl_module.so avl_module.c # pq -Wl,-soname,avl_module
 
-# regra de geração do executavel myavl
+# regra de geração do executavel myavl com link simbólico
 myavl: myavl.py avl_module.so
 	chmod 755 myavl.py
 	ln -sf myavl.py myavl
@@ -41,7 +42,4 @@ clean: all
 	-rm -f ~. *.o
 
 purge:
-	-rm -f ~. *.o
-	-rm -f ~. *.so
-	-rm -f ~. main
-	-rm -f ~. myavl
+	-rm -f ~. *.o *.so main myavl
