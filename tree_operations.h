@@ -19,10 +19,10 @@ int search_key_by_node(node_t *nd, key_t key);
 void print_tree_by_node(node_t *nd);
 
 // remove o nodo apontado
-int remove_node(node_t **nd, node_t *top);
+int remove_node(node_t *nd, node_t **top);
 
 // busca recursivamente e remove a chave
-int remove_key_by_node(node_t **nd, node_t *top, key_t key);
+int remove_key_by_node(node_t *nd, node_t **top, key_t key);
 
 // destroi a árvore recursivamente
 int destroy_tree(node_t **nd);

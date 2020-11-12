@@ -83,40 +83,44 @@ void print_tree_by_node(node_t *nd){
 }
 
 // remove o nodo apontado
-int remove_node(node_t **nd, node_t *top){
+int remove_node(node_t *nd, node_t **top){
     // se nodo não existir
-    if (!*nd) return 0;
+    if (!nd) return 0;
 
+    // TESTAR TOP != NULL
     // MELHORAR ISSO (?)
-    if ((*nd)->left && (*nd)->right) { // ambas existem
-
+    if (nd->left && nd->right) { // ambos os filhos existem
+        return 0;
     } else {
-        if (!((*nd)->left || (*nd)->right)) { // nenhuma existte
-
+        if (!(nd->left || nd->right)) { // nenhum filho existte
+            free(nd);
+            if (top) *top = NULL;
+            return 1;
         } else { // uma das duas existe
-            if ((*nd)->left) { // apenas esquerda existe
-
-            } else { // apenas direita existe
-
-            }
+            if (top) *top = nd->left ? nd->left : nd->right; // o nodo passa a ser o filho existente
+            free(nd);
+            return 1;
         }
     }
     return 0;
 }
 
 // busca recursivamente e remove a chave
-int remove_key_by_node(node_t **nd, node_t *top, key_t key){
-    if (!*nd) return 0;
+int remove_key_by_node(node_t *nd, node_t **top, key_t key){
+    if (!nd) return 0;
 
-    if ((*nd)->key == key) {
-        if (DEV) {fprintf(stderr, "Removendo nodo %p com chave %d\n", *nd, key);}
+    if (nd->key == key) {
+        if (DEV) {fprintf(stderr, "Removendo nodo %p com chave %d\n", nd, key);}
         return remove_node(nd, top);
     }
 
-    if ((*nd)->key > key) { //esquerda
-
+    if (DEV) {fprintf(stderr, "Removendo nodo %p com chave %d\n", nd, key);}
+    if (nd->key > key) { //esquerda
+        if (DEV) {fprintf(stderr, "Removendo nodo esquerdo %p com chave %d\n", nd->left, key);}
+        return remove_key_by_node(nd->left, &(nd->left), key);
     } else { // direita
-
+        if (DEV) {fprintf(stderr, "Removendo nodo direito %p com chave %d\n", nd->right, key);}
+        return remove_key_by_node(nd->right, &(nd->right), key);
     }
 
     return 0;
