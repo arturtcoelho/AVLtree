@@ -9,4 +9,21 @@
 <p>Contém as funções de interface pra utilização de uma árvore AVL, contém as funçoes padrão de qualquer árvore</p>
 
 <h4>tree_operations.*</h4>
-<p>Contém as funções de apoio para a biblioteca principal, essas funções não devem ser utilizadas diretamente no código</p>
+<p>Contém as funções de apoio para a biblioteca principal:</p>
+
+* rotate: rotaciona a árvora para balancea-la
+* insert_key: insere uma chave em um nodo apontado
+* remove_node: remove um nodo apontado
+
+* As funções recursivas:
+  * Busca
+  * Impressão
+  * Inserção
+  * Remoção
+  * Destruição
+
+<h4>avl_module.c</h4>
+<p>Contém a interface a ser exportada como biblioteca para utilização no código Python com ctypes</p>
+
+<h4>myavl.py</h4>
+<p>Interface de usuário para a árvore AVL, utilizando ctypes para importar a biblioteca implementada em C</p>
