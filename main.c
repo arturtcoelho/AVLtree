@@ -1,12 +1,13 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <time.h>
 
 #include "avl_tree.h"
 
 // por enquanto contém código em C para testes, 
 int main(){
 
-    srand(0);
+    srand(time(0));
     avl_t tree;
     initialize_avl(&tree);
 
