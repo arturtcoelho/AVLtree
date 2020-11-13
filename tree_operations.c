@@ -94,14 +94,13 @@ int remove_node(node_t *nd, node_t **top){
         node_t *succ = min_node(nd->right); // succ = sucessor de nodo
         nd->key = succ->key; // copia a chave PODE SER MUDADO PARA UMA ATRIBUIÇÃO DE PONTEIROS
         if (succ == nd->right){ // caso especial onde subárvore da direita é o sucessor
-            node_t *temp = nd->right;
             nd->right = nd->right->right;
-            free(temp);
         } else { // remove o sucessor
             succ->top->left = NULL;
         }
-        free(succ);
+        free(succ); 
         return 1;
+
     } else {
         if (!(nd->left || nd->right)) { // nenhum filho existte
             if(DEV) {fprintf(stderr, "Removendo nodo NENHUM EXISTE %p (%d)\n", nd, nd->key);}
