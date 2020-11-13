@@ -139,3 +139,17 @@ int destroy_tree(node_t **nd){
     free(*nd); // libera o nodo em si
     return 1;
 }
+
+// retorna o ponteiro para o nodo com o menor valor da subárvore passada, ou null caso tenha sido passado null
+node_t *min_node(node_t *nd){
+    if (!nd) return NULL;
+    if (!nd->left) return nd;
+    return (min_node(nd->left));
+}
+
+// retorna o ponteiro para o nodo com o maior valor da subárvore passada, ou null caso tenha sido passado null
+node_t *max_node(node_t *nd){
+    if (!nd) return NULL;
+    if (!nd->right) return nd;
+    return (max_node(nd->right));
+}

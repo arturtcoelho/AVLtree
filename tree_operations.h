@@ -27,4 +27,8 @@ int remove_key_by_node(node_t *nd, node_t **top, key_t key);
 // destroi a árvore recursivamente
 int destroy_tree(node_t **nd);
 
+// retorna o ponteiro para o nodo com o menor/maior valor da subárvore passada, ou null caso tenha sido passado null
+node_t *min_node(node_t *nd);
+node_t *max_node(node_t *nd);
+
 #endif
