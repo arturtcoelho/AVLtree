@@ -93,9 +93,11 @@ class avl_tree(ctypes.Structure):
 
     #def __str__(self):
     #    return self.print_tree()
-    # A representacao em __str__ provavelmente nao funcionaria,
+    # A representacao em __str__ provavelmente nao funciona,
     # Uma vez que __str__ requer uma string como output, e .print_tree() retorna
     # O valor de saida da funcao, nao a string
+    # Erro obtido:
+    # TypeError: __str__ returned non-string (type int)
 
     def __contains__(self, key):
         """Verificador usado pelo operador 'in'"""
