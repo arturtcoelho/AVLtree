@@ -6,17 +6,27 @@
 // por enquanto contém código em C para testes, 
 int main(){
 
+    srand(0);
     avl_t tree;
     initialize_avl(&tree);
 
-    insert_key_avl(&tree, 1);
-    insert_key_avl(&tree, 2);
-    insert_key_avl(&tree, 3);
+    for (int i = 0; i < 20; i++){
+        int r = rand() % 30;
+        printf("inserindo %d ", r);
+        insert_key_avl(&tree, r);
+        print_tree_avl(&tree);
+    }
+    printf("Arvore total \n");
     print_tree_avl(&tree);
-    remove_key_avl(&tree, 2);
+
+    for (int i = 0; i < 20; i++){
+        printf("removendo %d ", i);
+        remove_key_avl(&tree, i);
+        print_tree_avl(&tree);
+    }
+    printf("arvore final\n");
     print_tree_avl(&tree);
-    remove_key_avl(&tree, 3);
-    print_tree_avl(&tree);
+
     destroy_tree_avl(&tree);
 
     return 0;

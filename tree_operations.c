@@ -87,16 +87,27 @@ int remove_node(node_t *nd, node_t **top){
     // se nodo não existir
     if (!nd) return 0;
 
-    // TESTAR TOP != NULL
-    // MELHORAR ISSO (?)
+    if(DEV) {fprintf(stderr, "Removendo nodo %p (%d)\n", nd, nd->key);}
+    
     if (nd->left && nd->right) { // ambos os filhos existem
-        return 0;
+        if(DEV) {fprintf(stderr, "Removendo nodo AMBOS EXISTEM %p (%d)\n", nd, nd->key);}
+        node_t *succ = min_node(nd->right); // succ = sucessor de nodo
+        nd->key = succ->key; // copia a chave PODE SER MUDADO PARA UMA ATRIBUIÇÃO DE PONTEIROS
+        if (succ == nd->right){ // caso especial onde subárvore da direita é o sucessor
+            nd->right = NULL;
+        } else { // remove o sucessor
+            succ->top->left = NULL;
+        }
+        free(succ);
+        return 1;
     } else {
         if (!(nd->left || nd->right)) { // nenhum filho existte
+            if(DEV) {fprintf(stderr, "Removendo nodo NENHUM EXISTE %p (%d)\n", nd, nd->key);}
             free(nd);
             if (top) *top = NULL;
             return 1;
         } else { // uma das duas existe
+            if(DEV) {fprintf(stderr, "Removendo nodo UMA EXISTE %p (%d)\n", nd, nd->key);}
             if (top) *top = nd->left ? nd->left : nd->right; // o nodo passa a ser o filho existente
             free(nd);
             return 1;
@@ -142,8 +153,12 @@ int destroy_tree(node_t **nd){
 
 // retorna o ponteiro para o nodo com o menor valor da subárvore passada, ou null caso tenha sido passado null
 node_t *min_node(node_t *nd){
+    if (DEV) {fprintf(stderr, "Buscando min %p (%d) e top %p (%d)\n", nd, nd->key, nd->top, nd->top->key);}
     if (!nd) return NULL;
-    if (!nd->left) return nd;
+    if (!nd->left) {
+        if (DEV) {fprintf(stderr, "Achou min %p (%d), com top %p (%d)\n", nd, nd->key, nd->top, nd->top->key);} 
+        return nd;
+    }
     return (min_node(nd->left));
 }
 
