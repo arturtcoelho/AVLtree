@@ -100,7 +100,7 @@ class avl_tree(ctypes.Structure):
     # TypeError: __str__ returned non-string (type int)
 
     def __contains__(self, key):
-        """Verificador usado pelo operador 'in'"""
+        """ Verificador usado pelo operador 'in' """
         # Mais em docs/source.txt: In Operator 
         return self.search_key(key)
 
