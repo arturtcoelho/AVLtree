@@ -1,3 +1,5 @@
-https://cleitonbueno.com/python-usando-bibliotecas-do-linux-com-ctypes/
-https://dbader.org/blog/python-ctypes-tutorial-part-2
-https://docs.python.org/3.5/library/ctypes.html#incomplete-types
+Cleiton Bueno: https://cleitonbueno.com/python-usando-bibliotecas-do-linux-com-ctypes/
+Dan Bader: https://dbader.org/blog/python-ctypes-tutorial-part-2
+Tipos Incompletos: https://docs.python.org/3.5/library/ctypes.html#incomplete-types
+By Reference: https://stackoverflow.com/questions/7530473/ctypes-and-passing-a-by-reference-to-a-function
+In Operator: https://docs.python.org/3/reference/datamodel.html#object.__contains__
