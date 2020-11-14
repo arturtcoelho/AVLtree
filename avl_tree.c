@@ -9,9 +9,7 @@ int initialize_avl(avl_t *t){
     // inicializa os valores de root e height
     t->root = NULL;
     t->height = 0;
-    if (DEV) {
-        fprintf(stderr, "Árvore em %p inicializada\n", t);
-    }
+    if (DEV) {fprintf(stderr, "Árvore em %p inicializada\n", t);}
     return 1;
 }
 
@@ -92,7 +90,7 @@ int remove_key_avl(avl_t *t, key_t key){
     // remove a chave em root
     if (t->root->key == key) {
         if (DEV) {fprintf(stderr, "Removendo key %d em root\n", key);}
-        return remove_node(t->root, NULL);
+        return remove_node(t->root, &(t->root));
     }
 
     // remove a chave na sub-árvore correspondente
