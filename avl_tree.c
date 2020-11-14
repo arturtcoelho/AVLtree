@@ -28,6 +28,11 @@ int insert_key_avl(avl_t *t, key_t key){
         return 1;
     }
     
+    if (search_key_by_node(t->root, key)){
+        if (DEV) {fprintf(stderr, "Chave %d, ja existe\n", key);}
+        return 1;
+    }
+
     // insere na sub-árvore a esquerda ou direita
     if (t->root->key > key){ // esquerda
         if (DEV) {fprintf(stderr, "Inserindo key: %d em %p\n", key, &(t->root->left));}
