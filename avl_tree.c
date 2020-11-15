@@ -77,6 +77,21 @@ int print_tree_avl(avl_t *t){
     return 1;
 }
 
+
+// imprime a representação de parenteses de uma árvore binária
+int print_parethesis(avl_t *t) {
+    if (tree_is_empty(t)){
+        if (DEV) {fprintf(stderr, "Imprimindo parentesis árvore vazia\n");}
+        return 1;
+    }
+
+    // imprime a árvore recursivamente
+    print_parenthesis_by_node(t->root);
+    printf("\n");
+    
+    return 1;
+}
+
 // remove uma chave da árvore, retorna 0 em caso de erro e !0 caso contrário
 int remove_key_avl(avl_t *t, key_t key){
     if (tree_is_empty(t)){

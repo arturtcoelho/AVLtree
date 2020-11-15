@@ -87,6 +87,18 @@ void print_tree_by_node(node_t *nd){
     return;
 }
 
+int print_parenthesis_by_node(node_t *nd){
+    if (nd == NULL) {
+        // printf(")");
+        return 0; // terminou essa sub-árvore
+    }
+    printf("(%d", nd->key);
+    print_parenthesis_by_node(nd->left);
+    print_parenthesis_by_node(nd->right);
+    printf(")");
+    return 1;
+}
+
 // função para o caso onde ambos os filhos estão presentes
 int remove_both_exist(node_t *nd){
     if (!nd) return 0; // caso o nodo não exista

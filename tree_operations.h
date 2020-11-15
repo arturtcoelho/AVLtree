@@ -17,6 +17,7 @@ int search_key_by_node(node_t *nd, key_t key);
 
 // imprime recursivamente in-order as chaves da árvore
 void print_tree_by_node(node_t *nd);
+int print_parenthesis_by_node(node_t *nd);
 
 // remove o nodo apontado
 int remove_node(node_t *nd);

@@ -34,6 +34,7 @@ int search_key_avl(avl_t *t, key_t key);
 
 // imprime a árvore in-order na saída padrão, retorna 0 em caso de erro e !0 caso contrário
 int print_tree_avl(avl_t *t);
+int print_parethesis(avl_t *t);
 
 // remove uma chave da árvore, retorna 0 em caso de erro e !0 caso contrário
 int remove_key_avl(avl_t *t, key_t key);
