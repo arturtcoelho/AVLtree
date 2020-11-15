@@ -20,7 +20,6 @@ typedef struct node node_t;
 
 struct avl {
 	node_t *root;
-	int height;
 };
 typedef struct avl avl_t;
 

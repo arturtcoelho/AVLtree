@@ -6,37 +6,34 @@
 
 // inicializa a árvore, necessário para iniciar operações, retorna 0 em caso de erro e !0 caso contrário
 int initialize_avl(avl_t *t){
-    // inicializa os valores de root e height
+    // inicializa o valor de root
     t->root = NULL;
-    t->height = 0;
-    if (DEV) {fprintf(stderr, "Árvore em %p inicializada\n", t);}
+    if (DEV) {fprintf(stderr, "Árvore inicializada\n");}
     return 1;
 }
 
 // insere uma chave key_t na árvore, retorna 0 em caso de erro e !0 caso contrário
 int insert_key_avl(avl_t *t, key_t key){
     if(DEV){fprintf(stderr, "Inserindo AVL %d\n", key);}
+
     // caso ainda não existam nodos presentes
     if (tree_is_empty(t)){
-        if (DEV) {
-            fprintf(stderr, "Árvore vazia\n");
-            fprintf(stderr, "Inserindo em %p\n", &(t->root));
-        }
+        if (DEV) {fprintf(stderr, "Árvore vazia, inserindo em root\n");}
         insert_key(&(t->root), NULL, key);
         return 1;
     }
     
-    if (search_key_by_node(t->root, key)){
-        if (DEV) {fprintf(stderr, "Chave %d, ja existe\n", key);}
+    if (t->root->key == key) {
+        if (DEV) {fprintf(stderr, "Valor a ser inserido (%d) achado em root\n", key);}
         return 1;
     }
 
     // insere na sub-árvore a esquerda ou direita
     if (t->root->key > key){ // esquerda
-        if (DEV) {fprintf(stderr, "Inserindo key: %d em %p\n", key, &(t->root->left));}
+        if (DEV) {fprintf(stderr, "Inserindo key: %d a esquerda de root\n", key);}
         return insert_key_by_node(&(t->root->left), t->root, key);
     } else { // direita
-        if (DEV) {fprintf(stderr, "Inserindo key: %d em %p\n", key, &(t->root->right));}
+        if (DEV) {fprintf(stderr, "Inserindo key: %d a direita de root\n", key);}
         return insert_key_by_node(&(t->root->right), t->root, key);
     }
 }

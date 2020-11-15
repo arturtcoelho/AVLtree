@@ -14,16 +14,15 @@ int main(){
         for (int j = 0; j < 100; j++){
             initialize_avl(&tree);
             for (int k = 0; k < j; k++){
-                insert_key_avl(&tree, rand() % (i+1));
+                insert_key_avl(&tree, rand() % (i+1) + 1);
             }
 
             for (int k = 0; k < i; k+=(j+1)){
                 (remove_key_avl(&tree, k));
             }
-
+            // print_tree_avl(&tree);
             destroy_tree_avl(&tree);
         }
-        printf("%d\n", i);
     }
 
     // initialize_avl(&tree);

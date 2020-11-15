@@ -34,7 +34,6 @@ class avl_tree(ctypes.Structure):
 
     _fields_ = [
         ("root", ctypes.POINTER(node)),
-        ("height", ctypes.c_int)
     ]
 
     def __init__(self):
@@ -90,7 +89,7 @@ class avl_tree(ctypes.Structure):
         """Destrutor de classe"""
         return self.destroy()
 
-    #def __str__(self):
+    # def __str__(self):
     #    return self.print_tree()
     # A representacao em __str__ provavelmente nao funciona,
     # Uma vez que __str__ requer uma string como output, e .print_tree() retorna
@@ -104,5 +103,5 @@ class avl_tree(ctypes.Structure):
         return self.search_key(key)
 
     def __repr__(self):
-        return '({}, {})'.format(self.root, self.height)
+        return '({}, {})'.format(self.root)
 
