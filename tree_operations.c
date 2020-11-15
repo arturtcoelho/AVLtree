@@ -11,6 +11,10 @@ void bad_malloc(){
     exit(1);
 }
 
+void print_in_stdout(char *str) {
+    printf("%s", str);
+}
+
 // rotaciona a árvore para realizar seu balanço
 int rotate(){
     return 1;
@@ -87,15 +91,18 @@ void print_tree_by_node(node_t *nd){
     return;
 }
 
-int print_parenthesis_by_node(node_t *nd){
+// imprime na saída padrão a sub-árvore na notação de arenteses
+int print_parenthesis_by_node(node_t *nd, void (*print)(char*)){
     if (nd == NULL) {
-        // printf(")");
         return 0; // terminou essa sub-árvore
     }
-    printf("(%d", nd->key);
-    print_parenthesis_by_node(nd->left);
-    print_parenthesis_by_node(nd->right);
-    printf(")");
+    char open[4], close[2];
+    sprintf(open, "(%d", nd->key);
+    print(open);
+    print_parenthesis_by_node(nd->left, print);
+    print_parenthesis_by_node(nd->right, print);
+    sprintf(close, ")");
+    print(close);
     return 1;
 }
 
@@ -258,4 +265,11 @@ node_t *max_node(node_t *nd){
     if (!nd) return NULL;
     if (!nd->right) return nd;
     return (max_node(nd->right));
+}
+
+int number_of_nodes(node_t *nd, int *size){
+    if (!nd) return 0;
+    *size += number_of_nodes(nd->left, size);
+    *size += number_of_nodes(nd->right, size);
+    return 1;
 }

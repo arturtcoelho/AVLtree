@@ -8,6 +8,8 @@
 	#define DEV 0
 #endif
 
+#define MAX_NUM_LEN 4
+
 typedef int key_t;
 
 struct node {
@@ -41,5 +43,7 @@ int remove_key_avl(avl_t *t, key_t key);
 
 // destroi a árvore, retorna 0 em caso de erro e !0 caso contrário
 int destroy_tree_avl(avl_t *t);
+
+int tree_size(avl_t *t);
 
 #endif

@@ -86,7 +86,7 @@ int print_parethesis(avl_t *t) {
     }
 
     // imprime a árvore recursivamente
-    print_parenthesis_by_node(t->root);
+    print_parenthesis_by_node(t->root, print_in_stdout);
     printf("\n");
     
     return 1;
@@ -128,4 +128,17 @@ int destroy_tree_avl(avl_t *t){
     t->root = NULL;
 
     return 1;
+}
+
+// retorna o numero total de nodos
+int tree_size(avl_t *t){
+    if (tree_is_empty(t)){
+        if (DEV) {fprintf(stderr, "Imprimindo árvore vazia\n");}
+        return 0;
+    }
+
+    // descobre o tamanho da árvore recursivamente
+    int size = 1;
+    number_of_nodes(t->root, &size);
+    return size;
 }
