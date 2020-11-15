@@ -18,7 +18,7 @@ class node(ctypes.Structure):
     # ctypes incompletos;
     # Precisamos que o nodo seja conhecido pelo parser
     # antes de declararmos ponteiros para o mesmo
-    # Mais em docs/sources.txt (Tipos Incompletos)
+    # Verifique docs/sources.txt: Tipos Incompletos
 
 # Suas definicoes sao feitas apos sua declaracao:
 
@@ -28,7 +28,6 @@ node._fields_ = [
 	("left", ctypes.POINTER(node)),
 	("right", ctypes.POINTER(node)),
 ]
-
 
 class avl_tree(ctypes.Structure):
     """Arvore AVL, definida a partir da struct avl_t"""

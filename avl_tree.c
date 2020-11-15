@@ -90,16 +90,16 @@ int remove_key_avl(avl_t *t, key_t key){
     // remove a chave em root
     if (t->root->key == key) {
         if (DEV) {fprintf(stderr, "Removendo key %d em root\n", key);}
-        return remove_node(t->root, &(t->root));
+        return remove_node(t->root);
     }
 
     // remove a chave na sub-árvore correspondente
     if (t->root->key > key) { // esquerda
         if (DEV) {fprintf(stderr, "Removendo key %d a esquerda\n", key);}
-        return remove_key_by_node(t->root->left, &(t->root->left), key);
+        return remove_key_by_node(t->root->left, key);
     } else { // direita 
         if (DEV) {fprintf(stderr, "Removendo key %d a direita\n", key);}
-        return remove_key_by_node(t->root->right, &(t->root->right), key);
+        return remove_key_by_node(t->root->right, key);
     }
 
     return 0;
