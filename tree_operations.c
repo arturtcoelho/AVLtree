@@ -116,7 +116,8 @@ int remove_node(node_t *nd){
                     nd->top->right = NULL;
                 }
             } else { // é root
-                free(nd);
+                printf("É ROOT\n");
+                return 1;
             }
             free(nd);
             return 1;
@@ -135,31 +136,34 @@ int remove_node(node_t *nd){
                     nd->right->top = nd->top;
                 }
                 free(nd);
+                return 1;
             } else { // é root
-                if(DEV) {fprintf(stderr, "Removendo nodo UMA EXISTE %p (%d), %s\n", nd, nd->key, nd->left ? "ESQ" : "DIR");}
+                if(DEV) {fprintf(stderr, "Removendo nodo UMA EXISTE (%d), %s\n", nd->key, nd->left ? "ESQ" : "DIR");}
                 node_t *temp;
                 if (nd->left) { // esquerda
+                    if(DEV) {fprintf(stderr, "Ajustando ESQ (%d)\n", nd->left->key);}
                     temp = nd->left;
                     if(nd->left->left) nd->left->left->top = nd;
                     if(nd->left->right) nd->left->right->top = nd;
 
-                    nd->key = nd->left->key;
-                    nd->left = nd->left->left;
-                    nd->right = nd->left->right;
+                    nd->key = temp->key;
+                    nd->left = temp->left;
+                    nd->right = temp->right;
                     free(temp);
                 } else { // direita
+                    if(DEV) {fprintf(stderr, "Ajustando DIR (%d)\n", nd->right->key);}
                     temp = nd->right;
                     if(nd->right->left) nd->right->left->top = nd;
                     if(nd->right->right) nd->right->right->top = nd;
 
-                    nd->key = nd->right->key;
-                    nd->left = nd->right->left;
-                    nd->right = nd->right->right;
+                    nd->key = temp->key;
+                    nd->left = temp->left;
+                    nd->right = temp->right;
                     free(temp);
                 }
+                if(DEV){fprintf(stderr, "nd, key: %d, left: %d, right: %d,top: %d\n", nd->key, nd->left ? nd->left->key : 0, nd->right ? nd->right->key : 0, nd->top ? nd->top->key : 0);}
+                return 1;
             }
-
-            return 1;
         }
     }
     return 0;

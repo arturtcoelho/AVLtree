@@ -15,7 +15,7 @@ int initialize_avl(avl_t *t){
 
 // insere uma chave key_t na árvore, retorna 0 em caso de erro e !0 caso contrário
 int insert_key_avl(avl_t *t, key_t key){
-
+    if(DEV){fprintf(stderr, "Inserindo AVL %d\n", key);}
     // caso ainda não existam nodos presentes
     if (tree_is_empty(t)){
         if (DEV) {
@@ -91,7 +91,6 @@ int remove_key_avl(avl_t *t, key_t key){
     if (t->root->key == key) {
         if (DEV) {fprintf(stderr, "Removendo key %d em root\n", key);}
         return remove_node(t->root);
-        // return 1;
     }
 
     // remove a chave na sub-árvore correspondente
