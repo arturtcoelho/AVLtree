@@ -273,3 +273,11 @@ int number_of_nodes(node_t *nd, int *size){
     *size += number_of_nodes(nd->right, size);
     return 1;
 }
+
+// calcula a altura de uma subárvore
+int height_by_node(node_t *nd, int height){
+    if (!nd) return height;
+    int left_height = height_by_node(nd->left, height);
+    int right_height = height_by_node(nd->right, height);
+    return left_height > right_height ? left_height + 1 : right_height + 1;
+}

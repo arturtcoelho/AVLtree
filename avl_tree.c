@@ -142,3 +142,8 @@ int tree_size(avl_t *t){
     number_of_nodes(t->root, &size);
     return size;
 }
+
+int tree_height(avl_t *t){
+    if (!t->root) return 0;
+    return height_by_node(t->root, 0);
+}

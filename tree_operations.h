@@ -32,8 +32,13 @@ int destroy_tree(node_t **nd);
 node_t *min_node(node_t *nd);
 node_t *max_node(node_t *nd);
 
+// imprime uma string em stdout
 void print_in_stdout(char *str);
 
+// calcula o numero de nodos
 int number_of_nodes(node_t *nd, int *size);
+
+// calcula a altura de uma subárvore
+int height_by_node(node_t *nd, int height);
 
 #endif

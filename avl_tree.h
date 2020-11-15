@@ -46,4 +46,6 @@ int destroy_tree_avl(avl_t *t);
 
 int tree_size(avl_t *t);
 
+int tree_height(avl_t *t);
+
 #endif
