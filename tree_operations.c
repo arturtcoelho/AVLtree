@@ -209,7 +209,7 @@ int remove_key_by_node(node_t *nd, key_t key){
         if (DEV) {fprintf(stderr, "Removendo nodo esquerdo %d\n", nd->left ? nd->left->key : 0);}
         return remove_key_by_node(nd->left, key);
     } else { // direita
-        if (DEV) {fprintf(stderr, "Removendo nodo direito %d\n", nd->right ? nd->right->key);}
+        if (DEV) {fprintf(stderr, "Removendo nodo direito %d\n", nd->right ? nd->right->key : 0);}
         return remove_key_by_node(nd->right, key);
     }
 
