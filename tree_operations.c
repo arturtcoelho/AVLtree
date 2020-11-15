@@ -92,43 +92,73 @@ int remove_node(node_t *nd){
     if (nd->left && nd->right) { // ambos os filhos existem
         if(DEV) {fprintf(stderr, "Removendo nodo AMBOS EXISTEM %p (%d)\n", nd, nd->key);}
         node_t *succ = min_node(nd->right); // succ = sucessor de nodo
-        nd->key = succ->key; // copia a chave PODE SER MUDADO PARA UMA ATRIBUIÇÃO DE PONTEIROS
+        nd->key = succ->key; // copia a chave
         if (succ == nd->right){ // caso especial onde subárvore da direita é o sucessor
+            node_t *temp = nd->right;
+            if (nd->right->right) nd->right->right->top = nd;
             nd->right = nd->right->right;
+            free(temp);
         } else { // remove o sucessor
-            succ->top->left = NULL;
+            succ->top->left = succ->right;
+            if (succ->right) succ->right->top = succ->top;
+            free(succ);
         }
-        free(succ); 
         return 1;
 
     } else {
         if (!(nd->left || nd->right)) { // nenhum filho existte
-            if(DEV) {fprintf(stderr, "Removendo nodo NENHUM EXISTE %p (%d)\n", nd, nd->key);}
-            if (nd->top)
-            {
-                // descobre se eh filho esquerda ou filho direita
-                if (nd->top->left == nd) {
+            // if(DEV) {fprintf(stderr, "Removendo nodo NENHUM EXISTE %p (%d)\n", nd, nd->key);}
+            if(DEV) {fprintf(stderr, "NENHUM EXISTE %p (%d), left (%d), right (%d), top (%d)\n", nd, nd->key, nd->left ? nd->left->key : 0, nd->right ? nd->right->key : 0, nd->top ? nd->top->key : 0);}
+            if (nd->top) { // não é raiz
+                if (nd->top->left == nd) { // esquerda
                     nd->top->left = NULL;
+                } else { // direita
+                    nd->top->right = NULL;
                 }
-                else {
-                    nd->top->right = NULL;       
-                }
+            } else { // é root
+                free(nd);
             }
             free(nd);
             return 1;
         } else { // uma das duas existe
-            if(DEV) {fprintf(stderr, "Removendo nodo UMA EXISTE %p (%d)\n", nd, nd->key);}
-            if (nd->top) {
-                // descobre se eh filho esquerda ou filho direita
-                if (nd->top->left == nd) {
+            if (nd->top) { // se top existe
+                if(DEV) {fprintf(stderr, "Removendo nodo UMA EXISTE %p (%d)\n", nd, nd->key);}
+                if (nd->top->left == nd) { // se tem esquerdo
+                    // if(DEV) {fprintf(stderr, "Removendo nodo %p (%d), left (%d), right (%d), top (%d)\n", nd, nd->key, nd->left ? nd->left->key : 0, nd->right ? nd->right->key : 0, nd->top ? nd->top->key : 0);}
                     nd->top->left = nd->left ? nd->left : nd->right;
-                }
-                else {
+                } else { // se tem direito
                     nd->top->right = nd->left ? nd->left : nd->right;       
+                }
+                if (nd->left) {
+                    nd->left->top = nd->top;
+                } else {
+                    nd->right->top = nd->top;
+                }
+                free(nd);
+            } else { // é root
+                if(DEV) {fprintf(stderr, "Removendo nodo UMA EXISTE %p (%d), %s\n", nd, nd->key, nd->left ? "ESQ" : "DIR");}
+                node_t *temp;
+                if (nd->left) { // esquerda
+                    temp = nd->left;
+                    if(nd->left->left) nd->left->left->top = nd;
+                    if(nd->left->right) nd->left->right->top = nd;
+
+                    nd->key = nd->left->key;
+                    nd->left = nd->left->left;
+                    nd->right = nd->left->right;
+                    free(temp);
+                } else { // direita
+                    temp = nd->right;
+                    if(nd->right->left) nd->right->left->top = nd;
+                    if(nd->right->right) nd->right->right->top = nd;
+
+                    nd->key = nd->right->key;
+                    nd->left = nd->right->left;
+                    nd->right = nd->right->right;
+                    free(temp);
                 }
             }
 
-            free(nd);
             return 1;
         }
     }

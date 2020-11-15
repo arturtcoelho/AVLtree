@@ -91,6 +91,7 @@ int remove_key_avl(avl_t *t, key_t key){
     if (t->root->key == key) {
         if (DEV) {fprintf(stderr, "Removendo key %d em root\n", key);}
         return remove_node(t->root);
+        // return 1;
     }
 
     // remove a chave na sub-árvore correspondente
