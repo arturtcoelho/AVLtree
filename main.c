@@ -11,46 +11,32 @@ int main(){
     avl_t tree;
 
     for (int i = 0; i < 1000; i++){
-        initialize_avl(&tree);
-
-        for (int j = 0; j < 500; j++){
-            int r = rand() % 500;
-            insert_key_avl(&tree, r);
-            // printf("Inseriu: %d  ", r);
-        }
-
-        // printf("Árvore final\n");
-        // print_tree_avl(&tree);
-
-        for (int j = 0; j < 250; j+=5){
-            if (remove_key_avl(&tree, j)) {
-                // printf("Removeu: %d  ", j);
-                // print_tree_avl(&tree);
+        for (int j = 0; j < 100; j++){
+            initialize_avl(&tree);
+            for (int k = 0; k < j; k++){
+                insert_key_avl(&tree, rand() % (i+1));
             }
-        }
-        
-        // printf("Árvore final\n");
-        // print_tree_avl(&tree);
 
-        destroy_tree_avl(&tree);
+            for (int k = 0; k < i; k+=(j+1)){
+                (remove_key_avl(&tree, k));
+            }
+
+            destroy_tree_avl(&tree);
+        }
+        printf("%d\n", i);
     }
 
     // initialize_avl(&tree);
 
-    // insert_key_avl(&tree, 30);
-    // insert_key_avl(&tree, 139);
-    // insert_key_avl(&tree, 334);
-    // insert_key_avl(&tree, 448);
-    // insert_key_avl(&tree, 286);
-    // insert_key_avl(&tree, 151);
-    // insert_key_avl(&tree, 105);
-    // insert_key_avl(&tree, 318);
-    // insert_key_avl(&tree, 0);
-    // insert_key_avl(&tree, 462);
+    // insert_key_avl(&tree, 180);
+    // insert_key_avl(&tree, 430);
+    // insert_key_avl(&tree, 411);
+    // insert_key_avl(&tree, 443);
+    // insert_key_avl(&tree, 418);
 
-    // remove_key_avl(&tree, 0);
-    // remove_key_avl(&tree, 30);
-    // remove_key_avl(&tree, 105);
+    // remove_key_avl(&tree, 180);
+    // remove_key_avl(&tree, 430);
+    // print_tree_avl(&tree);
 
     // destroy_tree_avl(&tree);
 
