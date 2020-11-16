@@ -35,7 +35,6 @@ def node_repr_(self):
 node.__repr__ = node_repr_
 # Fim da definicao de 'node'
 
-
 class avl_tree(ctypes.Structure):
     """Arvore AVL, definida a partir da struct avl_t"""
 
@@ -113,3 +112,6 @@ class avl_tree(ctypes.Structure):
     def __repr__(self):
         return '({})'.format(self.root)
 
+    def __len__(self):
+        pass
+        # return self.size()
