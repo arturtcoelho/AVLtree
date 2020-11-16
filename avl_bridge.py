@@ -29,10 +29,10 @@ node._fields_ = [
 	("right", ctypes.POINTER(node)),
 ]
 
-def node_repr_(self):
+def _node_repr_(self):
     return int(self.key)
 
-node.__repr__ = node_repr_
+node.__repr__ = _node_repr_
 # Fim da definicao de 'node'
 
 class avl_tree(ctypes.Structure):
