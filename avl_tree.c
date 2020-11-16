@@ -86,10 +86,22 @@ int print_parethesis(avl_t *t) {
     }
 
     // imprime a árvore recursivamente
-    print_parenthesis_by_node(t->root, print_in_stdout);
+    print_parenthesis_by_node(t->root);
     printf("\n");
     
     return 1;
+}
+
+// retorna uma string com a notação de parenteses da árvore
+int string_parenthesis(avl_t *t, char * str, int max){
+
+    if (tree_is_empty(t)){
+        if (DEV) {fprintf(stderr, "Imprimindo string árvore vazia\n");}
+        return 1;
+    }
+
+    // adiquire a árvore recursivamente
+    return string_parenthesis_by_node(t->root, str, 0, max);
 }
 
 // remove uma chave da árvore, retorna 0 em caso de erro e !0 caso contrário

@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
+#include <string.h>
 
 #include "avl_tree.h"
 
@@ -27,26 +28,28 @@ int main(){
 
     initialize_avl(&tree);
 
-    // insert_key_avl(&tree, 5);
-    // insert_key_avl(&tree, 10);
-    // insert_key_avl(&tree, 1);
-    // insert_key_avl(&tree, 15);
-    // insert_key_avl(&tree, 4);
-    // insert_key_avl(&tree, 20);
-    // insert_key_avl(&tree, 11);
-    // insert_key_avl(&tree, 2);
-    // insert_key_avl(&tree, 25);
+    insert_key_avl(&tree, 4);
+    insert_key_avl(&tree, 20);
+    insert_key_avl(&tree, 11);
+    insert_key_avl(&tree, 2);
+    insert_key_avl(&tree, 25);
+    insert_key_avl(&tree, 5);
+    insert_key_avl(&tree, 10);
+    insert_key_avl(&tree, 1);
+    insert_key_avl(&tree, 15);
 
-    for (int i = 0; i < 200; i++)
-    {
-        insert_key_avl(&tree, i);
-    }
+    // for (int i = 0; i < 200; i++){
+    //     insert_key_avl(&tree, i);
+    // }
     
-
     printf("%d\n", tree_size(&tree));
     print_tree_avl(&tree);
     print_parethesis(&tree);
     printf("altura %d\n", tree_height(&tree));
+    char str[10000];
+    int tam = string_parenthesis(&tree, str, 10000);
+    printf("%s\n", str);
+    printf("%d == %ld\n", tam, strlen(str));    
 
     destroy_tree_avl(&tree);
 

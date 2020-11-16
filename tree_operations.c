@@ -11,10 +11,6 @@ void bad_malloc(){
     exit(1);
 }
 
-void print_in_stdout(char *str) {
-    printf("%s", str);
-}
-
 // rotaciona a árvore para realizar seu balanço
 int rotate(){
     return 1;
@@ -92,18 +88,25 @@ void print_tree_by_node(node_t *nd){
 }
 
 // imprime na saída padrão a sub-árvore na notação de arenteses
-int print_parenthesis_by_node(node_t *nd, void (*print)(char*)){
+int print_parenthesis_by_node(node_t *nd){
     if (nd == NULL) {
         return 0; // terminou essa sub-árvore
     }
-    char open[4], close[2];
-    sprintf(open, "(%d", nd->key);
-    print(open);
-    print_parenthesis_by_node(nd->left, print);
-    print_parenthesis_by_node(nd->right, print);
-    sprintf(close, ")");
-    print(close);
+    printf("(%d", nd->key);
+    print_parenthesis_by_node(nd->left);
+    print_parenthesis_by_node(nd->right);
+    printf(")");
     return 1;
+}
+
+int string_parenthesis_by_node(node_t *nd, char *str, int i, int max){
+    if (!nd) return 0;
+    int res = i;
+    res += sprintf(str+res, "(%d", nd->key);
+    res += string_parenthesis_by_node(nd->left, str, res, max);
+    res += string_parenthesis_by_node(nd->right, str, res, max);
+    res += sprintf(str+res, ")");
+    return res-i;
 }
 
 // função para o caso onde ambos os filhos estão presentes
