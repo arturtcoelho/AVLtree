@@ -29,6 +29,13 @@ node._fields_ = [
 	("right", ctypes.POINTER(node)),
 ]
 
+def node_repr_(self):
+    return int(self.key)
+
+node.__repr__ = node_repr_
+# Fim da definicao de 'node'
+
+
 class avl_tree(ctypes.Structure):
     """Arvore AVL, definida a partir da struct avl_t"""
 
@@ -81,6 +88,12 @@ class avl_tree(ctypes.Structure):
         """
         return lib.print_tree_avl(byref(self))
 
+    def as_string(self):
+        string = ctypes.c_char_p()
+        lib.string_parenthesis(byref(self), byref(string), 999)
+        ctypes.cast(string, ctypes.c_char_p)
+        return str(string.value)
+
     def destroy(self):
         """Destroi a árvore, retorna 0 em caso de erro e !0 caso contrário"""
         return lib.destroy_tree_avl(byref(self))
@@ -89,13 +102,8 @@ class avl_tree(ctypes.Structure):
         """Destrutor de classe"""
         return self.destroy()
 
-    # def __str__(self):
-    #    return self.print_tree()
-    # A representacao em __str__ provavelmente nao funciona,
-    # Uma vez que __str__ requer uma string como output, e .print_tree() retorna
-    # O valor de saida da funcao, nao a string
-    # Erro obtido:
-    # TypeError: __str__ returned non-string (type int)
+    def __str__(self):
+        return self.as_string()
 
     def __contains__(self, key):
         """ Verificador usado pelo operador 'in' """
@@ -103,5 +111,5 @@ class avl_tree(ctypes.Structure):
         return self.search_key(key)
 
     def __repr__(self):
-        return '({}, {})'.format(self.root)
+        return '({})'.format(self.root)
 
