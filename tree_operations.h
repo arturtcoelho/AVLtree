@@ -3,6 +3,8 @@
 
 #include "avl_tree.h"
 
+int test();
+
 // retorna 1 caso a árvore ja tenha sido inicializada, 0 caso contrário 
 int tree_is_empty(avl_t *t);
 

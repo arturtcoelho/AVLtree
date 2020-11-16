@@ -46,7 +46,7 @@ class avl_tree(ctypes.Structure):
     def __init__(self):
         """Inicializa a classe/struct"""
         # Verifique docs/sources.txt: By Reference
-        lib.initialize_avl(byref(self))
+        lib._initialize_avl(byref(self))
 
     def insert_key(self, key):
         """
@@ -57,7 +57,7 @@ class avl_tree(ctypes.Structure):
             raise TypeError
         c_key = ctypes.c_int(key)
 
-        return lib.insert_key_avl(byref(self), c_key)
+        return lib._insert_key_avl(byref(self), c_key)
 
     def search_key(self, key):
         """
@@ -68,7 +68,7 @@ class avl_tree(ctypes.Structure):
             raise TypeError
         c_key = ctypes.c_int(key)
 
-        return lib.search_key_avl(byref(self), c_key)
+        return lib._search_key_avl(byref(self), c_key)
 
     def remove_key(self, key):
         """
@@ -79,14 +79,14 @@ class avl_tree(ctypes.Structure):
             raise TypeError
         c_key = ctypes.c_int(key)
 
-        return lib.remove_key_avl(byref(self), c_key)
+        return lib._remove_key_avl(byref(self), c_key)
 
     def print_tree(self):
         """
         Imprime a árvore in-order na saída padrão,
         retorna 0 em caso de erro e !0 caso contrário
         """
-        return lib.print_tree_avl(byref(self))
+        return lib._print_tree_avl(byref(self))
 
     def as_string(self):
         string = ctypes.c_char_p()
@@ -96,7 +96,7 @@ class avl_tree(ctypes.Structure):
 
     def destroy(self):
         """Destroi a árvore, retorna 0 em caso de erro e !0 caso contrário"""
-        return lib.destroy_tree_avl(byref(self))
+        return lib._destroy_tree_avl(byref(self))
 
     def __del__(self):
         """Destrutor de classe"""
