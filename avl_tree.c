@@ -105,7 +105,7 @@ int _string_parenthesis(avl_t *t, char * str, int max){
     }
 
     // adiquire a árvore recursivamente
-    return _string_parenthesis_by_node(t->root, str, 0, max);
+    return string_parenthesis_by_node(t->root, str, 0, max);
 }
 
 // remove uma chave da árvore, retorna 0 em caso de erro e !0 caso contrário
