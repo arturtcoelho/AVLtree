@@ -2,3 +2,4 @@
 *.so
 main
 myavl
+__pycache__
