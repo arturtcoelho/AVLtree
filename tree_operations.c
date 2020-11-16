@@ -103,12 +103,12 @@ int print_parenthesis_by_node(node_t *nd){
     return 1;
 }
 
-int string_parenthesis_by_node(node_t *nd, char *str, int i, int max){
+int _string_parenthesis_by_node(node_t *nd, char *str, int i, int max){
     if (!nd) return 0;
     int res = i;
     res += sprintf(str+res, "(%d", nd->key);
-    res += string_parenthesis_by_node(nd->left, str, res, max);
-    res += string_parenthesis_by_node(nd->right, str, res, max);
+    res += _string_parenthesis_by_node(nd->left, str, res, max);
+    res += _string_parenthesis_by_node(nd->right, str, res, max);
     res += sprintf(str+res, ")");
     return res-i;
 }

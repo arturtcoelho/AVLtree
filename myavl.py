@@ -4,7 +4,7 @@
 import ctypes
 avl = ctypes.CDLL("./avl_module.so")
 
-# avl.initialize_avl();
+# avl._initialize_avl();
 # print(avl.avl_teste())
 # avl.avl_soma_teste(1, 3)
 print(avl.teste_avl())

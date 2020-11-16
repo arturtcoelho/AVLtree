@@ -9,7 +9,7 @@ int teste_avl(){
 }
 
 // inicializa a árvore, necessário para iniciar operações, retorna 0 em caso de erro e !0 caso contrário
-int initialize_avl(avl_t *t){
+int _initialize_avl(avl_t *t){
     // inicializa o valor de root
     t->root = NULL;
     if (DEV) {fprintf(stderr, "Árvore inicializada\n");}
@@ -17,7 +17,7 @@ int initialize_avl(avl_t *t){
 }
 
 // insere uma chave key_t na árvore, retorna 0 em caso de erro e !0 caso contrário
-int insert_key_avl(avl_t *t, key_t key){
+int _insert_key_avl(avl_t *t, key_t key){
     if(DEV){fprintf(stderr, "Inserindo AVL %d\n", key);}
 
     // caso ainda não existam nodos presentes
@@ -43,7 +43,7 @@ int insert_key_avl(avl_t *t, key_t key){
 }
 
 // procura uma chave na árvore, retorna 0 em caso de erro e !0 caso contrário
-int search_key_avl(avl_t *t, key_t key){
+int _search_key_avl(avl_t *t, key_t key){
     if (tree_is_empty(t)){
         if (DEV) {fprintf(stderr, "Buscando key %d numa árvore vazia\n", key);}
         return 0;
@@ -68,7 +68,7 @@ int search_key_avl(avl_t *t, key_t key){
 }
 
 // imprime a árvore in-order na saída padrão, retorna 0 em caso de erro e !0 caso contrário
-int print_tree_avl(avl_t *t){
+int _print_tree_avl(avl_t *t){
     if (tree_is_empty(t)){
         if (DEV) {fprintf(stderr, "Imprimindo árvore vazia\n");}
         return 1;
@@ -83,7 +83,7 @@ int print_tree_avl(avl_t *t){
 
 
 // imprime a representação de parenteses de uma árvore binária
-int print_parethesis(avl_t *t) {
+int _print_parethesis(avl_t *t) {
     if (tree_is_empty(t)){
         if (DEV) {fprintf(stderr, "Imprimindo parentesis árvore vazia\n");}
         return 1;
@@ -97,7 +97,7 @@ int print_parethesis(avl_t *t) {
 }
 
 // retorna uma string com a notação de parenteses da árvore
-int string_parenthesis(avl_t *t, char * str, int max){
+int _string_parenthesis(avl_t *t, char * str, int max){
 
     if (tree_is_empty(t)){
         if (DEV) {fprintf(stderr, "Imprimindo string árvore vazia\n");}
@@ -105,11 +105,11 @@ int string_parenthesis(avl_t *t, char * str, int max){
     }
 
     // adiquire a árvore recursivamente
-    return string_parenthesis_by_node(t->root, str, 0, max);
+    return _string_parenthesis_by_node(t->root, str, 0, max);
 }
 
 // remove uma chave da árvore, retorna 0 em caso de erro e !0 caso contrário
-int remove_key_avl(avl_t *t, key_t key){
+int _remove_key_avl(avl_t *t, key_t key){
     if (tree_is_empty(t)){
         if (DEV) {fprintf(stderr, "Removendo key %d na árvore vazia\n", key);}
         return 0;
@@ -134,7 +134,7 @@ int remove_key_avl(avl_t *t, key_t key){
 }
 
 // destroi a árvore, retorna 0 em caso de erro e !0 caso contrário
-int destroy_tree_avl(avl_t *t){
+int _destroy_tree_avl(avl_t *t){
     if (tree_is_empty(t)){
         return 1;
     }
@@ -147,7 +147,7 @@ int destroy_tree_avl(avl_t *t){
 }
 
 // retorna o numero total de nodos
-int tree_size(avl_t *t){
+int _tree_size(avl_t *t){
     if (tree_is_empty(t)){
         if (DEV) {fprintf(stderr, "Imprimindo árvore vazia\n");}
         return 0;
@@ -159,7 +159,7 @@ int tree_size(avl_t *t){
     return size;
 }
 
-int tree_height(avl_t *t){
+int _tree_height(avl_t *t){
     if (!t->root) return 0;
     return height_by_node(t->root, 0);
 }

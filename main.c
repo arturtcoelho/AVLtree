@@ -13,45 +13,45 @@ int main(){
 
     // for (int i = 0; i < 10; i++){
     //     for (int j = 0; j < 10; j++){
-    //         initialize_avl(&tree);
+    //         _initialize_avl(&tree);
     //         for (int k = 0; k < j; k++){
-    //             insert_key_avl(&tree, rand() % (i+1) + 1);
+    //             _insert_key_avl(&tree, rand() % (i+1) + 1);
     //         }
 
     //         for (int k = 0; k < i; k+=(j+1)){
-    //             (remove_key_avl(&tree, k));
+    //             (_remove_key_avl(&tree, k));
     //         }
-    //         print_parethesis(&tree);
-    //         destroy_tree_avl(&tree);
+    //         _print_parethesis(&tree);
+    //         _destroy_tree_avl(&tree);
     //     }
     // }
 
-    initialize_avl(&tree);
+    _initialize_avl(&tree);
 
-    insert_key_avl(&tree, 4);
-    insert_key_avl(&tree, 20);
-    insert_key_avl(&tree, 11);
-    insert_key_avl(&tree, 2);
-    insert_key_avl(&tree, 25);
-    insert_key_avl(&tree, 5);
-    insert_key_avl(&tree, 10);
-    insert_key_avl(&tree, 1);
-    insert_key_avl(&tree, 15);
+    _insert_key_avl(&tree, 4);
+    _insert_key_avl(&tree, 20);
+    _insert_key_avl(&tree, 11);
+    _insert_key_avl(&tree, 2);
+    _insert_key_avl(&tree, 25);
+    _insert_key_avl(&tree, 5);
+    _insert_key_avl(&tree, 10);
+    _insert_key_avl(&tree, 1);
+    _insert_key_avl(&tree, 15);
 
     // for (int i = 0; i < 200; i++){
-    //     insert_key_avl(&tree, i);
+    //     _insert_key_avl(&tree, i);
     // }
     
-    printf("%d\n", tree_size(&tree));
-    print_tree_avl(&tree);
-    print_parethesis(&tree);
-    printf("altura %d\n", tree_height(&tree));
+    printf("%d\n", _tree_size(&tree));
+    _print_tree_avl(&tree);
+    _print_parethesis(&tree);
+    printf("altura %d\n", _tree_height(&tree));
     char str[10000];
-    int tam = string_parenthesis(&tree, str, 10000);
+    int tam = _string_parenthesis(&tree, str, 10000);
     printf("%s\n", str);
     printf("%d == %ld\n", tam, strlen(str));    
 
-    destroy_tree_avl(&tree);
+    _destroy_tree_avl(&tree);
 
     return 0;
 }
