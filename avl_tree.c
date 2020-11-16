@@ -100,7 +100,7 @@ int string_parenthesis(avl_t *t, char * str, int max){
         return 1;
     }
 
-    // adiquire a árvore recursivamente
+    // adquire a árvore recursivamente
     return string_parenthesis_by_node(t->root, str, 0, max);
 }
 
