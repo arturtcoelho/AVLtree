@@ -25,5 +25,5 @@
 <h4>avl_module.c</h4>
 <p>Contém a interface a ser exportada como biblioteca para utilização no código Python com ctypes</p>
 
-<h4>myavl.py</h4>
-<p>Interface de usuário para a árvore AVL, utilizando ctypes para importar a biblioteca implementada em C</p>
+<h4>avl_bridge.py</h4>
+<p>Interface ponte do usuário para a árvore AVL, utilizando ctypes para importar a biblioteca implementada em C</p>
