@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 from avl_bridge import avl_tree
 import random
 
