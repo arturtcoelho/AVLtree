@@ -25,6 +25,8 @@ struct avl {
 };
 typedef struct avl avl_t;
 
+int teste();
+
 // inicializa a árvore, necessário para iniciar operações, retorna 0 em caso de erro e !0 caso contrário
 int initialize_avl(avl_t *t);
 

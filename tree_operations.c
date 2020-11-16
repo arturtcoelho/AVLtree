@@ -5,6 +5,10 @@
 #include "avl_tree.h"
 #include "tree_operations.h"
 
+int test(){
+    return 69420;
+}
+
 // função de auxílio para casos de alocação dinâmica
 void bad_malloc(){
     fprintf(stderr, "Erro de alocação");

@@ -4,6 +4,10 @@
 #include "avl_tree.h"
 #include "tree_operations.h"
 
+int teste_avl(){
+    return test();
+}
+
 // inicializa a árvore, necessário para iniciar operações, retorna 0 em caso de erro e !0 caso contrário
 int initialize_avl(avl_t *t){
     // inicializa o valor de root
