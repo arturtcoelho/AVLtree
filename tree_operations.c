@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
+#include <math.h>
 
 #include "avl_tree.h"
 #include "tree_operations.h"
@@ -101,6 +102,10 @@ int print_parenthesis_by_node(node_t *nd){
 
 int string_parenthesis_by_node(node_t *nd, char *str, int i, int max){
     if (!nd) return 0;
+    if (i + (int)log10(nd->key) > max){
+        fprintf(stderr, "TOO LARGE INPUT TO BUFFER");
+        return 0;
+    }
     int res = i;
     res += sprintf(str+res, "(%d", nd->key);
     res += string_parenthesis_by_node(nd->left, str, res, max);

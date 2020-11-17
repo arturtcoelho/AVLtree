@@ -30,6 +30,9 @@ tree.insert_key(15)
 
 tree.remove_key(15)
 
+# for i in range(1000):
+#     tree.insert_key(i)
+
 #for i in range(200)
 #    tree.insert_key(i)
 
