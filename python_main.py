@@ -28,13 +28,17 @@ tree.insert_key(10)
 tree.insert_key(1)
 tree.insert_key(15)
 
+tree.remove_key(15)
+
 #for i in range(200)
 #    tree.insert_key(i)
 
 # print(len(tree))
 
 tree.print_tree()
-print(tree.as_string())
+tree.print_tree_parenthesis()
+str = tree.as_string()
+print(str)
 
 # printf("altura %d\n", _tree_height(&tree))
 

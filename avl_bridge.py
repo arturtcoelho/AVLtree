@@ -87,11 +87,19 @@ class avl_tree(ctypes.Structure):
         """
         return lib.print_tree_avl(byref(self))
 
+    def print_tree_parenthesis(self):
+        """Imprime a árvore com a notação de parenteses"""
+        return lib.print_parethesis(byref(self))
+
     def as_string(self):
-        string = ctypes.c_char_p()
+        # string = ctypes.c_char_p()
+        string = ctypes.create_string_buffer(4096)
         lib.string_parenthesis(byref(self), byref(string), 999)
         ctypes.cast(string, ctypes.c_char_p)
-        return str(string.value)
+        s = str(string.value)
+        sl = slice(2, len(s)-1)
+        s = s[sl]
+        return s
 
     def destroy(self):
         """Destroi a árvore, retorna 0 em caso de erro e !0 caso contrário"""

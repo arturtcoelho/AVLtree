@@ -7,21 +7,8 @@
 
 #include "avl_tree.h"
 
-avl_t *tree = NULL;
-char *parenthesis_tree = "";
-int height = 0;
-int num_nodes = 0;
-
-int teste();
-
 // inicializa a árvore, necessário para iniciar operações, retorna 0 em caso de erro e !0 caso contrário
-void initialize_avl(){
-    if (tree) free(tree);
-    tree = (avl_t*)malloc(sizeof(avl_t));
-    if (!tree) {
-        fprintf(stderr, "ERR MALLOC\n");
-        exit(1);
-    }
+void initialize_avl(avl_t *tree){
     if(!_initialize_avl(tree)){
         fprintf(stderr, "ERR INITIALIZE\n");
         exit(1);
@@ -30,7 +17,7 @@ void initialize_avl(){
 }
 
 // insere uma chave key_t na árvore, retorna 0 em caso de erro e !0 caso contrário
-void insert_key_avl(key_t key){
+void insert_key_avl(avl_t *tree, key_t key){
     if (!tree) {
         fprintf(stderr, "ERR TREE NOT INITIALIZED\n");
         return;
@@ -43,7 +30,7 @@ void insert_key_avl(key_t key){
 }
 
 // procura uma chave key na árvore, retorna 0 em caso de erro e !0 caso contrário
-int search_key_avl( key_t key){
+int search_key_avl(avl_t *tree, key_t key){
     if (!tree) {
         fprintf(stderr, "ERR TREE NOT INITIALIZED\n");
         return 0;
@@ -52,7 +39,7 @@ int search_key_avl( key_t key){
 }
 
 // imprime a árvore in-order na saída padrão, retorna 0 em caso de erro e !0 caso contrário
-void print_tree_avl(){
+void print_tree_avl(avl_t *tree){
     if (!tree) {
         fprintf(stderr, "ERR TREE NOT INITIALIZED\n");
         return;
@@ -61,7 +48,7 @@ void print_tree_avl(){
     return;
 }
 
-void print_parethesis(){
+void print_parethesis(avl_t *tree){
     if (!tree) {
         fprintf(stderr, "ERR TREE NOT INITIALIZED\n");
         return;
@@ -71,16 +58,16 @@ void print_parethesis(){
 }
 
 // escreve em str a árvore em notação de parenteses, retorna o número de caracteres escritos
-// int string_parenthesis(char *str, int max){
-//     if (!tree) {
-//         fprintf(stderr, "ERR TREE NOT INITIALIZED\n");
-//         return;
-//     }
-
-// }
+int string_parenthesis(avl_t *tree, char *str, int max){
+    if (!tree) {
+        fprintf(stderr, "ERR TREE NOT INITIALIZED\n");
+        return 0;
+    }
+    return _string_parenthesis(tree, str, max);
+}
 
 // remove uma chave da árvore, retorna 0 em caso de erro e !0 caso contrário
-void remove_key_avl(key_t key){
+void remove_key_avl(avl_t *tree, key_t key){
     if (!tree) {
         fprintf(stderr, "ERR TREE NOT INITIALIZED\n");
         return;
@@ -92,16 +79,16 @@ void remove_key_avl(key_t key){
 }
 
 // destroi a árvore, retorna 0 em caso de erro e !0 caso contrário
-void destroy_tree_avl(){
+void destroy_tree_avl(avl_t *tree){
     if (!tree) {
         fprintf(stderr, "ERR TREE NOT INITIALIZED\n");
         return;
     }
     _destroy_tree_avl(tree);
-    free(tree);
+    // free(tree);
 }
 
-int tree_size(){
+int tree_size(avl_t *tree){
     if (!tree) {
         fprintf(stderr, "ERR TREE NOT INITIALIZED\n");
         return 0;
@@ -109,7 +96,7 @@ int tree_size(){
     return _tree_size(tree);
 }
 
-int tree_height(){
+int tree_height(avl_t *tree){
     if (!tree) {
         fprintf(stderr, "ERR TREE NOT INITIALIZED\n");
         return 0;

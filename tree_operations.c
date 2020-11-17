@@ -5,10 +5,6 @@
 #include "avl_tree.h"
 #include "tree_operations.h"
 
-int test(){
-    return 69420;
-}
-
 // função de auxílio para casos de alocação dinâmica
 void bad_malloc(){
     fprintf(stderr, "Erro de alocação");
@@ -103,12 +99,12 @@ int print_parenthesis_by_node(node_t *nd){
     return 1;
 }
 
-int _string_parenthesis_by_node(node_t *nd, char *str, int i, int max){
+int string_parenthesis_by_node(node_t *nd, char *str, int i, int max){
     if (!nd) return 0;
     int res = i;
     res += sprintf(str+res, "(%d", nd->key);
-    res += _string_parenthesis_by_node(nd->left, str, res, max);
-    res += _string_parenthesis_by_node(nd->right, str, res, max);
+    res += string_parenthesis_by_node(nd->left, str, res, max);
+    res += string_parenthesis_by_node(nd->right, str, res, max);
     res += sprintf(str+res, ")");
     return res-i;
 }
