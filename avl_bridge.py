@@ -8,6 +8,8 @@ import ctypes
 from ctypes import byref
 # Usamos 'byref' muitas vezes
 
+buffer_size = 16
+
 # Importando a lib para usos futuros:
 lib = ctypes.CDLL("./avl_module.so")
 
@@ -93,13 +95,17 @@ class avl_tree(ctypes.Structure):
 
     def as_string(self):
         # string = ctypes.c_char_p()
-        string = ctypes.create_string_buffer(4096)
-        lib.string_parenthesis(byref(self), byref(string), 999)
+        size = self.size() * buffer_size
+        string = ctypes.create_string_buffer(size)
+        lib.string_parenthesis(byref(self), byref(string), size)
         ctypes.cast(string, ctypes.c_char_p)
         s = str(string.value)
         sl = slice(2, len(s)-1)
         s = s[sl]
         return s
+
+    def size(self):
+        return lib.tree_size(byref(self))
 
     def destroy(self):
         """Destroi a árvore, retorna 0 em caso de erro e !0 caso contrário"""

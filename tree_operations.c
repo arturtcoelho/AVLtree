@@ -102,8 +102,11 @@ int print_parenthesis_by_node(node_t *nd){
 
 int string_parenthesis_by_node(node_t *nd, char *str, int i, int max){
     if (!nd) return 0;
-    if (i + (int)log10(nd->key) > max){
-        fprintf(stderr, "TOO LARGE INPUT TO BUFFER");
+    // confere se a posição i somada a quantidade de números a ser impressa
+    // somada aos parenteses ultrapassa o maximo permitido do buffer
+    int added = (log10(nd->key > 0 ? nd->key : 1) + 3);
+    if (i + added >= max){
+        fprintf(stderr, "TOO LARGE INPUT TO BUFFER, tried to add %d on top of %d, maxing %d", added, i, max);
         return 0;
     }
     int res = i;

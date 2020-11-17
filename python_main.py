@@ -18,20 +18,8 @@ tree = avl_tree()
 #    }
 #}
 
-tree.insert_key(4)
-tree.insert_key(20)
-tree.insert_key(11)
-tree.insert_key(2)
-tree.insert_key(25)
-tree.insert_key(5)
-tree.insert_key(10)
-tree.insert_key(1)
-tree.insert_key(15)
-
-tree.remove_key(15)
-
-# for i in range(1000):
-#     tree.insert_key(i)
+for i in range(1000):
+    tree.insert_key(i)
 
 #for i in range(200)
 #    tree.insert_key(i)
