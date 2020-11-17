@@ -57,6 +57,15 @@ void print_parethesis(avl_t *tree){
     return;
 }
 
+void print_with_height(avl_t *tree){
+    if (!tree) {
+        fprintf(stderr, "ERR TREE NOT INITIALIZED\n");
+        return;
+    }
+    _print_with_height(tree);
+    return;
+}
+
 // escreve em str a árvore em notação de parenteses, retorna o número de caracteres escritos
 int string_parenthesis(avl_t *tree, char *str, int max){
     if (!tree) {

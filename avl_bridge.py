@@ -93,6 +93,11 @@ class avl_tree(ctypes.Structure):
         """Imprime a árvore com a notação de parenteses"""
         return lib.print_parethesis(byref(self))
 
+    def print_with_height(self):
+        """Imprime a árvore com a notação de altura"""
+        return lib.print_with_height(byref(self))
+
+
     def as_string(self):
         """Retorna o texto de 'print_tree_parenthesis' como string"""
         size = len(self) * buffer_size

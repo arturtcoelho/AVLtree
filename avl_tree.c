@@ -92,6 +92,20 @@ int _print_parethesis(avl_t *t) {
     return 1;
 }
 
+int _print_with_height(avl_t *t){
+    if (tree_is_empty(t)){
+        if (DEV) {fprintf(stderr, "Imprimindo parentesis árvore vazia\n");}
+        return 1;
+    }
+
+    // imprime a árvore recursivamente
+    print_with_height_by_node(t->root, 0);
+    printf("\n");
+    
+    return 1;
+
+}
+
 // retorna uma string com a notação de parenteses da árvore
 int _string_parenthesis(avl_t *t, char * str, int max){
 

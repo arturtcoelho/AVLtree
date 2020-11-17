@@ -37,6 +37,7 @@ int _search_key_avl(avl_t *t, key_t key);
 // imprime a árvore in-order na saída padrão, retorna 0 em caso de erro e !0 caso contrário
 int _print_tree_avl(avl_t *t);
 int _print_parethesis(avl_t *t);
+int _print_with_height(avl_t *t);
 
 // escreve em str a árvore em notação de parenteses, retorna o número de caracteres escritos
 int _string_parenthesis(avl_t *t, char *str, int max);

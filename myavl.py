@@ -45,3 +45,4 @@ if __name__ == '__main__':
         pass
 
     print(tree)
+    tree.print_with_height()

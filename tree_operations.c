@@ -100,6 +100,14 @@ int print_parenthesis_by_node(node_t *nd){
     return 1;
 }
 
+int print_with_height_by_node(node_t *nd, int h){
+    if (!nd) return 0;
+    print_with_height_by_node(nd->left, h+1);
+    printf("%d,%d\n", nd->key, h);
+    print_with_height_by_node(nd->right, h+1);
+    return 1;
+}
+
 int string_parenthesis_by_node(node_t *nd, char *str, int i, int max){
     if (!nd) return 0;
     // confere se a posição i somada a quantidade de números a ser impressa
