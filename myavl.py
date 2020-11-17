@@ -41,7 +41,7 @@ if __name__ == '__main__':
             if (not process_input(line)):
                 print("Input inválido!")
             line = input()
-    except EOFError:
+    except (EOFError, KeyboardInterrupt):
         pass
 
     print(tree)
