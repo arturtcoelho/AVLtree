@@ -22,6 +22,7 @@ int string_parenthesis_by_node(node_t *nd, char *str, int i, int max);
 
 // remove o nodo apontado
 int remove_node(node_t *nd);
+int remove_root(avl_t *t);
 
 // busca recursivamente e remove a chave
 int remove_key_by_node(node_t *nd, key_t key);
