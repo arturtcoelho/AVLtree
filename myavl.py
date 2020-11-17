@@ -25,11 +25,11 @@ def process_input(s):
 
 if __name__ == '__main__':
     try:
-        command = input()
-        while (command): # command nao eh vazio
-            if (not process_input(command)):
+        line = input()
+        while (line): # linha nao eh vazia
+            if (not process_input(line)):
                 print("Input inválido!")
-            command = input()
+            line = input()
     except EOFError:
         pass
 
