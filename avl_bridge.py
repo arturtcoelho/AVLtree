@@ -26,9 +26,9 @@ class node(ctypes.Structure):
 
 node._fields_ = [
     ("key", ctypes.c_int),
-	("top", ctypes.POINTER(node)),
-	("left", ctypes.POINTER(node)),
-	("right", ctypes.POINTER(node)),
+        ("top", ctypes.POINTER(node)),
+        ("left", ctypes.POINTER(node)),
+        ("right", ctypes.POINTER(node)),
 ]
 
 def _node_repr_(self):
@@ -100,11 +100,15 @@ class avl_tree(ctypes.Structure):
         lib.string_parenthesis(byref(self), byref(string), size)
         ctypes.cast(string, ctypes.c_char_p)
         s = str(string.value)
-	#sl = slice(2, len(s)-1)
-	#s = s[sl]
+        #sl = slice(2, len(s)-1)
+        #s = s[sl]
         return s[2:-1]
 
     def size(self):
+<<<<<<< HEAD
+=======
+        """Retorna o tamanho da árvore"""
+>>>>>>> c636d13a2103838495783994b24147b219b6d110
         return lib.tree_size(byref(self))
         """ Retorna o tamanho da árvore """
 

@@ -3,23 +3,34 @@
 from avl_bridge import avl_tree
 tree = avl_tree()
 
-def process_input(s):
-    if (len(s) < 2):
-        return 0
-
-    command, arguments = s.split(maxsplit=1)
-    if (command != "i" and command != "r"):
-        return 0
+def process_input(line):
 
     try:
-        n = int(arguments)
+        # separa a linha em comandos e argumentos
+        command, arguments = line.split(maxsplit=1)
     except ValueError:
+        # comando sem argumentos
+        command = line
+
+    # Comandos sem argumentos:
+    if (command == "p"): # imprime a arvore
+        print(tree)
+        return 1
+
+    # Comandos com argumentos:
+    try:
+        n = int(arguments)
+    except:
         return 0
 
     if (command == "i"): # input na árvore 
         tree.insert_key(n)
-    else: # remove da árvore
+    elif (command == "r"): # remove da árvore
         tree.remove_key(n)
+    elif (command == "s"): # pesquisa na arvore
+        print(n in tree)
+    else: # comando nao encontrado
+        return 0
 
     return 1
 
@@ -33,4 +44,4 @@ if __name__ == '__main__':
     except EOFError:
         pass
 
-    tree.print_tree_parenthesis()
+    print(tree)
