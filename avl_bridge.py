@@ -123,9 +123,6 @@ class avl_tree(ctypes.Structure):
         # Mais em docs/sources.txt: In Operator 
         return self.search_key(key)
 
-    def __repr__(self):
-        return '({})'.format(self.root)
-
     def __len__(self):
         """Verificador usado pela funcao built-in 'len()'"""
         return self.size()
