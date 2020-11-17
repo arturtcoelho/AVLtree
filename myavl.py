@@ -4,14 +4,19 @@ from avl_bridge import avl_tree
 tree = avl_tree()
 
 def process_input(s):
-    if (len(s) < 2):
-        return 0
 
-    command, arguments = s.split(maxsplit=1)
+    try:
+        command, arguments = s.split(maxsplit=1)
+    except ValueError:
+        command = s
+
+    if (command == "p"): # imprime a arvore
+        print(tree)
+        return 1
 
     try:
         n = int(arguments)
-    except ValueError:
+    except:
         return 0
 
     if (command == "i"): # input na árvore 
