@@ -26,9 +26,9 @@ class node(ctypes.Structure):
 
 node._fields_ = [
     ("key", ctypes.c_int),
-	("top", ctypes.POINTER(node)),
-	("left", ctypes.POINTER(node)),
-	("right", ctypes.POINTER(node)),
+        ("top", ctypes.POINTER(node)),
+        ("left", ctypes.POINTER(node)),
+        ("right", ctypes.POINTER(node)),
 ]
 
 def _node_repr_(self):
@@ -94,18 +94,18 @@ class avl_tree(ctypes.Structure):
         return lib.print_parethesis(byref(self))
 
     def as_string(self):
-	"""Retorna o texto de 'print_tree_parenthesis' como string"""
+        """Retorna o texto de 'print_tree_parenthesis' como string"""
         size = len(self) * buffer_size
         string = ctypes.create_string_buffer(size)
         lib.string_parenthesis(byref(self), byref(string), size)
         ctypes.cast(string, ctypes.c_char_p)
         s = str(string.value)
-	#sl = slice(2, len(s)-1)
-	#s = s[sl]
+        #sl = slice(2, len(s)-1)
+        #s = s[sl]
         return s[2:-1]
 
     def size(self):
-	"""Retorna o tamanho da árvore"""
+        """Retorna o tamanho da árvore"""
         return lib.tree_size(byref(self))
 
     def destroy(self):
@@ -117,7 +117,7 @@ class avl_tree(ctypes.Structure):
         return self.destroy()
 
     def __str__(self):
-	"""Verificador usado pela funcao built-in 'print'"""
+        """Verificador usado pela funcao built-in 'print'"""
         return self.as_string()
 
     def __contains__(self, key):
@@ -129,5 +129,5 @@ class avl_tree(ctypes.Structure):
         return '({})'.format(self.root)
 
     def __len__(self):
-	"""Verificador usado pela funcao built-in 'len()'"""
+        """Verificador usado pela funcao built-in 'len()'"""
         return self.size()
