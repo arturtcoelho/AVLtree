@@ -3,9 +3,6 @@
 from avl_bridge import avl_tree
 tree = avl_tree()
 
-def input_exists(s):
-    return len(s) > 0
-
 def input_format(s):
     if (len(s) < 2):
         return 0
@@ -31,9 +28,9 @@ def input_format(s):
 if __name__ == '__main__':
     try:
         comm = input()
-        while (input_exists(comm)):
+        while (comm): # comm nao eh vazio
             if (not input_format(comm)):
-                print("erro de input")
+                print("Input inválido!")
             comm = input()
     except EOFError:
         pass
