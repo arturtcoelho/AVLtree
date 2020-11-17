@@ -7,18 +7,17 @@ def process_input(s):
     if (len(s) < 2):
         return 0
 
-    sl = slice(2)
-    comm = s[sl]
-    if (comm != "i " and comm != "r "):
+    command = s.split[0]
+    if (command != "i" and command != "r"):
         return 0
 
-    sl = slice(2, len(s))
+    argument = s.split[1]
     try:
-        n = int(s[sl])
+        n = int(argument)
     except ValueError:
         return 0
 
-    if (comm == "i "): # input na árvore 
+    if (command == "i"): # input na árvore 
         tree.insert_key(n)
     else: # remove da árvore
         tree.remove_key(n)
