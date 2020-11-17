@@ -3,7 +3,7 @@
 from avl_bridge import avl_tree
 tree = avl_tree()
 
-def input_format(s):
+def process_input(s):
     if (len(s) < 2):
         return 0
 
@@ -29,7 +29,7 @@ if __name__ == '__main__':
     try:
         comm = input()
         while (comm): # comm nao eh vazio
-            if (not input_format(comm)):
+            if (not process_input(comm)):
                 print("Input inválido!")
             comm = input()
     except EOFError:
