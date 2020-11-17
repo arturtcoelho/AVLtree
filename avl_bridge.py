@@ -105,12 +105,8 @@ class avl_tree(ctypes.Structure):
         return s[2:-1]
 
     def size(self):
-<<<<<<< HEAD
-=======
-        """Retorna o tamanho da árvore"""
->>>>>>> c636d13a2103838495783994b24147b219b6d110
-        return lib.tree_size(byref(self))
         """ Retorna o tamanho da árvore """
+        return lib.tree_size(byref(self))
 
     def destroy(self):
         """Destroi a árvore, retorna 0 em caso de erro e !0 caso contrário"""
