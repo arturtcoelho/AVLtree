@@ -95,7 +95,7 @@ class avl_tree(ctypes.Structure):
 
     def as_string(self):
         # string = ctypes.c_char_p()
-        size = self.size() * buffer_size
+        size = len(self) * buffer_size
         string = ctypes.create_string_buffer(size)
         lib.string_parenthesis(byref(self), byref(string), size)
         ctypes.cast(string, ctypes.c_char_p)
@@ -127,5 +127,4 @@ class avl_tree(ctypes.Structure):
         return '({})'.format(self.root)
 
     def __len__(self):
-        pass
-        # return self.size()
+        return self.size()
