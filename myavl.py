@@ -8,8 +8,6 @@ def process_input(s):
         return 0
 
     command, arguments = s.split(maxsplit=1)
-    if (command != "i" and command != "r"):
-        return 0
 
     try:
         n = int(arguments)
@@ -18,8 +16,12 @@ def process_input(s):
 
     if (command == "i"): # input na árvore 
         tree.insert_key(n)
-    else: # remove da árvore
+    elif (command == "r"): # remove da árvore
         tree.remove_key(n)
+    elif (command == "s"): # pesquisa na arvore
+        print(n in tree)
+    else:
+        return 0
 
     return 1
 
