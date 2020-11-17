@@ -7,7 +7,7 @@ def process_input(s):
     if (len(s) < 2):
         return 0
 
-    command, argument = s.split()
+    command, argument = s.split(maxsplit=1)
     if (command != "i" and command != "r"):
         return 0
 
