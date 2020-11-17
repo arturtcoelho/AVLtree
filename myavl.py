@@ -7,11 +7,10 @@ def process_input(s):
     if (len(s) < 2):
         return 0
 
-    command = s.split[0]
+    command, argument = s.split()
     if (command != "i" and command != "r"):
         return 0
 
-    argument = s.split[1]
     try:
         n = int(argument)
     except ValueError:
