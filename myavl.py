@@ -6,21 +6,25 @@ tree = avl_tree()
 def input_exists(s):
     return len(s) > 0
 
+# trata o input
 def input_format(s):
     if (len(s) < 2):
         return 0
 
+    # comando da entrada
     sl = slice(2)
     comm = s[sl]
     if (comm != "i " and comm != "r "):
         return 0
 
+    # número da entrada
     sl = slice(2, len(s))
     try:
         n = int(s[sl])
     except ValueError:
         return 0
 
+    # operação desejada
     if (comm == "i "): # input na árvore 
         tree.insert_key(n)
     else: # remove da árvore
@@ -29,6 +33,8 @@ def input_format(s):
     return 1
 
 ###################################################
+
+# leitura dos dados na entrada padrão
 try:
     comm = input()
     while (input_exists(comm)):
@@ -38,5 +44,6 @@ try:
 except EOFError:
     pass
 
+# com o input completo, imprime a árvore
 tree.print_tree_parenthesis()
 
