@@ -103,7 +103,6 @@ int _print_with_height(avl_t *t){
     printf("\n");
     
     return 1;
-
 }
 
 // retorna uma string com a notação de parenteses da árvore
