@@ -19,7 +19,9 @@ int search_key_by_node(node_t *nd, key_t key);
 void print_tree_by_node(node_t *nd);
 int print_parenthesis_by_node(node_t *nd);
 int print_with_height_by_node(node_t *nd, int h);
+
 int string_parenthesis_by_node(node_t *nd, char *str, int i, int max);
+int string_height_by_node(node_t *nd, char *str, int i, int max, int h);
 
 // remove o nodo apontado
 int remove_node(node_t *nd);

@@ -48,5 +48,6 @@ if __name__ == '__main__':
         pass
 
     print(tree)
-    tree.print_with_height()
-    print_graph(tree.as_string())
+    # tree.print_with_height()
+    print(tree.as_height_string())
+    # print_graph(tree.as_parenthesis_string())
