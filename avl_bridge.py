@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Modulo ponte entre scripts Python e a biblioteca avl_tree.so
+Modulo ponte entre scripts Python e a biblioteca avl_module.so
 Autores: Gabriel Nascarella Hishida e Artur Temporal Coelho
 """
 
@@ -13,35 +13,11 @@ buffer_size = 16
 # Importando a lib para usos futuros:
 lib = ctypes.CDLL("./avl_module.so")
 
-class node(ctypes.Structure):
-    """Nodo definido pela struct node_t""" 
-
-    pass
-    # ctypes incompletos;
-    # Precisamos que o nodo seja conhecido pelo parser
-    # antes de declararmos ponteiros para o mesmo
-    # Verifique docs/sources.txt: Tipos Incompletos
-
-# Suas definicoes sao feitas apos sua declaracao:
-
-node._fields_ = [
-    ("key", ctypes.c_int),
-        ("top", ctypes.POINTER(node)),
-        ("left", ctypes.POINTER(node)),
-        ("right", ctypes.POINTER(node)),
-]
-
-def _node_repr_(self):
-    return int(self.key)
-
-node.__repr__ = _node_repr_
-# Fim da definicao de 'node'
-
 class avl_tree(ctypes.Structure):
     """Arvore AVL, definida a partir da struct avl_t"""
 
     _fields_ = [
-        ("root", ctypes.POINTER(node)),
+        ("root", ctypes.POINTER(ctypes.c_void_p)),
     ]
 
     def __init__(self):
@@ -98,11 +74,20 @@ class avl_tree(ctypes.Structure):
         return lib.print_with_height(byref(self))
 
 
-    def as_string(self):
+    def as_parenthesis_string(self):
         """Retorna o texto de 'print_tree_parenthesis' como string"""
         size = len(self) * buffer_size
         string = ctypes.create_string_buffer(size)
         lib.string_parenthesis(byref(self), byref(string), size)
+        ctypes.cast(string, ctypes.c_char_p)
+        s = str(string.value)
+        return s[2:-1]
+
+    def as_height_string(self):
+        """Retorna o texto de 'print_tree_by_height' como string"""
+        size = len(self) * buffer_size
+        string = ctypes.create_string_buffer(size)
+        lib.string_height(byref(self), byref(string), size)
         ctypes.cast(string, ctypes.c_char_p)
         s = str(string.value)
         return s[2:-1]
@@ -121,7 +106,7 @@ class avl_tree(ctypes.Structure):
 
     def __str__(self):
         """Verificador usado pela funcao built-in 'print'"""
-        return self.as_string()
+        return self.as_parenthesis_string()
 
     def __contains__(self, key):
         """ Verificador usado pelo operador 'in' """

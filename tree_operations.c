@@ -3,7 +3,7 @@
 #include <unistd.h>
 #include <math.h>
 
-#include "avl_tree.h"
+#include "avl_module.h"
 #include "tree_operations.h"
 
 // função de auxílio para casos de alocação dinâmica
@@ -122,6 +122,22 @@ int string_parenthesis_by_node(node_t *nd, char *str, int i, int max){
     res += string_parenthesis_by_node(nd->left, str, res, max);
     res += string_parenthesis_by_node(nd->right, str, res, max);
     res += sprintf(str+res, ")");
+    return res-i;
+}
+
+int string_height_by_node(node_t *nd, char *str, int i, int max, int h){
+    if (!nd) return 0;
+    // confere se a posição i somada a quantidade de números a ser impressa
+    // somada aos parenteses ultrapassa o maximo permitido do buffer
+    int added = (log10(nd->key > 0 ? nd->key : 1) + 3);
+    if (i + added >= max){
+        fprintf(stderr, "TOO LARGE INPUT TO BUFFER, tried to add %d on top of %d, maxing %d", added, i, max);
+        return 0;
+    }
+    int res = i;
+    res += string_height_by_node(nd->left, str, res, max, h+1);
+    res += sprintf(str+res, "%d,%d ", nd->key, h);
+    res += string_height_by_node(nd->right, str, res, max, h+1);
     return res-i;
 }
 

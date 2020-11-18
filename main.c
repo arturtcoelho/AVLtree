@@ -3,7 +3,7 @@
 #include <time.h>
 #include <string.h>
 
-#include "avl_tree.h"
+#include "avl_module.h"
 
 // por enquanto contém código em C para testes, 
 int main(){

@@ -1,7 +1,7 @@
 #ifndef __AVL_OPERATOR__
 #define __AVL_OPERATOR__
 
-#include "avl_tree.h"
+#include "avl_module.h"
 
 // retorna 1 caso a árvore ja tenha sido inicializada, 0 caso contrário 
 int tree_is_empty(avl_t *t);
@@ -19,7 +19,9 @@ int search_key_by_node(node_t *nd, key_t key);
 void print_tree_by_node(node_t *nd);
 int print_parenthesis_by_node(node_t *nd);
 int print_with_height_by_node(node_t *nd, int h);
+
 int string_parenthesis_by_node(node_t *nd, char *str, int i, int max);
+int string_height_by_node(node_t *nd, char *str, int i, int max, int h);
 
 // remove o nodo apontado
 int remove_node(node_t *nd);

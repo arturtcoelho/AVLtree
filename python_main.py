@@ -28,7 +28,7 @@ for i in range(1000):
 
 tree.print_tree()
 tree.print_tree_parenthesis()
-str = tree.as_string()
+str = tree.as_parenthesis_string()
 print(str)
 
 # printf("altura %d\n", _tree_height(&tree))
