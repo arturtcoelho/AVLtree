@@ -13,35 +13,11 @@ buffer_size = 16
 # Importando a lib para usos futuros:
 lib = ctypes.CDLL("./avl_module.so")
 
-class node(ctypes.Structure):
-    """Nodo definido pela struct node_t""" 
-
-    pass
-    # ctypes incompletos;
-    # Precisamos que o nodo seja conhecido pelo parser
-    # antes de declararmos ponteiros para o mesmo
-    # Verifique docs/sources.txt: Tipos Incompletos
-
-# Suas definicoes sao feitas apos sua declaracao:
-
-node._fields_ = [
-    ("key", ctypes.c_int),
-        ("top", ctypes.POINTER(node)),
-        ("left", ctypes.POINTER(node)),
-        ("right", ctypes.POINTER(node)),
-]
-
-def _node_repr_(self):
-    return int(self.key)
-
-node.__repr__ = _node_repr_
-# Fim da definicao de 'node'
-
 class avl_tree(ctypes.Structure):
     """Arvore AVL, definida a partir da struct avl_t"""
 
     _fields_ = [
-        ("root", ctypes.POINTER(node)),
+        ("root", ctypes.POINTER(ctypes.c_void_p)),
     ]
 
     def __init__(self):
