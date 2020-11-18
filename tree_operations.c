@@ -3,7 +3,7 @@
 #include <unistd.h>
 #include <math.h>
 
-#include "avl_tree.h"
+#include "avl_module.h"
 #include "tree_operations.h"
 
 // função de auxílio para casos de alocação dinâmica

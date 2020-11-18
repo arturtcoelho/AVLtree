@@ -5,7 +5,7 @@
 <p>O intuito desse projeto é implementar uma Árvore binária do tipo AVL na linguagem C, e portar a mesma para sua utilização em Python. </p>
 
 <h3>Arquivos:</h3>
-<h4>avl_tree.*</h4>
+<h4>avl_module.*</h4>
 <p>Contém as funções de interface pra utilização de uma árvore AVL, contém as funçoes padrão de qualquer árvore</p>
 
 <h4>tree_operations.*</h4>

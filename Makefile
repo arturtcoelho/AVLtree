@@ -6,8 +6,8 @@ LIBFLAGS = -fPIC $(CFLAGS)
 MATH = -lm
 SHAREFLAGS = -shared
 
-LIBS = tree_operations.c tree_operations.h avl_tree.c avl_tree.h
-OBJECTS = tree_operations.o avl_tree.o
+LIBS = tree_operations.c tree_operations.h
+OBJECTS = tree_operations.o
 
 # regra principal
 all: myavl
@@ -20,18 +20,16 @@ debug: all
 # regras para as bibliotecas de árvore
 tree_operations.o: tree_operations.h tree_operations.c
 	$(CC) $(LIBFLAGS) $(MATH) -c tree_operations.c -o $@
-avl_tree.o: avl_tree.h avl_tree.c tree_operations.o
-	$(CC) $(LIBFLAGS) -c avl_tree.c -o $@
-avl_module.o: avl_tree.o tree_operations.o avl_module.c
+avl_module.o: tree_operations.o avl_module.c avl_module.h
 	$(CC) $(LIBFLAGS) -c avl_module.c -o $@
 
-
 # regra de compilação do arquivo principal em C
-main.o: tree_operations.h tree_operations.o avl_tree.h avl_tree.o main.c
+main.o: tree_operations.h tree_operations.o main.c
 	$(CC) $(CFLAGS) -c main.c
 
 # regra de montagem do arquivo principal em C
-main: tree_operations.o avl_tree.o main.o
+main: tree_operations.o main.o
+	$(CC) $(CFLAGS) main.o -o $@
 
 #######################################################
 

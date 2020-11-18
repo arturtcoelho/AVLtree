@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Modulo ponte entre scripts Python e a biblioteca avl_tree.so
+Modulo ponte entre scripts Python e a biblioteca avl_module.so
 Autores: Gabriel Nascarella Hishida e Artur Temporal Coelho
 """
 

@@ -1,7 +1,7 @@
 #ifndef __AVL_OPERATOR__
 #define __AVL_OPERATOR__
 
-#include "avl_tree.h"
+#include "avl_module.h"
 
 // retorna 1 caso a árvore ja tenha sido inicializada, 0 caso contrário 
 int tree_is_empty(avl_t *t);
