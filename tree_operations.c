@@ -123,7 +123,7 @@ int print_graph_by_node(node_t *nd, int h){
             }
         }
 
-        printf("%-*d", MAX_NUM_LEN,  nd->key);
+        printf(" %-*d", MAX_NUM_LEN,  nd->key);
 
         print_graph_by_node(nd->left, h+1);
 
