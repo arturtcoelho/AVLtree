@@ -19,6 +19,7 @@ int search_key_by_node(node_t *nd, key_t key);
 void print_tree_by_node(node_t *nd);
 int print_parenthesis_by_node(node_t *nd);
 int print_with_height_by_node(node_t *nd, int h);
+int print_graph_by_node(node_t *nd, int h);
 
 int string_parenthesis_by_node(node_t *nd, char *str, int i, int max);
 int string_height_by_node(node_t *nd, char *str, int i, int max, int h);
@@ -36,6 +37,8 @@ int destroy_tree(node_t **nd);
 // retorna o ponteiro para o nodo com o menor/maior valor da subárvore passada, ou null caso tenha sido passado null
 node_t *min_node(node_t *nd);
 node_t *max_node(node_t *nd);
+
+int last_right_node(node_t *nd);
 
 // calcula o numero de nodos
 int number_of_nodes(node_t *nd, int *size);

@@ -3,9 +3,6 @@
 from avl_bridge import avl_tree
 tree = avl_tree()
 
-def print_graph(t):
-    print(t)
-
 def process_input(line):
 
     try:
@@ -47,7 +44,4 @@ if __name__ == '__main__':
     except (EOFError, KeyboardInterrupt):
         pass
 
-    print(tree)
-    # tree.print_with_height()
-    print(tree.as_height_string())
-    # print_graph(tree.as_parenthesis_string())
+    tree.print_graph()

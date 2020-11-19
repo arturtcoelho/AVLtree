@@ -9,6 +9,7 @@
 #endif
 
 #define MAX_NUM_LEN 4
+#define SPACING 5
 
 typedef int key_t;
 
@@ -38,6 +39,7 @@ int search_key_avl(avl_t *t, key_t key);
 int print_tree_avl(avl_t *t);
 int print_parethesis(avl_t *t);
 int print_with_height(avl_t *t);
+int print_graph(avl_t *t);
 
 // escreve em str a árvore, retorna o número de caracteres escritos
 int string_parenthesis(avl_t *t, char *str, int max);

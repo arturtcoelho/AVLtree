@@ -108,6 +108,31 @@ int print_with_height_by_node(node_t *nd, int h){
     return 1;
 }
 
+int print_graph_by_node(node_t *nd, int h){
+    if (nd) {
+        print_graph_by_node(nd->right, h+1);
+
+        for (int i = 0; i < (h-1)*SPACING; i++) {
+            printf(" ");
+        }
+        if (nd->top){
+            if (nd->top->left == nd){
+                printf("\\");
+            } else {
+                printf("/");
+            }
+        }
+
+        printf("%-*d", MAX_NUM_LEN,  nd->key);
+
+        print_graph_by_node(nd->left, h+1);
+
+        return 1;
+    }
+    printf("\n");
+    return 0;
+}
+
 int string_parenthesis_by_node(node_t *nd, char *str, int i, int max){
     if (!nd) return 0;
     // confere se a posição i somada a quantidade de números a ser impressa
@@ -300,6 +325,16 @@ node_t *max_node(node_t *nd){
     if (!nd) return NULL;
     if (!nd->right) return nd;
     return (max_node(nd->right));
+}
+
+int last_right_node(node_t *nd){
+    if (!nd->top){
+        return 1;
+    }
+    if (nd->top->right == nd){
+        return last_right_node(nd->top);
+    }
+    return 0;
 }
 
 int number_of_nodes(node_t *nd, int *size){

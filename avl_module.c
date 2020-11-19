@@ -103,7 +103,16 @@ int print_with_height(avl_t *t){
     printf("\n");
     
     return 1;
+}
 
+int print_graph(avl_t *t){
+    if (tree_is_empty(t)){
+        if (DEV) {fprintf(stderr, "Imprimindo parentesis árvore vazia\n");}
+        return 1;
+    }
+    print_graph_by_node(t->root, 1);
+    printf("\n");
+    return 1; 
 }
 
 // retorna uma string com a notação de parenteses da árvore

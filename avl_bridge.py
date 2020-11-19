@@ -73,6 +73,9 @@ class avl_tree(ctypes.Structure):
         """Imprime a árvore com a notação de altura"""
         return lib.print_with_height(byref(self))
 
+    def print_graph(self):
+        return lib.print_graph(byref(self))
+
 
     def as_parenthesis_string(self):
         """Retorna o texto de 'print_tree_parenthesis' como string"""
