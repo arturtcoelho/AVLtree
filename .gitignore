@@ -3,4 +3,5 @@
 main
 myavl
 __pycache__
+.vscode
 in
