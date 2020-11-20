@@ -1,4 +1,4 @@
-# Makefile geral do projeto, realiza a compilação das bibliotecas e código principal (main)
+# Makefile geral do projeto, realiza a compilação das bibliotecas e código principal
 
 CC = gcc
 CFLAGS = -Wall -Wextra
@@ -23,14 +23,6 @@ tree_operations.o: tree_operations.h tree_operations.c
 avl_module.o: tree_operations.o avl_module.c avl_module.h
 	$(CC) $(LIBFLAGS) -c avl_module.c -o $@
 
-# regra de compilação do arquivo principal em C
-main.o: tree_operations.h tree_operations.o main.c
-	$(CC) $(CFLAGS) -c main.c
-
-# regra de montagem do arquivo principal em C
-main: tree_operations.o main.o
-	$(CC) $(CFLAGS) main.o -o $@
-
 #######################################################
 
 # compilação da lib utilizada pelo ctype
@@ -50,4 +42,4 @@ clean: all
 	-rm -f ~. *.o
 
 purge:
-	-rm -f ~. *.o *.so main myavl
+	-rm -f ~. *.o *.so myavl

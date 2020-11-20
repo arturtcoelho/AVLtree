@@ -1,6 +1,5 @@
 *.o
 *.so
-main
 myavl
 __pycache__
 .vscode
