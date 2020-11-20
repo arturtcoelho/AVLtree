@@ -1,13 +1,6 @@
 #ifndef AVL_MODULE
 #define AVL_MODULE
 
-// definição da macro DEV, para uso de debug
-#if defined DEBUG
-	#define DEV 1
-#else
-	#define DEV 0
-#endif
-
 #define MAX_NUM_LEN 4
 #define SPACING 5
 

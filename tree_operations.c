@@ -28,17 +28,14 @@ int insert_key_by_node(node_t **nd, node_t *top, key_t key){
     if (!*nd) return insert_key(nd, top, key);
 
     if ((*nd)->key == key) {
-        if (DEV) {fprintf(stderr, "Inserindo key: %d, valor ja existe\n", key);}
         return 1;
     }
 
     // caso esse nodo ja esteja ocupado, insere em um de seus filhos
     int res = 1;
     if ((*nd)->key > key){
-        if (DEV) {fprintf(stderr, "Inserindo key: %d esquerda\n", key);}
         res = insert_key_by_node(&((*nd)->left), *nd, key);
     } else {
-        if (DEV) {fprintf(stderr, "Inserindo key: %d direita\n", key);}   
         res = insert_key_by_node(&((*nd)->right), *nd, key);
     }
 
@@ -53,7 +50,6 @@ int insert_key_by_node(node_t **nd, node_t *top, key_t key){
 
 // adiciona uma chave no nodo especificado, com o pai
 int insert_key(node_t **nd, node_t *top, key_t key){
-    if (DEV) {fprintf(stderr, "Inserindo folha em top (%d)\n", (*nd)->top ? (*nd)->top->key : 0);}
     
     // aloca memória para o nodo
     *nd = (node_t*)malloc(sizeof(node_t));
@@ -170,8 +166,6 @@ int string_height_by_node(node_t *nd, char *str, int i, int max, int h){
 int remove_both_exist(node_t *nd){
     if (!nd) return 0; // caso o nodo não exista
 
-    if(DEV) {fprintf(stderr, "Removendo nodo AMBOS EXISTEM (%d)\n", nd->key);}
-
     node_t *succ = min_node(nd->right); // succ = sucessor de nodo
     nd->key = succ->key; // copia a chave
     if (succ == nd->right){ // caso especial onde subárvore da direita é o sucessor
@@ -195,13 +189,10 @@ int remove_node(node_t *nd){
     // se nodo não existir
     if (!nd || !nd->top) return 0;
 
-    if(DEV) {fprintf(stderr, "Removendo nodo (%d)\n", nd->key);}
-    
     if (nd->left && nd->right) { // ambos os filhos existem
         return remove_both_exist(nd);
     } else {
         if (!(nd->left || nd->right)) { // nenhum filho existte
-            if(DEV) {fprintf(stderr, "NENHUM EXISTE (%d), left (%d), right (%d), top (%d)\n", nd->key, nd->left ? nd->left->key : 0, nd->right ? nd->right->key : 0, nd->top ? nd->top->key : 0);}
             // atribui o esq ou dir do pai da folha para null
             if (nd->top->left == nd) { // esquerda
                 nd->top->left = NULL;
@@ -211,7 +202,6 @@ int remove_node(node_t *nd){
             free(nd);
             return 1;
         } else { // uma das duas existe
-            if(DEV) {fprintf(stderr, "Removendo nodo UMA EXISTE (%d)\n", nd->key);}
             // reatribui o ponteiro do pai para o novo filho
             if (nd->top->left == nd) { // se tem esquerdo
                 nd->top->left = nd->left ? nd->left : nd->right;
@@ -237,8 +227,6 @@ int remove_root(avl_t *t) {
     node_t *nd = t->root;
     if (!nd) return 0; // se nodo não existir
 
-    if(DEV) {fprintf(stderr, "Removendo root (%d)\n", nd->key);}
-    
     if (nd->left && nd->right) { // ambos os filhos existem
         return remove_both_exist(nd);
     } else {
@@ -248,16 +236,13 @@ int remove_root(avl_t *t) {
             t->root = NULL;
             return 1;
         } else { // uma das duas existe
-            if(DEV){fprintf(stderr, "Removendo root, uma existe nd, key: %d, left: %d, right: %d,top: %d\n", nd->key, nd->left ? nd->left->key : 0, nd->right ? nd->right->key : 0, nd->top ? nd->top->key : 0);}
             node_t *temp;
             if (nd->left) { // esquerda
-                if(DEV) {fprintf(stderr, "Ajustando ESQ (%d)\n", nd->left->key);}
                 temp = nd->left;
                 if(nd->left->left) nd->left->left->top = nd;
                 if(nd->left->right) nd->left->right->top = nd;
 
             } else { // direita
-                if(DEV) {fprintf(stderr, "Ajustando DIR (%d)\n", nd->right->key);}
                 temp = nd->right;
                 if(nd->right->left) nd->right->left->top = nd;
                 if(nd->right->right) nd->right->right->top = nd;
@@ -279,16 +264,12 @@ int remove_key_by_node(node_t *nd, key_t key){
     if (!nd) return 0;
 
     if (nd->key == key) {
-        if (DEV) {fprintf(stderr, "Removendo (pois achou) o nodo %d\n", key);}
         return remove_node(nd);
     }
 
-    if (DEV) {fprintf(stderr, "Removendo nodo (%d)\n",key);}
     if (nd->key > key) { //esquerda
-        if (DEV) {fprintf(stderr, "Removendo nodo esquerdo %d\n", nd->left ? nd->left->key : 0);}
         return remove_key_by_node(nd->left, key);
     } else { // direita
-        if (DEV) {fprintf(stderr, "Removendo nodo direito %d\n", nd->right ? nd->right->key : 0);}
         return remove_key_by_node(nd->right, key);
     }
 
@@ -311,10 +292,8 @@ int destroy_tree(node_t **nd){
 
 // retorna o ponteiro para o nodo com o menor valor da subárvore passada, ou null caso tenha sido passado null
 node_t *min_node(node_t *nd){
-    if (DEV) {fprintf(stderr, "Buscando min(%d) e top (%d)\n", nd->key, nd->top->key);}
     if (!nd) return NULL;
     if (!nd->left) {
-        if (DEV) {fprintf(stderr, "Achou min (%d), com top (%d)\n", nd->key, nd->top->key);} 
         return nd;
     }
     return (min_node(nd->left));

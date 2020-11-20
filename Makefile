@@ -12,11 +12,6 @@ OBJECTS = tree_operations.o
 # regra principal
 all: myavl
 
-# regra para compilar com a opção de debug
-debug: purge
-debug: CFLAGS += -DDEBUG
-debug: all
-
 # regras para as bibliotecas de árvore
 tree_operations.o: tree_operations.h tree_operations.c
 	$(CC) $(LIBFLAGS) $(MATH) -c tree_operations.c -o $@
