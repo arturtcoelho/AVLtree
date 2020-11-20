@@ -100,7 +100,6 @@ int print_with_height(avl_t *t){
 
     // imprime a árvore recursivamente
     print_with_height_by_node(t->root, 0);
-    printf("\n");
     
     return 1;
 }
