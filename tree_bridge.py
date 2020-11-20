@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Modulo ponte entre scripts Python e a biblioteca avl_module.so
+Modulo ponte entre scripts Python e a biblioteca tree_module.so
 Autores: Gabriel Nascarella Hishida e Artur Temporal Coelho
 """
 
@@ -11,10 +11,10 @@ from ctypes import byref
 buffer_size = 16
 
 # Importando a lib para usos futuros:
-lib = ctypes.CDLL("./avl_module.so")
+lib = ctypes.CDLL("./tree_module.so")
 
-class avl_tree(ctypes.Structure):
-    """Arvore AVL, definida a partir da struct avl_t"""
+class tree_bridge(ctypes.Structure):
+    """Arvore de busca, definida a partir da struct tree_t"""
 
     _fields_ = [
         ("root", ctypes.POINTER(ctypes.c_void_p)),
@@ -23,7 +23,7 @@ class avl_tree(ctypes.Structure):
     def __init__(self):
         """Inicializa a classe/struct"""
         # Verifique docs/sources.txt: By Reference
-        lib.initialize_avl(byref(self))
+        lib.initialize_tree(byref(self))
 
     def insert_key(self, key):
         """
@@ -34,7 +34,7 @@ class avl_tree(ctypes.Structure):
             raise TypeError
         c_key = ctypes.c_int(key)
 
-        return lib.insert_key_avl(byref(self), c_key)
+        return lib.insert_key_tree(byref(self), c_key)
 
     def search_key(self, key):
         """
@@ -45,7 +45,7 @@ class avl_tree(ctypes.Structure):
             raise TypeError
         c_key = ctypes.c_int(key)
 
-        return lib.search_key_avl(byref(self), c_key)
+        return lib.search_key_tree(byref(self), c_key)
 
     def remove_key(self, key):
         """
@@ -56,14 +56,14 @@ class avl_tree(ctypes.Structure):
             raise TypeError
         c_key = ctypes.c_int(key)
 
-        return lib.remove_key_avl(byref(self), c_key)
+        return lib.remove_key_tree(byref(self), c_key)
 
     def print_tree(self):
         """
         Imprime a árvore in-order na saída padrão,
         retorna 0 em caso de erro e !0 caso contrário
         """
-        return lib.print_tree_avl(byref(self))
+        return lib.print_tree_tree(byref(self))
 
     def print_tree_parenthesis(self):
         """Imprime a árvore com a notação de parenteses"""
@@ -101,7 +101,7 @@ class avl_tree(ctypes.Structure):
 
     def destroy(self):
         """Destroi a árvore, retorna 0 em caso de erro e !0 caso contrário"""
-        return lib.destroy_tree_avl(byref(self))
+        return lib.destroy_tree_tree(byref(self))
 
     def __del__(self):
         """Destrutor de classe"""

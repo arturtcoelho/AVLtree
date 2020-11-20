@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 
-from avl_bridge import avl_tree
-tree = avl_tree()
+from tree_bridge import tree_bridge
+tree = tree_bridge()
 
 def process_input(line):
 

@@ -1,11 +1,11 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#include "avl_module.h"
+#include "tree_module.h"
 #include "tree_operations.h"
 
 // inicializa a árvore, necessário para iniciar operações, retorna 0 em caso de erro e !0 caso contrário
-int initialize_avl(avl_t *t){
+int initialize_tree(tree_t *t){
     // inicializa o valor de root
     t->root = NULL;
     if (DEV) {fprintf(stderr, "Árvore inicializada\n");}
@@ -13,8 +13,8 @@ int initialize_avl(avl_t *t){
 }
 
 // insere uma chave key_t na árvore, retorna 0 em caso de erro e !0 caso contrário
-int insert_key_avl(avl_t *t, key_t key){
-    if(DEV){fprintf(stderr, "Inserindo AVL %d\n", key);}
+int insert_key_tree(tree_t *t, key_t key){
+    if(DEV){fprintf(stderr, "Inserindo tree %d\n", key);}
 
     // caso ainda não existam nodos presentes
     if (tree_is_empty(t)){
@@ -39,7 +39,7 @@ int insert_key_avl(avl_t *t, key_t key){
 }
 
 // procura uma chave na árvore, retorna 0 em caso de erro e !0 caso contrário
-int search_key_avl(avl_t *t, key_t key){
+int search_key_tree(tree_t *t, key_t key){
     if (tree_is_empty(t)){
         if (DEV) {fprintf(stderr, "Buscando key %d numa árvore vazia\n", key);}
         return 0;
@@ -64,7 +64,7 @@ int search_key_avl(avl_t *t, key_t key){
 }
 
 // imprime a árvore in-order na saída padrão, retorna 0 em caso de erro e !0 caso contrário
-int print_tree_avl(avl_t *t){
+int print_tree_tree(tree_t *t){
     if (tree_is_empty(t)){
         if (DEV) {fprintf(stderr, "Imprimindo árvore vazia\n");}
         return 1;
@@ -79,7 +79,7 @@ int print_tree_avl(avl_t *t){
 
 
 // imprime a representação de parenteses de uma árvore binária
-int print_parethesis(avl_t *t) {
+int print_parethesis(tree_t *t) {
     if (tree_is_empty(t)){
         if (DEV) {fprintf(stderr, "Imprimindo parentesis árvore vazia\n");}
         return 1;
@@ -92,7 +92,7 @@ int print_parethesis(avl_t *t) {
     return 1;
 }
 
-int print_with_height(avl_t *t){
+int print_with_height(tree_t *t){
     if (tree_is_empty(t)){
         if (DEV) {fprintf(stderr, "Imprimindo parentesis árvore vazia\n");}
         return 1;
@@ -104,7 +104,7 @@ int print_with_height(avl_t *t){
     return 1;
 }
 
-int print_graph(avl_t *t){
+int print_graph(tree_t *t){
     if (tree_is_empty(t)){
         if (DEV) {fprintf(stderr, "Imprimindo parentesis árvore vazia\n");}
         return 1;
@@ -115,7 +115,7 @@ int print_graph(avl_t *t){
 }
 
 // retorna uma string com a notação de parenteses da árvore
-int string_parenthesis(avl_t *t, char * str, int max){
+int string_parenthesis(tree_t *t, char * str, int max){
 
     if (tree_is_empty(t)){
         if (DEV) {fprintf(stderr, "Imprimindo string árvore vazia\n");}
@@ -127,7 +127,7 @@ int string_parenthesis(avl_t *t, char * str, int max){
 }
 
 // retorna uma string com a notação de parenteses da árvore
-int string_height(avl_t *t, char * str, int max){
+int string_height(tree_t *t, char * str, int max){
 
     if (tree_is_empty(t)){
         if (DEV) {fprintf(stderr, "Imprimindo string árvore vazia\n");}
@@ -139,7 +139,7 @@ int string_height(avl_t *t, char * str, int max){
 }
 
 // remove uma chave da árvore, retorna 0 em caso de erro e !0 caso contrário
-int remove_key_avl(avl_t *t, key_t key){
+int remove_key_tree(tree_t *t, key_t key){
     if (tree_is_empty(t)){
         if (DEV) {fprintf(stderr, "Removendo key %d na árvore vazia\n", key);}
         return 0;
@@ -164,7 +164,7 @@ int remove_key_avl(avl_t *t, key_t key){
 }
 
 // destroi a árvore, retorna 0 em caso de erro e !0 caso contrário
-int destroy_tree_avl(avl_t *t){
+int destroy_tree_tree(tree_t *t){
     if (tree_is_empty(t)){
         return 1;
     }
@@ -177,7 +177,7 @@ int destroy_tree_avl(avl_t *t){
 }
 
 // retorna o numero total de nodos
-int tree_size(avl_t *t){
+int tree_size(tree_t *t){
     if (tree_is_empty(t)){
         if (DEV) {fprintf(stderr, "Imprimindo árvore vazia\n");}
         return 0;
@@ -189,7 +189,7 @@ int tree_size(avl_t *t){
     return size;
 }
 
-int tree_height(avl_t *t){
+int tree_height(tree_t *t){
     if (!t->root) return 0;
     return height_by_node(t->root, 0);
 }

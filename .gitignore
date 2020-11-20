@@ -1,7 +1,6 @@
 *.o
 *.so
-main
-myavl
+mytree
 __pycache__
 .vscode
 in

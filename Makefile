@@ -1,4 +1,4 @@
-# Makefile geral do projeto, realiza a compilação das bibliotecas e código principal (main)
+# Makefile geral do projeto, realiza a compilação das bibliotecas e código principal
 
 CC = gcc
 CFLAGS = -Wall -Wextra
@@ -10,7 +10,7 @@ LIBS = tree_operations.c tree_operations.h
 OBJECTS = tree_operations.o
 
 # regra principal
-all: myavl
+all: mytree
 
 # regra para compilar com a opção de debug
 debug: purge
@@ -20,34 +20,26 @@ debug: all
 # regras para as bibliotecas de árvore
 tree_operations.o: tree_operations.h tree_operations.c
 	$(CC) $(LIBFLAGS) $(MATH) -c tree_operations.c -o $@
-avl_module.o: tree_operations.o avl_module.c avl_module.h
-	$(CC) $(LIBFLAGS) -c avl_module.c -o $@
-
-# regra de compilação do arquivo principal em C
-main.o: tree_operations.h tree_operations.o main.c
-	$(CC) $(CFLAGS) -c main.c
-
-# regra de montagem do arquivo principal em C
-main: tree_operations.o main.o
-	$(CC) $(CFLAGS) main.o -o $@
+tree_module.o: tree_operations.o tree_module.c tree_module.h
+	$(CC) $(LIBFLAGS) -c tree_module.c -o $@
 
 #######################################################
 
 # compilação da lib utilizada pelo ctype
-avl_module.so: $(OBJECTS) avl_module.o
-	$(CC) $(SHAREFLAGS) avl_module.o $(OBJECTS) -o $@
+tree_module.so: $(OBJECTS) tree_module.o
+	$(CC) $(SHAREFLAGS) tree_module.o $(OBJECTS) -o $@
 
-# regra de geração do executavel myavl com link simbólico
-myavl: myavl.py avl_module.so
-	chmod 755 myavl.py
-	ln -sf myavl.py myavl
+# regra de geração do executavel mytree com link simbólico
+mytree: mytree.py tree_module.so
+	chmod 755 mytree.py
+	ln -sf mytree.py mytree
 
-install: avl_module.so
-	cp ./avl_module.so /usr/lib
+install: tree_module.so
+	cp ./tree_module.so /usr/lib
 
 # regras de limpeza
 clean: all
 	-rm -f ~. *.o
 
 purge:
-	-rm -f ~. *.o *.so main myavl
+	-rm -f ~. *.o *.so mytree

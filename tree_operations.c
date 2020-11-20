@@ -3,7 +3,7 @@
 #include <unistd.h>
 #include <math.h>
 
-#include "avl_module.h"
+#include "tree_module.h"
 #include "tree_operations.h"
 
 // função de auxílio para casos de alocação dinâmica
@@ -18,7 +18,7 @@ int rotate(){
 }
 
 // retorna !0 caso a árvore ja tenha sido inicializada, 0 caso contrário 
-int tree_is_empty(avl_t *t){
+int tree_is_empty(tree_t *t){
     return (t->root == NULL);
 }
 
@@ -233,7 +233,7 @@ int remove_node(node_t *nd){
 }
 
 // remove o nodo localizado no root
-int remove_root(avl_t *t) {
+int remove_root(tree_t *t) {
     node_t *nd = t->root;
     if (!nd) return 0; // se nodo não existir
 
