@@ -3,11 +3,13 @@
 
 #include "avl_module.h"
 #include "tree_operations.h"
+#include "avl_operations.h"
 
 // inicializa a árvore, necessário para iniciar operações, retorna 0 em caso de erro e !0 caso contrário
 int initialize_avl(avl_t *t){
     // inicializa o valor de root
     t->root = NULL;
+    t->bf = 0;
     return 1;
 }
 

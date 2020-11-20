@@ -5,6 +5,7 @@
 
 #include "avl_module.h"
 #include "tree_operations.h"
+#include "avl_operations.h"
 
 // função de auxílio para casos de alocação dinâmica
 void bad_malloc(){
