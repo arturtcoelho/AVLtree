@@ -184,74 +184,27 @@ int remove_both_exist(node_t *nd){
 }
 
 // remove o nodo apontado
-int remove_node(node_t *nd){
+int remove_node(node_t *nd, node_t **top){
     // se nodo não existir
-    if (!nd || !nd->top) return 0;
+    if (!nd) return 0;
 
     if (nd->left && nd->right) { // ambos os filhos existem
         return remove_both_exist(nd);
     } else {
         if (!(nd->left || nd->right)) { // nenhum filho existte
-            // atribui o esq ou dir do pai da folha para null
-            if (nd->top->left == nd) { // esquerda
-                nd->top->left = NULL;
-            } else { // direita
-                nd->top->right = NULL;
-            }
+            *top = NULL;
             free(nd);
             return 1;
         } else { // uma das duas existe
             // reatribui o ponteiro do pai para o novo filho
-            if (nd->top->left == nd) { // se tem esquerdo
-                nd->top->left = nd->left ? nd->left : nd->right;
-            } else { // se tem direito
-                nd->top->right = nd->left ? nd->left : nd->right;       
-            }
+            *top = nd->left ? nd->left : nd->right;
 
-            // ajusta o ponteiro do filho para o pai 
-            if (nd->left) {
+            // ajusta o ponteiro do filho para o pai
+            if (nd->left)
                 nd->left->top = nd->top;
-            } else {
+            else
                 nd->right->top = nd->top;
-            }
             free(nd);
-            return 1;
-        }
-    }
-    return 0;
-}
-
-// remove o nodo localizado no root
-int remove_root(avl_t *t) {
-    node_t *nd = t->root;
-    if (!nd) return 0; // se nodo não existir
-
-    if (nd->left && nd->right) { // ambos os filhos existem
-        return remove_both_exist(nd);
-    } else {
-        if (!(nd->left || nd->right)) { // nenhum filho existte
-            // reinicializa a árvore
-            free(nd);
-            t->root = NULL;
-            return 1;
-        } else { // uma das duas existe
-            node_t *temp;
-            if (nd->left) { // esquerda
-                temp = nd->left;
-                if(nd->left->left) nd->left->left->top = nd;
-                if(nd->left->right) nd->left->right->top = nd;
-
-            } else { // direita
-                temp = nd->right;
-                if(nd->right->left) nd->right->left->top = nd;
-                if(nd->right->right) nd->right->right->top = nd;
-            }
-
-            nd->key = temp->key;
-            nd->left = temp->left;
-            nd->right = temp->right;
-            free(temp);
-
             return 1;
         }
     }
@@ -259,15 +212,15 @@ int remove_root(avl_t *t) {
 }
 
 // busca recursivamente e remove a chave
-int remove_key_by_node(node_t *nd, key_t key){
+int remove_key_by_node(node_t *nd, node_t **top, key_t key){
     if (!nd) return 0;
 
-    if (nd->key == key) return remove_node(nd);
+    if (nd->key == key) return remove_node(nd, top);
 
     if (nd->key > key) //esquerda
-        return remove_key_by_node(nd->left, key);
+        return remove_key_by_node(nd->left, &(nd->left), key);
     else // direita
-        return remove_key_by_node(nd->right, key);
+        return remove_key_by_node(nd->right, &(nd->right), key);
 
     return 0;
 }

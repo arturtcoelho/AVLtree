@@ -25,11 +25,11 @@ int string_parenthesis_by_node(node_t *nd, char *str, int i, int max);
 int string_height_by_node(node_t *nd, char *str, int i, int max, int h);
 
 // remove o nodo apontado
-int remove_node(node_t *nd);
+int remove_node(node_t *nd, node_t **top);
 int remove_root(avl_t *t);
 
 // busca recursivamente e remove a chave
-int remove_key_by_node(node_t *nd, key_t key);
+int remove_key_by_node(node_t *nd, node_t **top,key_t key);
 
 // destroi a árvore recursivamente
 int destroy_tree(node_t **nd);
