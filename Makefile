@@ -18,8 +18,6 @@ tree_operations.o: tree_operations.h tree_operations.c
 avl_module.o: tree_operations.o avl_module.c avl_module.h
 	$(CC) $(LIBFLAGS) -c avl_module.c -o $@
 
-#######################################################
-
 # compilação da lib utilizada pelo ctype
 avl_module.so: $(OBJECTS) avl_module.o
 	$(CC) $(SHAREFLAGS) avl_module.o $(OBJECTS) -o $@

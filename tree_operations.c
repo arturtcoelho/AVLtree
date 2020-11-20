@@ -27,17 +27,14 @@ int insert_key_by_node(node_t **nd, node_t *top, key_t key){
     // caso esse nodo seja nulo, insere nele
     if (!*nd) return insert_key(nd, top, key);
 
-    if ((*nd)->key == key) {
-        return 1;
-    }
+    if ((*nd)->key == key) return 1; // caso o número ja exista
 
     // caso esse nodo ja esteja ocupado, insere em um de seus filhos
     int res = 1;
-    if ((*nd)->key > key){
+    if ((*nd)->key > key)
         res = insert_key_by_node(&((*nd)->left), *nd, key);
-    } else {
+    else
         res = insert_key_by_node(&((*nd)->right), *nd, key);
-    }
 
     // caso não seja possivel inserir, retorna 0
     if (!res) return 0;
@@ -67,70 +64,68 @@ int insert_key(node_t **nd, node_t *top, key_t key){
 // procura a chave 'key' a partir de um nodo apontado, 1 se a chave esta presente e 0 caso contrario
 int search_key_by_node(node_t *nd, key_t key){
     if (nd == NULL) return 0; // caso seja nulo, não achou
+
     if (nd->key == key) return 1; // achou
-    if (nd->key > key) { // procura a esquerda
+
+    if (nd->key > key) // procura a esquerda
         return search_key_by_node(nd->left, key);
-    } else { // procura a direita
+    else // procura a direita
         return search_key_by_node(nd->right, key);
-    }
 }
 
 // imprime recursivamente in-order as chaves da árvore
 void print_tree_by_node(node_t *nd){
     if (nd == NULL) return; // terminou essa sub-árvore
+
     print_tree_by_node(nd->left); // imprime a sub-árvore a esquerda
     printf("%d ", nd->key);
     print_tree_by_node(nd->right); // imprime a sub-árvore a direita
+
     return;
 }
 
 // imprime na saída padrão a sub-árvore na notação de arenteses
 int print_parenthesis_by_node(node_t *nd){
-    if (nd == NULL) {
-        return 0; // terminou essa sub-árvore
-    }
+    if (nd == NULL) return 0; // terminou essa sub-árvore
+
     printf("(%d", nd->key);
     print_parenthesis_by_node(nd->left);
     print_parenthesis_by_node(nd->right);
     printf(")");
+
     return 1;
 }
 
 int print_with_height_by_node(node_t *nd, int h){
     if (!nd) return 0;
+
     print_with_height_by_node(nd->left, h+1);
     printf("%d,%d\n", nd->key, h);
     print_with_height_by_node(nd->right, h+1);
+
     return 1;
 }
 
 int print_graph_by_node(node_t *nd, int h){
-    if (nd) {
-        print_graph_by_node(nd->right, h+1);
+    if (!nd) return printf("\n");
 
-        for (int i = 0; i < (h-1)*SPACING; i++) {
-            printf(" ");
-        }
-        if (nd->top){
-            if (nd->top->left == nd){
-                printf("\\");
-            } else {
-                printf("/");
-            }
-        }
-
-        printf(" %-*d", MAX_NUM_LEN,  nd->key);
-
-        print_graph_by_node(nd->left, h+1);
-
-        return 1;
+    print_graph_by_node(nd->right, h+1);
+    for (int i = 0; i < (h-1)*SPACING; i++) printf(" ");
+    if (nd->top){
+        if (nd->top->left == nd)
+            printf("\\");
+        else
+            printf("/");
     }
-    printf("\n");
-    return 0;
+    printf(" %-*d", MAX_NUM_LEN,  nd->key);
+    print_graph_by_node(nd->left, h+1);
+
+    return 1;
 }
 
 int string_parenthesis_by_node(node_t *nd, char *str, int i, int max){
     if (!nd) return 0;
+
     // confere se a posição i somada a quantidade de números a ser impressa
     // somada aos parenteses ultrapassa o maximo permitido do buffer
     int added = (ceil(log10(nd->key > 0 ? nd->key : 1)) + 2);
@@ -138,11 +133,13 @@ int string_parenthesis_by_node(node_t *nd, char *str, int i, int max){
         fprintf(stderr, "TOO LARGE INPUT TO BUFFER, tried to add %d on top of %d, maxing %d", added, i, max);
         return 0;
     }
+
     int res = i;
     res += sprintf(str+res, "(%d", nd->key);
     res += string_parenthesis_by_node(nd->left, str, res, max);
     res += string_parenthesis_by_node(nd->right, str, res, max);
     res += sprintf(str+res, ")");
+
     return res-i;
 }
 
@@ -151,10 +148,12 @@ int string_height_by_node(node_t *nd, char *str, int i, int max, int h){
     // confere se a posição i somada a quantidade de números a ser impressa
     // somada aos parenteses ultrapassa o maximo permitido do buffer
     int added = (log10(nd->key > 0 ? nd->key : 1) + 3);
+
     if (i + added >= max){
         fprintf(stderr, "TOO LARGE INPUT TO BUFFER, tried to add %d on top of %d, maxing %d", added, i, max);
         return 0;
     }
+
     int res = i;
     res += string_height_by_node(nd->left, str, res, max, h+1);
     res += sprintf(str+res, "%d,%d ", nd->key, h);
@@ -263,15 +262,12 @@ int remove_root(avl_t *t) {
 int remove_key_by_node(node_t *nd, key_t key){
     if (!nd) return 0;
 
-    if (nd->key == key) {
-        return remove_node(nd);
-    }
+    if (nd->key == key) return remove_node(nd);
 
-    if (nd->key > key) { //esquerda
+    if (nd->key > key) //esquerda
         return remove_key_by_node(nd->left, key);
-    } else { // direita
+    else // direita
         return remove_key_by_node(nd->right, key);
-    }
 
     return 0;
 }
@@ -293,9 +289,7 @@ int destroy_tree(node_t **nd){
 // retorna o ponteiro para o nodo com o menor valor da subárvore passada, ou null caso tenha sido passado null
 node_t *min_node(node_t *nd){
     if (!nd) return NULL;
-    if (!nd->left) {
-        return nd;
-    }
+    if (!nd->left) return nd;
     return (min_node(nd->left));
 }
 
@@ -307,12 +301,8 @@ node_t *max_node(node_t *nd){
 }
 
 int last_right_node(node_t *nd){
-    if (!nd->top){
-        return 1;
-    }
-    if (nd->top->right == nd){
-        return last_right_node(nd->top);
-    }
+    if (!nd->top) return 1;
+    if (nd->top->right == nd) return last_right_node(nd->top);
     return 0;
 }
 

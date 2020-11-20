@@ -28,7 +28,7 @@ int insert_key_avl(avl_t *t, key_t key);
 // procura uma chave key na árvore, retorna 0 em caso de erro e !0 caso contrário
 int search_key_avl(avl_t *t, key_t key);
 
-// imprime a árvore in-order na saída padrão, retorna 0 em caso de erro e !0 caso contrário
+// imprime a árvore na saída padrão, retorna 0 em caso de erro e !0 caso contrário
 int print_tree_avl(avl_t *t);
 int print_parethesis(avl_t *t);
 int print_with_height(avl_t *t);
@@ -44,8 +44,10 @@ int remove_key_avl(avl_t *t, key_t key);
 // destroi a árvore, retorna 0 em caso de erro e !0 caso contrário
 int destroy_tree_avl(avl_t *t);
 
+// retorna o número de nodos da árvore
 int tree_size(avl_t *t);
 
+// retorna a altura da árvore
 int tree_height(avl_t *t);
 
 #endif
