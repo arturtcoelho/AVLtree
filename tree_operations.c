@@ -28,22 +28,18 @@ int insert_key_by_node(node_t **nd, node_t *top, key_t key){
     // caso esse nodo seja nulo, insere nele
     if (!*nd) return insert_key(nd, top, key);
 
-    if ((*nd)->key == key) return 1; // caso o número ja exista
+    if ((*nd)->key == key) return 0; // caso o número ja exista
 
     // caso esse nodo ja esteja ocupado, insere em um de seus filhos
-    int res = 1;
-    if ((*nd)->key > key)
+    int res;
+    if ((*nd)->key > key){
         res = insert_key_by_node(&((*nd)->left), *nd, key);
-    else
+        (*nd)->bf -= res;
+    } else {
         res = insert_key_by_node(&((*nd)->right), *nd, key);
-
-    // caso não seja possivel inserir, retorna 0
-    if (!res) return 0;
-
-    // realiza o giro da árvore para se manter balanceda
-    rotate();
-
-    return 1;
+        (*nd)->bf += res;
+    }
+    return res;
 }
 
 // adiciona uma chave no nodo especificado, com o pai
@@ -58,6 +54,7 @@ int insert_key(node_t **nd, node_t *top, key_t key){
     (*nd)->left = NULL;
     (*nd)->right = NULL;
     (*nd)->key = key;
+    (*nd)->bf = 0;
 
     return 1;
 }
@@ -118,7 +115,9 @@ int print_graph_by_node(node_t *nd, int h){
         else
             printf("/");
     }
-    printf(" %-*d", MAX_NUM_LEN,  nd->key);
+    // printf(" %-*d", MAX_NUM_LEN,  nd->key);
+    printf(" %d(%d)", nd->key, nd->bf);
+    
     print_graph_by_node(nd->left, h+1);
 
     return 1;

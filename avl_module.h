@@ -5,20 +5,18 @@
 #define SPACING 5
 
 typedef int key_t;
-typedef unsigned char uint8_t;
 
 struct node {
 	key_t key;
 	struct node *top;
 	struct node *left;
 	struct node *right;
-	uint8_t bf;
+	int bf;
 };
 typedef struct node node_t;
 
 struct avl {
 	node_t *root;
-	uint8_t bf;
 };
 typedef struct avl avl_t;
 

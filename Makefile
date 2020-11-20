@@ -16,7 +16,7 @@ avl_operations.o: avl_operations.c avl_operations.h
 	$(CC) $(LIBFLAGS) -c avl_operations.c -o $@
 tree_operations.o: avl_operations.o tree_operations.c tree_operations.h
 	$(CC) $(LIBFLAGS) $(MATH) -c tree_operations.c -o $@
-avl_module.o: $(LIBS)
+avl_module.o: avl_module.c avl_module.h tree_operations.c tree_operations.h avl_operations.c avl_operations.h
 	$(CC) $(LIBFLAGS) -c avl_module.c -o $@
 
 # compilação da lib utilizada pelo ctype

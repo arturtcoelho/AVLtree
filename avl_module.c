@@ -9,7 +9,6 @@
 int initialize_avl(avl_t *t){
     // inicializa o valor de root
     t->root = NULL;
-    t->bf = 0;
     return 1;
 }
 
@@ -22,11 +21,16 @@ int insert_key_avl(avl_t *t, key_t key){
     if (t->root->key == key) return 1;
 
     // insere na sub-árvore a esquerda ou direita
-    if (t->root->key > key) // esquerda
-        return insert_key_by_node(&(t->root->left), t->root, key);
-    else // direita
-        return insert_key_by_node(&(t->root->right), t->root, key);
-
+    if (t->root->key > key){// esquerda
+        int res = insert_key_by_node(&(t->root->left), t->root, key);
+        t->root->bf -= res;
+        return res; 
+    } 
+    else { // direita
+        int res = insert_key_by_node(&(t->root->right), t->root, key);
+        t->root->bf += res;
+        return res;
+    }
 }
 
 // procura uma chave na árvore, retorna 0 em caso de erro e !0 caso contrário
