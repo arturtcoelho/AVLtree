@@ -48,4 +48,4 @@ if __name__ == '__main__':
     # tree.print_tree()
     # tree.print_tree_parenthesis()
     # tree.print_with_height()
-    tree.print_graph()
+    # tree.print_graph()

@@ -13,10 +13,60 @@ void bad_malloc(){
     exit(1);
 }
 
-// rotaciona a árvore para realizar seu balanço
-int rotate(){
+int rotate_right(node_t *p){
+    node_t *temp = p;
+    node_t *q = p->left;
+    p->left = q->right;
+    q->top = p->top;
+    p->top = q;
+    if (q->right != NULL)
+        q->right->top = p;
+    q->right = p;
+    p = temp;
     return 1;
 }
+
+int rotate_left(node_t *p){
+    node_t *temp = p;
+    node_t *q = p->right;
+    p->right = q->left;
+    q->top = p->top;
+    p->top = q;
+    if (q->left != NULL)
+        q->left->top = p;
+    q->left = p;
+    p = temp;
+    return 1;
+}
+
+// rotaciona a árvore para realizar seu balanço
+int rotate(node_t *nd, int *bal){
+    node_t *rotate_node = nd;//, *pai = no->pai;
+    if (nd->bf == -2) { //desbalanceado na  esquerda
+        if (nd->left != NULL && nd->left->bf > 0) {
+            rotate_left(nd->left);
+        }
+        rotate_right(nd);        
+    } else {        
+        if (nd->right->bf < 0){
+            rotate_right(nd->right);
+        }
+        rotate_left(nd);
+    }
+    if (rotate_node->top != NULL){
+        if (rotate_node->top->left == nd)
+            rotate_node->top->left = rotate_node;
+        else
+            rotate_node->top->right = rotate_node;  
+    }
+    rotate_node->bf = 0;
+    rotate_node->left->bf = (height_by_node(rotate_node->left->right, 0) - height_by_node(rotate_node->left->left, 0));
+    rotate_node->right->bf = (height_by_node(rotate_node->left->right, 0) - height_by_node(rotate_node->right->left, 0));
+    *bal = 0;
+    nd = rotate_node;
+    return 1;
+}
+
 
 // retorna !0 caso a árvore ja tenha sido inicializada, 0 caso contrário 
 int tree_is_empty(avl_t *t){
@@ -24,22 +74,32 @@ int tree_is_empty(avl_t *t){
 }
 
 // insere uma chave em um nodo apontado, retorna 1 em caso de sucesso, 0 ao contrário
-int insert_key_by_node(node_t **nd, node_t *top, key_t key){
+int insert_key_by_node(node_t **nd, node_t *top, key_t key, int *bal){
     // caso esse nodo seja nulo, insere nele
-    if (!*nd) return insert_key(nd, top, key);
+    if (!*nd) {
+        insert_key(nd, top, key);
+        *bal = 1;
+        return 1; 
+    }
 
     if ((*nd)->key == key) return 0; // caso o número ja exista
 
     // caso esse nodo ja esteja ocupado, insere em um de seus filhos
-    int res;
     if ((*nd)->key > key){
-        res = insert_key_by_node(&((*nd)->left), *nd, key);
-        (*nd)->bf -= res;
+        insert_key_by_node(&((*nd)->left), *nd, key, bal);
+        if (*bal) (*nd)->bf--;
     } else {
-        res = insert_key_by_node(&((*nd)->right), *nd, key);
-        (*nd)->bf += res;
+        insert_key_by_node(&((*nd)->right), *nd, key, bal);
+        if (*bal) (*nd)->bf++;
     }
-    return res;
+    if (*bal) {
+        if (!(*nd)->bf) *bal = 0;
+        if (abs((*nd)->bf) > 1) {
+            // rotate(*nd, bal);
+            printf("Rotate %d\n", (*nd)->key);
+        }
+    }
+    return 1;
 }
 
 // adiciona uma chave no nodo especificado, com o pai
