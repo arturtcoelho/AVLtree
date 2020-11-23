@@ -1,7 +1,6 @@
 #ifndef AVL_MODULE
 #define AVL_MODULE
 
-#define MAX_NUM_LEN 4
 #define SPACING 5
 
 typedef int key_t;

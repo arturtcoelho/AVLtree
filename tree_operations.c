@@ -37,6 +37,18 @@ int rotate_left(node_t **nd){
     return 1;
 }
 
+int balance_up(node_t *nd){
+    if (!nd->top || abs(nd->bf) > 1) return 1;
+    if (nd->top->left == nd) {
+        nd->top->bf++;
+    }
+    else {
+        nd->top->bf--;
+    }
+    balance_up(nd->top);
+    return 1;
+}
+
 // rotaciona a árvore para realizar seu balanço
 int rotate(node_t **nd, int *bal){
     if ((*nd)->bf == -2) { //desbalanceado na  esquerda
@@ -168,8 +180,8 @@ int print_graph_by_node(node_t *nd, int h){
         else
             printf("/");
     }
-    // printf(" %-*d", MAX_NUM_LEN,  nd->key);
     printf(" %d(%d)", nd->key, nd->bf);
+    // printf(" (%d)%d(%d)", nd->top?nd->top->key:-1,nd->key, nd->bf);
     
     print_graph_by_node(nd->left, h+1);
 
@@ -242,13 +254,17 @@ int remove_node(node_t *nd, node_t **top){
     if (!nd) return 0;
 
     if (nd->left && nd->right) { // ambos os filhos existem
-        return remove_both_exist(nd);
+        remove_both_exist(nd);
+        return 1;
     } else {
         if (!(nd->left || nd->right)) { // nenhum filho existte
+            if (nd->top) nd->top->bf += nd->top->left == nd ? 1 : -1;
+            balance_up(nd->top);
             *top = NULL;
             free(nd);
             return 1;
         } else { // uma das duas existe
+            balance_up(nd);
             // reatribui o ponteiro do pai para o novo filho
             *top = nd->left ? nd->left : nd->right;
 
@@ -257,6 +273,7 @@ int remove_node(node_t *nd, node_t **top){
                 nd->left->top = nd->top;
             else
                 nd->right->top = nd->top;
+            
             free(nd);
             return 1;
         }

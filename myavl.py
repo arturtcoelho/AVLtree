@@ -44,8 +44,3 @@ if __name__ == '__main__':
             line = input()
     except (EOFError, KeyboardInterrupt):
         pass
-
-    # tree.print_tree()
-    # tree.print_tree_parenthesis()
-    # tree.print_with_height()
-    # tree.print_graph()
