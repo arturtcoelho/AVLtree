@@ -26,6 +26,7 @@ int print_parenthesis_by_node(node_t *nd){
     return 1;
 }
 
+// imprime in-order com a altura
 int print_with_height_by_node(node_t *nd, int h){
     if (!nd) return 0;
 
@@ -36,6 +37,7 @@ int print_with_height_by_node(node_t *nd, int h){
     return 1;
 }
 
+// imprime graficamente
 int print_graph_by_node(node_t *nd, int h){
     if (!nd) return printf("\n");
 
@@ -47,14 +49,14 @@ int print_graph_by_node(node_t *nd, int h){
         else
             printf("/");
     }
-    printf(" %d(%d)", nd->key, nd->bf);
-    // printf(" (%d)%d(%d)", nd->top?nd->top->key:-1,nd->key, nd->bf);
+    printf(" %d", nd->key);
     
     print_graph_by_node(nd->left, h+1);
 
     return 1;
 }
 
+// escreve as chaves em str com notação de parenteses
 int string_parenthesis_by_node(node_t *nd, char *str, int i, int max){
     if (!nd) return 0;
 
@@ -75,6 +77,7 @@ int string_parenthesis_by_node(node_t *nd, char *str, int i, int max){
     return res-i;
 }
 
+// escreve em str com altura
 int string_height_by_node(node_t *nd, char *str, int i, int max, int h){
     if (!nd) return 0;
     // confere se a posição i somada a quantidade de números a ser impressa

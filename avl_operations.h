@@ -12,8 +12,10 @@ int rotate_left(node_t **nd);
 // rotaciona a árvore para realizar seu balanço
 int rotate(node_t **nd, int *bal);
 
+// rotaciona a árvore para realizar seu balanço
 int adjust_bf_up(node_t *nd);
 
+// desde root, confere e ajusta o balanço de cada nodo até uma chave específica
 int balance_to_key(node_t **nd, key_t key);
 
 #endif

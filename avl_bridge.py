@@ -9,12 +9,14 @@ from ctypes import byref
 # Usamos 'byref' muitas vezes
 
 buffer_size = 16
+key_t = int
 
-# Importando a lib para usos futuros:
+# Importando a lib avl_module:
 lib = ctypes.CDLL("./avl_module.so")
 
 class avl_tree(ctypes.Structure):
     """Arvore AVL, definida a partir da struct avl_t"""
+    """possui um ponteiro de void, que aponta para a raiz"""
 
     _fields_ = [
         ("root", ctypes.POINTER(ctypes.c_void_p)),
@@ -22,6 +24,7 @@ class avl_tree(ctypes.Structure):
 
     def __init__(self):
         """Inicializa a classe/struct"""
+        """chamado para toda vez que um novo objeto do tipo avl_tree for criado"""
         # Verifique docs/sources.txt: By Reference
         lib.initialize_avl(byref(self))
 
@@ -30,7 +33,7 @@ class avl_tree(ctypes.Structure):
         Insere uma chave int na árvore,
         retorna 0 em caso de erro e !0 caso contrário
         """
-        if type(key) != int:
+        if type(key) != key_t:
             raise TypeError
         c_key = ctypes.c_int(key)
 
@@ -41,7 +44,7 @@ class avl_tree(ctypes.Structure):
         Procura uma chave key na árvore,
         retorna 0 em caso de erro e !0 caso contrário
         """
-        if type(key) != int:
+        if type(key) != key_t:
             raise TypeError
         c_key = ctypes.c_int(key)
 
@@ -52,7 +55,7 @@ class avl_tree(ctypes.Structure):
         Remove uma chave da árvore,
         retorna 0 em caso de erro e !0 caso contrário
         """
-        if type(key) != int:
+        if type(key) != key_t:
             raise TypeError
         c_key = ctypes.c_int(key)
 
@@ -61,7 +64,7 @@ class avl_tree(ctypes.Structure):
     def print_tree(self):
         """
         Imprime a árvore in-order na saída padrão,
-        retorna 0 em caso de erro e !0 caso contrário
+        retorna 0 em caso de erro e 1 em sucesso
         """
         return lib.print_tree_avl(byref(self))
 
@@ -74,14 +77,19 @@ class avl_tree(ctypes.Structure):
         return lib.print_with_height(byref(self))
 
     def print_graph(self):
+        """Imprime a árvore graficamente"""
         return lib.print_graph(byref(self))
 
 
     def as_parenthesis_string(self):
         """Retorna o texto de 'print_tree_parenthesis' como string"""
+        # cria uma string de C baseada no tamanho prṕrio
         size = len(self) * buffer_size
         string = ctypes.create_string_buffer(size)
+
         lib.string_parenthesis(byref(self), byref(string), size)
+        
+        # transforma essa string para uma string em python
         ctypes.cast(string, ctypes.c_char_p)
         s = str(string.value)
         return s[2:-1]
@@ -90,7 +98,9 @@ class avl_tree(ctypes.Structure):
         """Retorna o texto de 'print_tree_by_height' como string"""
         size = len(self) * buffer_size
         string = ctypes.create_string_buffer(size)
+
         lib.string_height(byref(self), byref(string), size)
+        
         ctypes.cast(string, ctypes.c_char_p)
         s = str(string.value)
         return s[2:-1]
@@ -99,16 +109,17 @@ class avl_tree(ctypes.Structure):
         """ Retorna o tamanho da árvore """
         return lib.tree_size(byref(self))
 
-    def destroy(self):
-        """Destroi a árvore, retorna 0 em caso de erro e !0 caso contrário"""
-        return lib.destroy_tree_avl(byref(self))
+    def height(self):
+        """Retorna a altura da árvore"""
+        return lib.tree_height(byref(self))
 
     def __del__(self):
         """Destrutor de classe"""
-        return self.destroy()
+        return lib.destroy_tree_avl(byref(self))
 
     def __str__(self):
         """Verificador usado pela funcao built-in 'print'"""
+        """Assim podemos utilizar print(tree)"""
         return self.as_parenthesis_string()
 
     def __contains__(self, key):
