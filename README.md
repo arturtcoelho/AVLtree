@@ -1,29 +1,25 @@
-<h1>AVLtree</h1>
+## My AVL tree
 
-<p>Este projeto foi iniciado em Novembro de 2020 para a matéria de Algoritmos e Estuturas de Dados III no período especial 2 da UFPR.</p>
+**Autores:** Artur Temporal Coelho & Gabriel Nascarella Hishida do Nascimento
 
-<p>O intuito desse projeto é implementar uma Árvore binária do tipo AVL na linguagem C, e portar a mesma para sua utilização em Python. </p>
+**Sobre:** Este trabalho foi realizado para a matéria Algoritmos e estrutura de dados III, ERE 2 2020, durante o mês de novembro. Consiste de uma biblioteca de uma árvore binária AVL construida em C e importada por um módulo Python para sua utilização abstraida.
 
-<h3>Arquivos:</h3>
-<h4>avl_module.*</h4>
-<p>Contém as funções de interface pra utilização de uma árvore AVL, contém as funçoes padrão de qualquer árvore</p>
+## myavl .py
+O arquivo myavl .py importa o módulo avl e contém a interface com a árvore, sua função de leitura e impressão na tela para o usuário.
 
-<h4>tree_operations.*</h4>
-<p>Contém as funções de apoio para a biblioteca principal:</p>
+## avl_bridge .py
+A ponte AVL utiliza a biblioteca ctypes para fazer a interface entre o programa myavl e a biblioteca avl_module
 
-* rotate: rotaciona a árvora para balancea-la
-* insert_key: insere uma chave em um nodo apontado
-* remove_node: remove um nodo apontado
+## avl_module .so
+Este é o arquivo utilizado pela ponte para realizar as operações com a árvore, este é o arquivo montado pelo Makefile, dependendo das seguintes implementações:
 
-* As funções recursivas:
-  * Busca
-  * Impressão
-  * Inserção
-  * Remoção
-  * Destruição
-
-<h4>avl_module.c</h4>
-<p>Contém a interface a ser exportada como biblioteca para utilização no código Python com ctypes</p>
-
-<h4>avl_bridge.py</h4>
-<p>Interface ponte do usuário para a árvore AVL, utilizando ctypes para importar a biblioteca implementada em C</p>
+ - **avl_module:** Contém as definições de tipos e as funções de interface visiveis pela ponte
+ - **tree_operations:** Contém as implementações recursivas principais de busca, inserção e remoção
+ - **avl_operations:**  Contém as implementações das funções específicas de uma árvore AVL, como rotação e ajuste do fator de balanceamento
+ - **print_tree:** Contém as diversas funções de impressão da árvore
+## Makefile
+O Makefile foi construido com os alvos:
+ - `all`, para compilação e montagem dos arquivos objetos culminando no objeto compartilhado avl_module.so
+ -  `clean`, para remoção dos arquivos objeto 
+ - `purge`, para remoção de todos os arquivos que não sejam código fonte
+ - `install`, para instalação da biblioteca para uso geral na maquina
