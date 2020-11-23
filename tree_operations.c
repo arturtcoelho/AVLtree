@@ -13,57 +13,51 @@ void bad_malloc(){
     exit(1);
 }
 
-int rotate_right(node_t *p){
-    node_t *temp = p;
-    node_t *q = p->left;
-    p->left = q->right;
-    q->top = p->top;
-    p->top = q;
-    if (q->right != NULL)
-        q->right->top = p;
-    q->right = p;
-    p = temp;
+int rotate_right(node_t **nd){
+    node_t *r = (*nd)->left;
+    r->top = (*nd)->top;
+    (*nd)->left = r->right;
+    if ((*nd)->left) (*nd)->left->top = *nd;
+    r->right = *nd;
+    (*nd)->top = r;
+    (*nd) = r;
+
     return 1;
 }
 
-int rotate_left(node_t *p){
-    node_t *temp = p;
-    node_t *q = p->right;
-    p->right = q->left;
-    q->top = p->top;
-    p->top = q;
-    if (q->left != NULL)
-        q->left->top = p;
-    q->left = p;
-    p = temp;
+int rotate_left(node_t **nd){
+    node_t *r = (*nd)->right;
+    r->top = (*nd)->top;
+    (*nd)->right = r->left;
+    if ((*nd)->right) (*nd)->right->top = *nd;
+    r->left = *nd;
+    (*nd)->top = r;
+    (*nd) = r;
+
     return 1;
 }
 
 // rotaciona a árvore para realizar seu balanço
-int rotate(node_t *nd, int *bal){
-    node_t *rotate_node = nd;//, *pai = no->pai;
-    if (nd->bf == -2) { //desbalanceado na  esquerda
-        if (nd->left != NULL && nd->left->bf > 0) {
-            rotate_left(nd->left);
+int rotate(node_t **nd, int *bal){
+    if ((*nd)->bf == -2) { //desbalanceado na  esquerda
+        printf("Rotacionando %d a direita\n", (*nd)->key);
+        if ((*nd)->left != NULL && (*nd)->left->bf > 0) {
+            printf("Rotacionando %d a esquerda antes\n", (*nd)->left->key);
+            rotate_left(&((*nd)->left));
         }
         rotate_right(nd);        
-    } else {        
-        if (nd->right->bf < 0){
-            rotate_right(nd->right);
+    } else { // desbalanceado a direita
+        printf("Rotacionando %d a esquerda\n", (*nd)->key);
+        if ((*nd)->right->bf < 0){
+            printf("Rotacionando %d a direita antes\n", (*nd)->right->key);
+            rotate_right(&((*nd)->right));
         }
         rotate_left(nd);
     }
-    if (rotate_node->top != NULL){
-        if (rotate_node->top->left == nd)
-            rotate_node->top->left = rotate_node;
-        else
-            rotate_node->top->right = rotate_node;  
-    }
-    rotate_node->bf = 0;
-    rotate_node->left->bf = (height_by_node(rotate_node->left->right, 0) - height_by_node(rotate_node->left->left, 0));
-    rotate_node->right->bf = (height_by_node(rotate_node->left->right, 0) - height_by_node(rotate_node->right->left, 0));
+    (*nd)->bf = 0;
     *bal = 0;
-    nd = rotate_node;
+    (*nd)->left->bf = height_by_node((*nd)->left->right, 0) - height_by_node((*nd)->left->left, 0);
+    (*nd)->right->bf = height_by_node((*nd)->right->right, 0) - height_by_node((*nd)->right->left, 0);
     return 1;
 }
 
@@ -95,8 +89,7 @@ int insert_key_by_node(node_t **nd, node_t *top, key_t key, int *bal){
     if (*bal) {
         if (!(*nd)->bf) *bal = 0;
         if (abs((*nd)->bf) > 1) {
-            // rotate(*nd, bal);
-            printf("Rotate %d\n", (*nd)->key);
+            rotate(nd, bal);
         }
     }
     return 1;
