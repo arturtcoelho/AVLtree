@@ -6,17 +6,19 @@ LIBFLAGS = -fPIC $(CFLAGS)
 MATH = -lm
 SHAREFLAGS = -shared
 
-OBJECTS = tree_operations.o avl_operations.o
+OBJECTS = tree_operations.o avl_operations.o print_tree.o
 
 # regra principal
 all: myavl
 
 # regras para as bibliotecas de árvore
+print_tree.o: print_tree.c print_tree.h
+	$(CC) $(LIBFLAGS) $(MATH) -c print_tree.c -o $@
 avl_operations.o: avl_operations.c avl_operations.h
 	$(CC) $(LIBFLAGS) -c avl_operations.c -o $@
 tree_operations.o: avl_operations.o tree_operations.c tree_operations.h
 	$(CC) $(LIBFLAGS) $(MATH) -c tree_operations.c -o $@
-avl_module.o: avl_module.c avl_module.h tree_operations.c tree_operations.h avl_operations.c avl_operations.h
+avl_module.o: avl_module.c avl_module.h tree_operations.c tree_operations.h avl_operations.c avl_operations.h print_tree.o
 	$(CC) $(LIBFLAGS) -c avl_module.c -o $@
 
 # compilação da lib utilizada pelo ctype
