@@ -103,16 +103,16 @@ int remove_node(node_t *nd, node_t **top){
             if (nd->top){
                 if (nd->top->left == nd) {
                     nd->top->bf++;
-                    if (!nd->top->right) adjust_bf_up(nd->top);
+                    if (!nd->top->right) adjust_bf_upwards(nd->top);
                 } else {
                     nd->top->bf--;
-                    if (!nd->top->left) adjust_bf_up(nd->top);
+                    if (!nd->top->left) adjust_bf_upwards(nd->top);
                 }
             } 
             *top = NULL;
             free(nd);
         } else { // uma das duas existe
-            adjust_bf_up(nd);
+            adjust_bf_upwards(nd);
 
             // reatribui o ponteiro do pai para o novo filho
             *top = nd->left ? nd->left : nd->right;

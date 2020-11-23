@@ -39,31 +39,29 @@ int rotate_left(node_t **nd){
 }
 
 // ajusta o fator de balanceamento para os nodos anteriores a nd
-int adjust_bf_up(node_t *nd){
+int adjust_bf_upwards(node_t *nd){
     if (!nd->top || abs(nd->bf) > 1) return 1;
     if (nd->top->left == nd) {
         nd->top->bf++;
-    }
-    else {
+    } else {
         nd->top->bf--;
     }
-    adjust_bf_up(nd->top);
+    adjust_bf_upwards(nd->top);
     return 1;
 }
 
 // rotaciona a árvore para realizar seu balanço
 int rotate(node_t **nd){
     if ((*nd)->bf == -2) { //desbalanceado na  esquerda
-        if ((*nd)->left != NULL && (*nd)->left->bf > 0) {
+        if ((*nd)->left && (*nd)->left->bf > 0) {
             rotate_left(&((*nd)->left));
         }
-        rotate_right(nd);        
+        rotate_right(nd);
     } else { // desbalanceado a direita
         if ((*nd)->right->bf < 0){
             rotate_right(&((*nd)->right));
         }
         rotate_left(nd);
-
     }
     (*nd)->bf = balance_factor((*nd));
     (*nd)->left->bf = balance_factor((*nd)->left);
