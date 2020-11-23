@@ -61,9 +61,22 @@ int rotate(node_t **nd, int *bal){
         rotate_left(nd);
 
     }
-    (*nd)->bf = 0;
     *bal = 0;
+    (*nd)->bf = balance_factor((*nd));
     (*nd)->left->bf = balance_factor((*nd)->left);
     (*nd)->right->bf = balance_factor((*nd)->right);
+    return 1;
+}
+
+int balance_to_key(node_t **nd, key_t key){
+    if (!*nd) return 1;
+    int b;
+    if (abs((*nd)->bf) > 1) rotate(nd, &b);
+
+    if ((*nd)->key > key) {
+        balance_to_key(&((*nd)->left), key);
+    } else {
+        balance_to_key(&((*nd)->right), key);
+    }
     return 1;
 }

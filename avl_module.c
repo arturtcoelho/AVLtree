@@ -101,15 +101,20 @@ int remove_key_avl(avl_t *t, key_t key){
     if (tree_is_empty(t)) return 0;
 
     // remove a chave em root
-    if (t->root->key == key) return remove_node(t->root, &(t->root));
+    if (t->root->key == key) {
+        remove_node(t->root, &(t->root));
+        return 1;
+    }
 
     // remove a chave na sub-árvore correspondente
     if (t->root->key > key) // esquerda
-        return remove_key_by_node(t->root->left, &(t->root->left),key);
+        remove_key_by_node(t->root->left, &(t->root->left),key);
     else  // direita 
-        return remove_key_by_node(t->root->right, &(t->root->right), key);
+        remove_key_by_node(t->root->right, &(t->root->right), key);
 
-    return 0;
+    balance_to_key(&(t->root), key);
+    
+    return 1;
 }
 
 // destroi a árvore, retorna 0 em caso de erro e !0 caso contrário

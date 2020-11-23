@@ -14,4 +14,6 @@ int rotate(node_t **nd, int *bal);
 
 int adjust_bf_up(node_t *nd);
 
+int balance_to_key(node_t **nd, key_t key);
+
 #endif
