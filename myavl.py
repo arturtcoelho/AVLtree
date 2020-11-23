@@ -44,3 +44,5 @@ if __name__ == '__main__':
             line = input()
     except (EOFError, KeyboardInterrupt):
         pass
+
+    tree.print_with_height()

@@ -76,25 +76,18 @@ int search_key_by_node(node_t *nd, key_t key){
 }
 
 // função para o caso onde ambos os filhos estão presentes
-int remove_both_exist(node_t *nd){
-    if (!nd) return 0; // caso o nodo não exista
+node_t *remove_both_exist(node_t *nd){
+    if (!nd) return NULL; // caso o nodo não exista
 
     node_t *succ = min_node(nd->right); // succ = sucessor de nodo
     nd->key = succ->key; // copia a chave
+    // if (!succ->left && !succ->right) nd->bf--;
     if (succ == nd->right){ // caso especial onde subárvore da direita é o sucessor
-        node_t *temp = nd->right; // guarda o nodo a ser retirado
-
-        // atribui o filho da direita do filho da direita aponta para o novo nodo 
-        if (nd->right->right) nd->right->right->top = nd; 
-        // passa o filho da direita para o filho do filho da direita
-        nd->right = nd->right->right;
-        free(temp);
+        remove_node(succ, &(nd->right));
     } else { // remove o sucessor
-        succ->top->left = succ->right; // reatribui os ponteiros do sucessor
-        if (succ->right) succ->right->top = succ->top;
-        free(succ);
+        remove_node(succ, &(succ->top->left));
     }
-    return 1;
+    return nd->top;
 }
 
 // remove o nodo apontado
@@ -110,18 +103,18 @@ int remove_node(node_t *nd, node_t **top){
             if (nd->top){
                 if (nd->top->left == nd) {
                     nd->top->bf++;
-                    if (!nd->top->right) balance_up(nd->top);
+                    if (!nd->top->right) adjust_bf_up(nd->top);
                 } else {
                     nd->top->bf--;
-                    if (!nd->top->left) balance_up(nd->top);
+                    if (!nd->top->left) adjust_bf_up(nd->top);
                 }
             } 
             *top = NULL;
             free(nd);
-            return 1;
         } else { // uma das duas existe
+            adjust_bf_up(nd);
+
             // reatribui o ponteiro do pai para o novo filho
-            balance_up(nd);
             *top = nd->left ? nd->left : nd->right;
 
             // ajusta o ponteiro do filho para o pai
@@ -130,12 +123,10 @@ int remove_node(node_t *nd, node_t **top){
             } else {
                 nd->right->top = nd->top;
             }
-            
             free(nd);
-            return 1;
         }
     }
-    return 0;
+    return 1;
 }
 
 // busca recursivamente e remove a chave
@@ -180,12 +171,14 @@ node_t *max_node(node_t *nd){
     return (max_node(nd->right));
 }
 
+// bool, retorna verdadeiro caso seja o maior nodo da árvore, falso caso contrário
 int last_right_node(node_t *nd){
     if (!nd->top) return 1;
     if (nd->top->right == nd) return last_right_node(nd->top);
     return 0;
 }
 
+// retorna o número de nodos da sub-árvore
 int number_of_nodes(node_t *nd, int *size){
     if (!nd) return 0;
     *size += number_of_nodes(nd->left, size);
