@@ -107,21 +107,29 @@ int remove_node(node_t *nd, node_t **top){
         return 1;
     } else {
         if (!(nd->left || nd->right)) { // nenhum filho existte
-            if (nd->top) nd->top->bf += nd->top->left == nd ? 1 : -1;
-            balance_up(nd->top);
+            if (nd->top){
+                if (nd->top->left == nd) {
+                    nd->top->bf++;
+                    if (!nd->top->right) balance_up(nd->top);
+                } else {
+                    nd->top->bf--;
+                    if (!nd->top->left) balance_up(nd->top);
+                }
+            } 
             *top = NULL;
             free(nd);
             return 1;
         } else { // uma das duas existe
-            balance_up(nd);
             // reatribui o ponteiro do pai para o novo filho
+            balance_up(nd);
             *top = nd->left ? nd->left : nd->right;
 
             // ajusta o ponteiro do filho para o pai
-            if (nd->left)
+            if (nd->left){
                 nd->left->top = nd->top;
-            else
+            } else {
                 nd->right->top = nd->top;
+            }
             
             free(nd);
             return 1;
