@@ -19,28 +19,29 @@ int tree_is_empty(avl_t *t){
 }
 
 // insere uma chave em um nodo apontado, retorna 1 em caso de sucesso, 0 ao contrário
-int insert_key_by_node(node_t **nd, node_t *top, key_t key, int *bal){
+int insert_key_by_node(node_t **nd, node_t *top, key_t key, int *should_balance){
     // caso esse nodo seja nulo, insere nele
     if (!*nd) {
         insert_key(nd, top, key);
-        *bal = 1;
+        *should_balance = 1;
         return 1; 
     }
 
-    if ((*nd)->key == key) return 0; // caso o número ja exista
+    if ((*nd)->key == key) return 1; // caso o número ja exista
 
     // caso esse nodo ja esteja ocupado, insere em um de seus filhos
     if ((*nd)->key > key){
-        insert_key_by_node(&((*nd)->left), *nd, key, bal);
-        if (*bal) (*nd)->bf--;
+        insert_key_by_node(&((*nd)->left), *nd, key, should_balance);
+        if (*should_balance) (*nd)->bf--;
     } else {
-        insert_key_by_node(&((*nd)->right), *nd, key, bal);
-        if (*bal) (*nd)->bf++;
+        insert_key_by_node(&((*nd)->right), *nd, key, should_balance);
+        if (*should_balance) (*nd)->bf++;
     }
-    if (*bal) {
-        if (!(*nd)->bf) *bal = 0;
+    if (*should_balance) {
+        if (!(*nd)->bf) *should_balance = 0;
         if (abs((*nd)->bf) > 1) {
-            rotate(nd, bal);
+            rotate(nd);
+            *should_balance = 0;
         }
     }
     return 1;
@@ -76,18 +77,17 @@ int search_key_by_node(node_t *nd, key_t key){
 }
 
 // função para o caso onde ambos os filhos estão presentes
-node_t *remove_both_exist(node_t *nd){
-    if (!nd) return NULL; // caso o nodo não exista
+int remove_both_exist(node_t *nd){
+    if (!nd) return 0; // caso o nodo não exista
 
     node_t *succ = min_node(nd->right); // succ = sucessor de nodo
     nd->key = succ->key; // copia a chave
-    // if (!succ->left && !succ->right) nd->bf--;
     if (succ == nd->right){ // caso especial onde subárvore da direita é o sucessor
         remove_node(succ, &(nd->right));
     } else { // remove o sucessor
         remove_node(succ, &(succ->top->left));
     }
-    return nd->top;
+    return 1;
 }
 
 // remove o nodo apontado

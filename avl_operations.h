@@ -10,7 +10,7 @@ int rotate_right(node_t **nd);
 int rotate_left(node_t **nd);
 
 // rotaciona a árvore para realizar seu balanço
-int rotate(node_t **nd, int *bal);
+int rotate(node_t **nd);
 
 // rotaciona a árvore para realizar seu balanço
 int adjust_bf_up(node_t *nd);

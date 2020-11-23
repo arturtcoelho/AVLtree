@@ -52,7 +52,7 @@ int adjust_bf_up(node_t *nd){
 }
 
 // rotaciona a árvore para realizar seu balanço
-int rotate(node_t **nd, int *bal){
+int rotate(node_t **nd){
     if ((*nd)->bf == -2) { //desbalanceado na  esquerda
         if ((*nd)->left != NULL && (*nd)->left->bf > 0) {
             rotate_left(&((*nd)->left));
@@ -65,7 +65,6 @@ int rotate(node_t **nd, int *bal){
         rotate_left(nd);
 
     }
-    *bal = 0;
     (*nd)->bf = balance_factor((*nd));
     (*nd)->left->bf = balance_factor((*nd)->left);
     (*nd)->right->bf = balance_factor((*nd)->right);
@@ -75,8 +74,7 @@ int rotate(node_t **nd, int *bal){
 // desde root, confere e ajusta o balanço de cada nodo até uma chave específica
 int balance_to_key(node_t **nd, key_t key){
     if (!*nd) return 1;
-    int b;
-    if (abs((*nd)->bf) > 1) rotate(nd, &b);
+    if (abs((*nd)->bf) > 1) rotate(nd);
 
     if ((*nd)->key > key) {
         balance_to_key(&((*nd)->left), key);

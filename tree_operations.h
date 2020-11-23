@@ -10,7 +10,7 @@ int tree_is_empty(avl_t *t);
 int insert_key(node_t **nd, node_t *top, key_t key);
 
 // insere a chave 'key' a partir um nodo apontado, retorna 1 em caso de sucesso, 0 caso contrário
-int insert_key_by_node(node_t **top, node_t *nd, key_t key, int *bal);
+int insert_key_by_node(node_t **top, node_t *nd, key_t key, int *should_balance);
 
 // procura a chave 'key' a partir de um nodo apontado, 1 se a chave esta presente e 0 caso contrario
 int search_key_by_node(node_t *nd, key_t key);
