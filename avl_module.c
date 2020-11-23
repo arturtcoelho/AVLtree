@@ -103,6 +103,7 @@ int remove_key_avl(avl_t *t, key_t key){
     // remove a chave em root
     if (t->root->key == key) {
         remove_node(t->root, &(t->root));
+        balance_to_key(&(t->root), key);
         return 1;
     }
 
