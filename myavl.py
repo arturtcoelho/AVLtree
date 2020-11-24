@@ -3,7 +3,6 @@
 """
 Script de interface do usuario com uma arvore AVL.
 Usa o modulo python 'avl_bridge.py',
-Autores: Gabriel Nascarella Hishida e Artur Temporal Coelho
 que o conecta com a biblioteca C 'avl_module.c'.
 
 Comandos:
