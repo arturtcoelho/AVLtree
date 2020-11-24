@@ -63,6 +63,7 @@ if __name__ == '__main__':
                 print("Input inválido!")
             tree.print_graph()
             line = input()
+            
     except (EOFError, KeyboardInterrupt):
         pass
 
