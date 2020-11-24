@@ -39,7 +39,7 @@ def process_input(line):
         command = line
 
     # Comandos sem argumentos:
-    if (command == "p"): # imprime a arvore
+    if (command == "p"): # imprime a arvore (notacao de parenteses)
         print(tree)
         return 1
 
