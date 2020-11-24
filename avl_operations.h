@@ -8,7 +8,6 @@
     Descreve operacoes que diferenciam a AVL das outras arvores
 */
 
-
 // retorna o fator de balanceamento da subárvore
 int balance_factor(node_t *nd);
 
