@@ -3,6 +3,7 @@
 """
 Script de interface do usuario com uma arvore AVL.
 Usa o modulo python 'avl_bridge.py',
+Autores: Gabriel Nascarella Hishida e Artur Temporal Coelho
 que o conecta com a biblioteca C 'avl_module.c'.
 
 Comandos:
@@ -29,8 +30,7 @@ def process_input(line):
     try:
         # separa a linha em comandos e argumentos
         command, arguments = line.split(maxsplit=1)
-    except ValueError:
-        # comando sem argumentos
+    except ValueError: # comando sem argumentos
         command = line
 
     # Comandos sem argumentos:
@@ -41,7 +41,7 @@ def process_input(line):
     # Comandos com argumentos:
     try:
         n = int(arguments)
-    except:
+    except: # Argumento invalido
         return 0
 
     if (command == "i"): # input na árvore 
@@ -64,6 +64,7 @@ if __name__ == '__main__':
             tree.print_graph()
             line = input()
     except (EOFError, KeyboardInterrupt):
+        # fim do arquivo
         pass
 
     tree.print_with_height()
