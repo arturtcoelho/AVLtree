@@ -86,7 +86,7 @@ int string_height_by_node(node_t *nd, char *str, int i, int max, int h){
     int added = (log10(nd->key > 0 ? nd->key : 1) + 3);
 
     if (i + added >= max){
-        fprintf(stderr, "TOO LARGE INPUT TO BUFFER, tried to add %d on top of %d, maxing %d", added, i, max);
+        fprintf(stderr, "INPUT TOO LARGE TO BUFFER: tried to add %d on top of %d, exceeding max %d", added, i, max);
         return 0;
     }
 
