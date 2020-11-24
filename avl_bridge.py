@@ -23,9 +23,7 @@ class avl_tree(ctypes.Structure):
     Contem um ponteiro void, que aponta para sua raiz
     """
 
-    _fields_ = [
-        ("root", ctypes.POINTER(ctypes.c_void_p)),
-    ]
+    _fields_ = [("root", ctypes.POINTER(ctypes.c_void_p))]
 
     def __init__(self):
         """
