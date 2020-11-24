@@ -23,7 +23,6 @@ class avl_tree(ctypes.Structure):
     Contem um ponteiro void, que aponta para sua raiz
     """
 
-
     _fields_ = [
         ("root", ctypes.POINTER(ctypes.c_void_p)),
     ]
@@ -87,7 +86,6 @@ class avl_tree(ctypes.Structure):
     def print_graph(self):
         """Imprime a árvore graficamente"""
         return lib.print_graph(byref(self))
-
 
     def as_parenthesis_string(self):
         """Retorna o texto de 'print_tree_parenthesis' como string"""
