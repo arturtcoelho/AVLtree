@@ -87,7 +87,7 @@ class avl_tree(ctypes.Structure):
 
     def as_parenthesis_string(self):
         """Retorna o texto de 'print_tree_parenthesis' como string"""
-        # cria uma string de C baseada no tamanho prṕrio
+        # cria uma string de C baseada no tamanho da arvore
         size = len(self) * buffer_size
         string = ctypes.create_string_buffer(size)
 
