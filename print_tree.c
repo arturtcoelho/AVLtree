@@ -37,7 +37,7 @@ int print_with_height_by_node(node_t *nd, int h){
     return 1;
 }
 
-// imprime graficamente
+// imprime graficamente da esquerda para a direita
 int print_graph_by_node(node_t *nd, int h){
     if (!nd) return printf("\n");
 
