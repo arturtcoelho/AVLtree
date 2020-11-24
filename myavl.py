@@ -26,6 +26,11 @@ from avl_bridge import avl_tree
 tree = avl_tree()
 
 def process_input(line):
+    """
+    Processa linha de input.
+    Retorna 1 se a linha contem um comando valido (e o executa);
+    Retorna 0 caso contrario
+    """
 
     try:
         # separa a linha em comandos e argumentos
@@ -63,7 +68,7 @@ if __name__ == '__main__':
                 print("Input inválido!")
             tree.print_graph()
             line = input()
-            
+
     except (EOFError, KeyboardInterrupt):
         pass
 
