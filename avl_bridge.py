@@ -19,8 +19,11 @@ key_t = int
 lib = ctypes.CDLL("./avl_module.so")
 
 class avl_tree(ctypes.Structure):
-    """Arvore AVL, definida a partir da struct avl_t"""
-    """possui um ponteiro de void, que aponta para a raiz"""
+    """
+    Arvore AVL, definida a partir da struct avl_t;
+    Contem um ponteiro void, que aponta para sua raiz
+    """
+
 
     _fields_ = [
         ("root", ctypes.POINTER(ctypes.c_void_p)),
