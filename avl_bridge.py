@@ -27,8 +27,10 @@ class avl_tree(ctypes.Structure):
     ]
 
     def __init__(self):
-        """Inicializa a classe/struct"""
-        """chamado para toda vez que um novo objeto do tipo avl_tree for criado"""
+        """
+        Inicializa a classe/struct;
+        Chamado toda vez que um novo objeto do tipo avl_tree for criado
+        """
         # Verifique docs/sources.txt: By Reference
         lib.initialize_avl(byref(self))
 
@@ -110,7 +112,7 @@ class avl_tree(ctypes.Structure):
         return s[2:-1]
 
     def size(self):
-        """ Retorna o tamanho da árvore """
+        """Retorna o tamanho da árvore"""
         return lib.tree_size(byref(self))
 
     def height(self):
