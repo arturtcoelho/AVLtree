@@ -64,7 +64,6 @@ if __name__ == '__main__':
             tree.print_graph()
             line = input()
     except (EOFError, KeyboardInterrupt):
-        # fim do arquivo
         pass
 
     tree.print_with_height()
