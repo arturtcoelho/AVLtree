@@ -19,7 +19,7 @@ Comandos:
 Apos cada comando, a arvore eh desenhada com seus grafos,
 da esquerda para direita.
 """
-
+__author__ = "Gabriel Nascarella Hishida and Artur Temporal Coelho"
 
 from avl_bridge import avl_tree
 tree = avl_tree()

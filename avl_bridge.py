@@ -4,9 +4,8 @@ Modulo ponte entre scripts Python e a biblioteca 'avl_module.so',
 criada a partir de 'avl_module.c'
 
 Usa o modulo Python ctypes para efetuar as transformacoes necessarias.
-
-Autores: Gabriel Nascarella Hishida e Artur Temporal Coelho
 """
+__author__ = "Gabriel Nascarella Hishida and Artur Temporal Coelho"
 
 import ctypes
 from ctypes import byref
