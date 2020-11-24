@@ -1,5 +1,26 @@
 #!/usr/bin/env python3
 
+"""
+Script de interface do usuario com uma arvore AVL.
+Usa o modulo python 'avl_bridge.py',
+que o conecta com a biblioteca C 'avl_module.c'.
+
+Comandos:
+    'p'
+        Imprime a arvore na notacao de parenteses
+    'i {x}'
+        Insere {x} na arvore AVL
+    'r {x}'
+        Remove {x} da arvore, se {x} pertence a mesma
+    's {x}'
+        Imprime 'True' na saida padrao se {x} pertenca a arvore,
+        'False' caso contrario
+
+Apos cada comando, a arvore eh desenhada com seus grafos,
+da esquerda para direita.
+"""
+
+
 from avl_bridge import avl_tree
 tree = avl_tree()
 
