@@ -65,7 +65,7 @@ int string_parenthesis_by_node(node_t *nd, char *str, int i, int max){
     // somada aos parenteses ultrapassa o maximo permitido do buffer
     int added = (ceil(log10(nd->key > 0 ? nd->key : 1)) + 2);
     if (i + added >= max){
-        fprintf(stderr, "TOO LARGE INPUT TO BUFFER, tried to add %d on top of %d, maxing %d", added, i, max);
+        fprintf(stderr, "INPUT TOO LARGE TO BUFFER: tried to add %d on top of %d, exceeding max %d", added, i, max);
         return 0;
     }
 
