@@ -11,7 +11,7 @@
 
 */
 
-#define SPACING 5
+#define SPACING 5 // espacamento usado na impressao em grafos
 
 typedef int key_t;
 
