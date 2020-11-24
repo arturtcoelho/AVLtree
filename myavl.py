@@ -14,7 +14,7 @@ Comandos:
     'r {x}'
         Remove {x} da arvore, se {x} pertence a mesma
     's {x}'
-        Imprime 'True' na saida padrao se {x} pertenca a arvore,
+        Imprime 'True' na saida padrao se {x} pertence a arvore,
         'False' caso contrario
 
 Apos cada comando, a arvore eh desenhada com seus grafos,
