@@ -60,6 +60,7 @@ def process_input(line):
 
     return 1
 
+
 if __name__ == '__main__':
     try:
         line = input()
