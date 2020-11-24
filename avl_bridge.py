@@ -124,12 +124,13 @@ class avl_tree(ctypes.Structure):
         return lib.destroy_tree_avl(byref(self))
 
     def __str__(self):
-        """Verificador usado pela funcao built-in 'print'"""
-        """Assim podemos utilizar print(tree)"""
+        """
+        Verificador usado pela funcao built-in 'print';
+        Permite o uso de 'print(tree)'"""
         return self.as_parenthesis_string()
 
     def __contains__(self, key):
-        """ Verificador usado pelo operador 'in' """
+        """Verificador usado pelo operador 'in'"""
         # Mais em docs/sources.txt: In Operator 
         return self.search_key(key)
 
