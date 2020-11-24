@@ -1,6 +1,10 @@
 #!/usr/bin/env python3
 """
-Modulo ponte entre scripts Python e a biblioteca avl_module.so
+Modulo ponte entre scripts Python e a biblioteca 'avl_module.so',
+criada a partir de 'avl_module.c'
+
+Usa o modulo Python ctypes para efetuar as transformacoes necessarias.
+
 Autores: Gabriel Nascarella Hishida e Artur Temporal Coelho
 """
 

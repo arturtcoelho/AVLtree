@@ -2,6 +2,10 @@
 #define PRINT_TREE_OPS
 
 #include "avl_module.h"
+/*
+    Descreve operacoes de impressao de arvores
+*/
+
 
 // imprime recursivamente as chaves da árvore
 void print_tree_by_node(node_t *nd);

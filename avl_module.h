@@ -1,6 +1,16 @@
 #ifndef AVL_MODULE
 #define AVL_MODULE
 
+/*
+	AVL Module:
+	Contem todas as funcoes necessarias para criar,
+	usar e excluir arvores AVL.
+
+	Autores:
+	Gabriel Nascarella Hishida e Artur Temporal Coelho
+
+*/
+
 #define SPACING 5
 
 typedef int key_t;

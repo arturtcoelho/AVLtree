@@ -3,6 +3,11 @@
 
 #include "avl_module.h"
 
+/*
+    Tree Operations:
+    Descreve operacoes usadas por estruturas de arvores, em geral
+*/
+
 // retorna 1 caso a árvore ja tenha sido inicializada, 0 caso contrário 
 int tree_is_empty(avl_t *t);
 
