@@ -86,7 +86,7 @@ class avl_tree(ctypes.Structure):
         return lib.print_graph(byref(self))
 
     def as_parenthesis_string(self):
-        """Retorna o texto de 'print_tree_parenthesis' como string"""
+        """Retorna o texto de 'print_tree_parenthesis()' como string"""
         # cria uma string de C baseada no tamanho da arvore
         size = len(self) * buffer_size
         string = ctypes.create_string_buffer(size)
@@ -124,14 +124,21 @@ class avl_tree(ctypes.Structure):
     def __str__(self):
         """
         Verificador usado pela funcao built-in 'print';
-        Permite o uso de 'print(tree)'"""
+        Permite o uso de 'print(tree)'
+        """
         return self.as_parenthesis_string()
 
     def __contains__(self, key):
-        """Verificador usado pelo operador 'in'"""
+        """
+        Verificador usado pelo operador 'in'
+        Permite o uso de '{key} in tree'
+        """
         # Mais em docs/sources.txt: In Operator 
         return self.search_key(key)
 
     def __len__(self):
-        """Verificador usado pela funcao built-in 'len()'"""
+        """
+        Verificador usado pela funcao built-in 'len()'
+        Permite o uso de 'len(tree)'
+        """
         return self.size()
