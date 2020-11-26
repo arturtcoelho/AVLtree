@@ -3,7 +3,6 @@
 """
 Script de interface do usuario com uma arvore AVL.
 Usa o modulo python 'avl_bridge.py',
-Autores: Gabriel Nascarella Hishida e Artur Temporal Coelho
 que o conecta com a biblioteca C 'avl_module.c'.
 
 Comandos:
@@ -14,7 +13,7 @@ Comandos:
     'r {x}'
         Remove {x} da arvore, se {x} pertence a mesma
     's {x}'
-        Imprime 'True' na saida padrao se {x} pertenca a arvore,
+        Imprime 'True' na saida padrao se {x} pertence a arvore,
         'False' caso contrario
 
 Apos cada comando, a arvore eh desenhada com seus grafos,
@@ -39,7 +38,7 @@ def process_input(line):
         command = line
 
     # Comandos sem argumentos:
-    if (command == "p"): # imprime a arvore
+    if (command == "p"): # imprime a arvore (notacao de parenteses)
         print(tree)
         return 1
 
