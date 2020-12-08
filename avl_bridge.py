@@ -30,7 +30,7 @@ class avl_tree(ctypes.Structure):
         Inicializa a classe/struct;
         Chamado toda vez que um novo objeto do tipo avl_tree for criado
         """
-        # Verifique docs/sources.txt: By Reference
+        # Verifique docs/references.txt: By Reference
         lib.initialize_avl(byref(self))
 
     def insert_key(self, key):
@@ -133,7 +133,7 @@ class avl_tree(ctypes.Structure):
         Verificador usado pelo operador 'in'
         Permite o uso de '{key} in tree'
         """
-        # Mais em docs/sources.txt: In Operator 
+        # Mais em docs/references.txt: In Operator 
         return self.search_key(key)
 
     def __len__(self):
