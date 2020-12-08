@@ -4,10 +4,10 @@
 
 **Sobre:** Este trabalho foi realizado para a matéria Algoritmos e estrutura de dados III, ERE 2 2020, durante o mês de novembro. Consiste de uma biblioteca de uma árvore binária AVL construida em C e importada para um módulo Python para sua utilização abstraida.
 
-## myavl .py
-O arquivo myavl .py importa o módulo avl_bridge e provém uma interface com uma árvore AVL para o usuário, com suas funções de leitura e impressão na tela.
+## `myavl.py`
+O arquivo myavl.py importa o módulo avl_bridge e provém uma interface com uma árvore AVL para o usuário, com suas funções de leitura e impressão na tela.
 
-## avl_bridge .py
+## `avl_bridge.py`
 A ponte AVL utiliza o módulo ctypes para fazer a interface entre o programa myavl e a biblioteca avl_module. As funções que estão disponiveis para uso, seu nome em avl_module e seu método correspondente em avl_bridge são:
 
  - `initialize_avl(avl_t)` -> `__init__`: construtor da árvore
@@ -25,7 +25,7 @@ A ponte AVL utiliza o módulo ctypes para fazer a interface entre o programa mya
  - `destroy_tree_avl(avl_t)` -> `__del__`: destrutor da classe, removendo todos os nodos
 
 
-## avl_module .so
+## `avl_module.so`
 Este é o arquivo utilizado pela ponte para realizar as operações com a árvore, este é o arquivo montado pelo Makefile, dependendo das seguintes implementações:
 
  - **avl_module:** Contém as definições de tipos e as funções de interface visiveis pela ponte
@@ -33,7 +33,7 @@ Este é o arquivo utilizado pela ponte para realizar as operações com a árvor
  - **avl_operations:**  Contém as implementações das funções específicas de uma árvore AVL, como rotação e ajuste do fator de balanceamento
  - **print_tree:** Contém as diversas funções de impressão da árvore
  
-## Makefile
+## `Makefile`
 O Makefile foi construido com os alvos:
  - `all`, para compilação e montagem dos arquivos objetos culminando no objeto compartilhado avl_module.so
  -  `clean`, para remoção dos arquivos objeto 
