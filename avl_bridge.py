@@ -16,11 +16,13 @@ key_t = int # tipo da chave a ser usada nas arvores
 
 # Importando a lib avl_module:
 try:
-    lib = ctypes.CDLL("./avl_module.so")
     lib = ctypes.CDLL("avl_module.so")
 except:
-    print("Não foi possivel encontrar a biblioteca avl_module, verifique se ela existe em seu sistema")
-    exit()
+    try: 
+        lib = ctypes.CDLL("./avl_module.so")
+    except: 
+        print("Não foi possivel encontrar a biblioteca avl_module, verifique se ela existe em seu sistema")
+        exit()
 
 class avl_tree(ctypes.Structure):
     """
