@@ -33,9 +33,6 @@ myavl: myavl.py avl_module.so
 install: avl_module.so
 	cp ./avl_module.so /usr/lib
 
-gtk:
-	$(CC) $(CFLAGS) gtk_tree.c `pkg-config --libs --cflags gtk+-2.0`
-
 # regras de limpeza
 clean: all
 	-rm -f ~. *.o
