@@ -66,7 +66,7 @@ if __name__ == '__main__':
         while (line): # linha nao eh vazia
             if (not process_input(line)):
                 print("Input inválido!")
-            tree.print_graph() # descomente essa linha para ver a evolução da árvore
+            # tree.print_graph() # descomente essa linha para ver a evolução da árvore
             line = input()
 
     except (EOFError, KeyboardInterrupt):
