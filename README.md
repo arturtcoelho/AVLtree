@@ -1,5 +1,6 @@
 ## My AVL tree
-[GitHub](https://github.com/arturtemporal/AVLtree)
+
+## [GitHub](https://github.com/arturtemporal/AVLtree)
 
 **Autores:** Artur Temporal Coelho & Gabriel Nascarella Hishida do Nascimento
 
