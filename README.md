@@ -1,5 +1,7 @@
 ## My AVL tree
 
+## [GitHub](https://github.com/arturtemporal/AVLtree)
+
 **Autores:** Artur Temporal Coelho & Gabriel Nascarella Hishida do Nascimento
 
 **Sobre:** Este trabalho foi realizado para a matéria Algoritmos e estrutura de dados III, ERE 2 2020, durante o mês de novembro. Consiste de uma biblioteca de uma árvore binária AVL construida em C e importada para um módulo Python para sua utilização abstraida.
