@@ -15,7 +15,10 @@ buffer_size = 16 # da string de impressao da arvore
 key_t = int # tipo da chave a ser usada nas arvores
 
 # Importando a lib avl_module:
-lib = ctypes.CDLL("./avl_module.so")
+try:
+    lib = ctypes.CDLL("./avl_module.so")
+except:
+    lib = ctypes.CDLL("avl_module.so")
 
 class avl_tree(ctypes.Structure):
     """
