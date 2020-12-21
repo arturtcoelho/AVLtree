@@ -50,7 +50,6 @@ int print_graph_by_node(node_t *nd, int h){
             printf("/");
     }
     printf(" %d", nd->key);
-    // printf(" %d(%d)", nd->key, nd->bf);
     
     print_graph_by_node(nd->left, h+1);
 

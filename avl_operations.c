@@ -71,7 +71,7 @@ int rotate(node_t **nd){
 
 // desde root, confere e ajusta o balanço de cada nodo até uma chave específica
 int balance_to_key(node_t **nd, key_t key){
-    if (!*nd) return 1;
+    if (!*nd || (*nd)->key == key) return 1;
     if (abs((*nd)->bf) > 1) rotate(nd);
 
     if ((*nd)->key > key) {

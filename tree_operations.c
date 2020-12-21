@@ -13,7 +13,7 @@ void bad_malloc(){
     exit(1);
 }
 
-// retorna !0 caso a árvore ja tenha sido inicializada, 0 caso contrário 
+// retorna a 0 caso a árvore estaja vazia e !0 caso contrário 
 int tree_is_empty(avl_t *t){
     return (t->root == NULL);
 }
@@ -29,7 +29,8 @@ int insert_key_by_node(node_t **nd, node_t *top, key_t key, int *should_balance)
 
     if ((*nd)->key == key) return 1; // caso o número ja exista
 
-    // caso esse nodo ja esteja ocupado, insere em um de seus filhos
+    // caso esse nodo ja esteja ocupado, insere em um de seus filhos e
+    // ajusta o balanceamento dos nodos por qual ele passa 
     if ((*nd)->key > key){
         insert_key_by_node(&((*nd)->left), *nd, key, should_balance);
         if (*should_balance) (*nd)->bf--;
@@ -37,6 +38,7 @@ int insert_key_by_node(node_t **nd, node_t *top, key_t key, int *should_balance)
         insert_key_by_node(&((*nd)->right), *nd, key, should_balance);
         if (*should_balance) (*nd)->bf++;
     }
+    // confere balanceamento da árvore
     if (*should_balance) {
         if (!(*nd)->bf) *should_balance = 0;
         if (abs((*nd)->bf) > 1) {
@@ -70,10 +72,11 @@ int search_key_by_node(node_t *nd, key_t key){
 
     if (nd->key == key) return 1; // achou
 
-    if (nd->key > key) // procura a esquerda
+    if (nd->key > key) { // procura a esquerda
         return search_key_by_node(nd->left, key);
-    else // procura a direita
+    } else { // procura a direita
         return search_key_by_node(nd->right, key);
+    }
 }
 
 // função para o caso onde ambos os filhos estão presentes
@@ -82,7 +85,7 @@ int remove_both_exist(node_t *nd){
 
     node_t *succ = min_node(nd->right); // succ = sucessor de nodo
     nd->key = succ->key; // copia a chave
-    if (succ == nd->right){ // caso especial onde subárvore da direita é o sucessor
+    if (succ == nd->right) { // caso especial onde subárvore da direita é o sucessor
         remove_node(succ, &(nd->right));
     } else { // remove o sucessor
         remove_node(succ, &(succ->top->left));
