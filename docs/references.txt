@@ -5,3 +5,4 @@ By Reference: https://stackoverflow.com/questions/7530473/ctypes-and-passing-a-b
 In Operator: https://docs.python.org/3/reference/datamodel.html#object.__contains__
 BST delete: https://www.mathcs.emory.edu/~cheung/Courses/171/Syllabus/9-BinTree/BST-delete2.html
 Prof. Didonet: https://github.com/Marcosddf/algoritmoseestruturasdedados/blob/master/arvore_AVL.ipynb
+Nested try-except? https://stackoverflow.com/questions/17015230/are-nested-try-except-blocks-in-python-a-good-programming-practice
